@@ -292,15 +292,6 @@ export default function ChatWidget() {
           </div>
         )}
 
-        {showScheduling && (
-          <SchedulingForm
-            visitorName={visitorName}
-            visitorEmail={visitorEmail}
-            onSchedule={handleScheduleVisit}
-            onCancel={() => setShowScheduling(false)}
-          />
-        )}
-
         {messages.map((message) => (
           <div
             key={message.id}
@@ -350,8 +341,8 @@ export default function ChatWidget() {
       {/* Scheduling Form Modal */}
       {showScheduling && (
         <SchedulingForm
-          onSubmit={handleScheduleVisit}
-          onClose={() => setShowScheduling(false)}
+          onSchedule={handleScheduleVisit}
+          onCancel={() => setShowScheduling(false)}
           visitorName={visitorName}
           visitorEmail={visitorEmail}
         />

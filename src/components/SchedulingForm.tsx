@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Calendar, Clock, MapPin, Home } from 'lucide-react';
+import { Calendar, Clock, MapPin, Home, X } from 'lucide-react';
 
 interface SchedulingFormProps {
   visitorName: string;
@@ -53,10 +53,22 @@ export default function SchedulingForm({ visitorName, visitorEmail, onSchedule, 
   const minDate = tomorrow.toISOString().split('T')[0];
 
   return (
-    <div className="p-4 bg-gray-50 rounded-lg">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">📅 Schedule On-Site Visit</h3>
-      
-      <form onSubmit={handleSubmit} className="space-y-3">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+        <div className="sticky top-0 bg-emerald-600 text-white p-4 rounded-t-2xl flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <Calendar className="w-5 h-5" />
+            <h3 className="font-semibold">Schedule On-Site Visit</h3>
+          </div>
+          <button
+            onClick={onCancel}
+            className="hover:bg-emerald-700 rounded-full p-1 transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
         {/* Phone */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -155,22 +167,23 @@ export default function SchedulingForm({ visitorName, visitorEmail, onSchedule, 
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-2 pt-2">
-          <button
-            type="submit"
-            className="flex-1 bg-emerald-600 text-white py-2 rounded-lg font-medium hover:bg-emerald-700 transition-colors text-sm"
-          >
-            Schedule Visit
-          </button>
+        <div className="flex gap-3 pt-2">
           <button
             type="button"
             onClick={onCancel}
-            className="px-4 bg-gray-200 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-300 transition-colors text-sm"
+            className="flex-1 px-4 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
           >
             Cancel
           </button>
+          <button
+            type="submit"
+            className="flex-1 px-4 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-medium"
+          >
+            Schedule Visit
+          </button>
         </div>
       </form>
+      </div>
     </div>
   );
 }
