@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Phone, X } from 'lucide-react';
+import { Phone, X, Calendar, Clock } from 'lucide-react';
 
 export interface CallBackData {
   visitorName: string;
@@ -21,11 +21,21 @@ export default function CallBackForm({ onSubmit, onClose, visitorName = '' }: Ca
     bestTime: '',
     notes: ''
   });
+  const [selectedDay, setSelectedDay] = useState('');
+  const [selectedTime, setSelectedTime] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.visitorName && formData.visitorPhone) {
-      onSubmit(formData);
+      // Combine day and time into bestTime string
+      const bestTimeStr = selectedDay && selectedTime 
+        ? `${selectedDay}, ${selectedTime}`
+        : selectedDay || selectedTime || '';
+      
+      onSubmit({
+        ...formData,
+        bestTime: bestTimeStr
+      });
     }
   };
 
@@ -76,15 +86,44 @@ export default function CallBackForm({ onSubmit, onClose, visitorName = '' }: Ca
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Best Time to Call
+              <Calendar className="inline w-4 h-4 mr-1" />
+              Best Day to Call
             </label>
-            <input
-              type="text"
-              value={formData.bestTime}
-              onChange={(e) => setFormData({ ...formData, bestTime: e.target.value })}
+            <select
+              value={selectedDay}
+              onChange={(e) => setSelectedDay(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-              placeholder="e.g., Weekdays 9am-5pm"
-            />
+            >
+              <option value="">Select a day...</option>
+              <option value="Weekdays">Weekdays</option>
+              <option value="Weekends">Weekends</option>
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+              <option value="Anytime">Anytime</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              <Clock className="inline w-4 h-4 mr-1" />
+              Best Time Range
+            </label>
+            <select
+              value={selectedTime}
+              onChange={(e) => setSelectedTime(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+            >
+              <option value="">Select a time...</option>
+              <option value="Morning (8am-12pm)">Morning (8am-12pm)</option>
+              <option value="Afternoon (12pm-4pm)">Afternoon (12pm-4pm)</option>
+              <option value="Evening (4pm-8pm)">Evening (4pm-8pm)</option>
+              <option value="Anytime">Anytime</option>
+            </select>
           </div>
 
           <div>
