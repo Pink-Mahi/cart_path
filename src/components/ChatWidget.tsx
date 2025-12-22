@@ -270,27 +270,27 @@ export default function ChatWidget() {
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50">
-        {!hasProvidedInfo && (
-          <div className="bg-white p-4 rounded-lg shadow-sm space-y-3">
-            <p className="text-sm text-gray-700 font-medium">
-              Welcome! Please provide your details to start chatting:
-            </p>
-            <input
-              type="text"
-              placeholder="Your name"
-              value={visitorName}
-              onChange={(e) => setVisitorName(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
-            />
-            <input
-              type="email"
-              placeholder="Your email"
-              value={visitorEmail}
-              onChange={(e) => setVisitorEmail(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
-            />
-          </div>
-        )}
+        <div className="bg-white p-4 rounded-lg shadow-sm space-y-3 sticky top-0 z-10">
+          <p className="text-sm text-gray-700 font-medium">
+            {hasProvidedInfo ? 'Your Details:' : 'Welcome! Please provide your details to start chatting:'}
+          </p>
+          <input
+            type="text"
+            placeholder="Your name"
+            value={visitorName}
+            onChange={(e) => setVisitorName(e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            disabled={hasProvidedInfo}
+          />
+          <input
+            type="email"
+            placeholder="Your email"
+            value={visitorEmail}
+            onChange={(e) => setVisitorEmail(e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            disabled={hasProvidedInfo}
+          />
+        </div>
 
         {messages.map((message) => (
           <div
