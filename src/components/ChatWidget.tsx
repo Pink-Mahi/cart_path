@@ -148,6 +148,8 @@ export default function ChatWidget() {
     wsRef.current.send(JSON.stringify({
       type: 'schedule_visit',
       content: scheduleData,
+      visitorName,
+      visitorEmail,
       conversationId,
     }));
 
@@ -163,6 +165,8 @@ export default function ChatWidget() {
     wsRef.current.send(JSON.stringify({
       type: 'request_callback',
       content: callBackData,
+      visitorName,
+      visitorEmail,
       conversationId,
     }));
 
