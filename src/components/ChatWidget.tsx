@@ -21,12 +21,16 @@ export default function ChatWidget() {
   const [visitorEmail, setVisitorEmail] = useState('');
   const [hasProvidedInfo, setHasProvidedInfo] = useState(false);
 
-  // Auto-set hasProvidedInfo when both name and valid email are filled
+  // Auto-set hasProvidedInfo when both name and valid email are filled (with debounce)
   useEffect(() => {
-    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(visitorEmail.trim());
-    if (visitorName.trim() && isValidEmail && !hasProvidedInfo) {
-      setHasProvidedInfo(true);
-    }
+    const timer = setTimeout(() => {
+      const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(visitorEmail.trim());
+      if (visitorName.trim() && isValidEmail && !hasProvidedInfo) {
+        setHasProvidedInfo(true);
+      }
+    }, 800); // Wait 800ms after user stops typing
+
+    return () => clearTimeout(timer);
   }, [visitorName, visitorEmail, hasProvidedInfo]);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [showScheduling, setShowScheduling] = useState(false);
