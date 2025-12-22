@@ -48,10 +48,18 @@ export default function ChatWidget() {
       const storedId = localStorage.getItem('cart_path_visitor_id');
       if (storedId) {
         visitorIdRef.current = storedId;
+        console.log('Using stored visitor ID:', storedId);
       } else {
-        const newId = crypto.randomUUID();
+        // Fallback for browsers without crypto.randomUUID()
+        const newId = crypto.randomUUID ? crypto.randomUUID() : 
+          'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            const r = Math.random() * 16 | 0;
+            const v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+          });
         localStorage.setItem('cart_path_visitor_id', newId);
         visitorIdRef.current = newId;
+        console.log('Created new visitor ID:', newId);
       }
     }
   }, []);
