@@ -21,9 +21,10 @@ export default function ChatWidget() {
   const [visitorEmail, setVisitorEmail] = useState('');
   const [hasProvidedInfo, setHasProvidedInfo] = useState(false);
 
-  // Auto-set hasProvidedInfo when both name and email are filled
+  // Auto-set hasProvidedInfo when both name and valid email are filled
   useEffect(() => {
-    if (visitorName.trim() && visitorEmail.trim() && !hasProvidedInfo) {
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(visitorEmail.trim());
+    if (visitorName.trim() && isValidEmail && !hasProvidedInfo) {
       setHasProvidedInfo(true);
     }
   }, [visitorName, visitorEmail, hasProvidedInfo]);
