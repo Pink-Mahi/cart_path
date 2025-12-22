@@ -44,15 +44,15 @@ export default function Hero() {
         </div>
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20">
+          <div className="bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto">
             <div className="text-4xl font-bold text-white mb-2">Faster</div>
             <div className="text-white/90">Efficient workflow</div>
           </div>
-          <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20">
+          <div className="bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto">
             <div className="text-4xl font-bold text-white mb-2">Less</div>
             <div className="text-white/90">Water consumption</div>
           </div>
-          <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20">
+          <div className="bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto">
             <div className="text-4xl font-bold text-white mb-2">Low</div>
             <div className="text-white/90">Disruption</div>
           </div>
@@ -66,7 +66,7 @@ export default function Hero() {
       <a
         href="#solution"
         aria-label="Scroll to the next section"
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce rounded-full focus:outline-none focus:ring-2 focus:ring-white/60"
+        className="hidden md:block absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce rounded-full focus:outline-none focus:ring-2 focus:ring-white/60"
       >
         <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2 hover:border-white/80 transition-colors">
           <div className="w-1 h-3 bg-white/50 rounded-full"></div>
