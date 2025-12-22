@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { MessageCircle, X, Send, Calendar, MessageSquare } from 'lucide-react';
+import { MessageCircle, X, Send, Calendar, MessageSquare, Phone } from 'lucide-react';
 import SchedulingForm, { ScheduleData } from './SchedulingForm';
+import CallBackForm, { CallBackData } from './CallBackForm';
 
 const CHAT_API_URL = import.meta.env.VITE_CHAT_API_URL || 'ws://localhost:3001';
 
@@ -21,7 +22,9 @@ export default function ChatWidget() {
   const [hasProvidedInfo, setHasProvidedInfo] = useState(false);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [showScheduling, setShowScheduling] = useState(false);
+  const [showCallBack, setShowCallBack] = useState(false);
   const [whatsappLink, setWhatsappLink] = useState<string | null>(null);
+  const [afterHoursMessage, setAfterHoursMessage] = useState<string | null>(null);
   
   const wsRef = useRef<WebSocket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -140,6 +143,21 @@ export default function ChatWidget() {
     addMessage('visitor', `Requesting on-site visit for ${scheduleData.preferredDate}`);
   };
 
+  const handleCallBack = (callBackData: CallBackData) => {
+    if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) {
+      return;
+    }
+
+    wsRef.current.send(JSON.stringify({
+      type: 'request_callback',
+      content: callBackData,
+      conversationId,
+    }));
+
+    setShowCallBack(false);
+    addMessage('visitor', `Requesting call back at ${callBackData.visitorPhone}`);
+  };
+
   const fetchWhatsAppLink = async () => {
     try {
       const apiUrl = CHAT_API_URL.replace('ws://', 'http://').replace('wss://', 'https://');
@@ -153,9 +171,23 @@ export default function ChatWidget() {
     }
   };
 
+  const fetchBusinessHours = async () => {
+    try {
+      const apiUrl = CHAT_API_URL.replace('ws://', 'http://').replace('wss://', 'https://');
+      const response = await fetch(`${apiUrl}/api/business-hours`);
+      const data = await response.json();
+      if (!data.inBusinessHours && data.afterHoursMessage) {
+        setAfterHoursMessage(data.afterHoursMessage);
+      }
+    } catch (error) {
+      console.error('Failed to fetch business hours:', error);
+    }
+  };
+
   useEffect(() => {
     if (isOpen) {
       fetchWhatsAppLink();
+      fetchBusinessHours();
     }
   }, [isOpen]);
 
@@ -190,8 +222,15 @@ export default function ChatWidget() {
         </button>
       </div>
 
+      {/* After Hours Message */}
+      {afterHoursMessage && (
+        <div className="px-4 py-3 bg-amber-50 border-b border-amber-200">
+          <p className="text-sm text-amber-800">{afterHoursMessage}</p>
+        </div>
+      )}
+
       {/* Action Buttons */}
-      {hasProvidedInfo && !showScheduling && (
+      {hasProvidedInfo && !showScheduling && !showCallBack && (
         <div className="px-4 py-3 bg-white border-b border-gray-200 flex gap-2">
           <button
             onClick={() => setShowScheduling(true)}
@@ -199,6 +238,13 @@ export default function ChatWidget() {
           >
             <Calendar size={16} />
             Schedule Visit
+          </button>
+          <button
+            onClick={() => setShowCallBack(true)}
+            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium"
+          >
+            <Phone size={16} />
+            Request Call
           </button>
           {whatsappLink && (
             <a
@@ -292,6 +338,25 @@ export default function ChatWidget() {
           </button>
         </div>
       </div>
+
+      {/* Scheduling Form Modal */}
+      {showScheduling && (
+        <SchedulingForm
+          onSubmit={handleScheduleVisit}
+          onClose={() => setShowScheduling(false)}
+          visitorName={visitorName}
+          visitorEmail={visitorEmail}
+        />
+      )}
+
+      {/* Call Back Form Modal */}
+      {showCallBack && (
+        <CallBackForm
+          onSubmit={handleCallBack}
+          onClose={() => setShowCallBack(false)}
+          visitorName={visitorName}
+        />
+      )}
     </div>
   );
 }
