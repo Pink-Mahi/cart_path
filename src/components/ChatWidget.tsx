@@ -88,6 +88,12 @@ export default function ChatWidget() {
       setIsConnected(true);
       console.log('Connected to chat server');
       
+      // Set conversationId to visitorId immediately
+      if (visitorIdRef.current && !conversationId) {
+        setConversationId(visitorIdRef.current);
+        console.log('Set conversationId to visitorId:', visitorIdRef.current);
+      }
+      
       // Send visitor ID to server on connection
       if (visitorIdRef.current) {
         ws.send(JSON.stringify({
@@ -101,15 +107,9 @@ export default function ChatWidget() {
       const data = JSON.parse(event.data);
       
       if (data.type === 'system') {
-        if (data.visitorId) {
-          setConversationId(data.visitorId);
-        }
         addMessage('system', 'Hi! How can I help you with cart path cleaning today?');
       } else if (data.type === 'bot' || data.type === 'admin') {
         addMessage(data.type, data.content);
-        if (data.conversationId) {
-          setConversationId(data.conversationId);
-        }
       }
     };
 
