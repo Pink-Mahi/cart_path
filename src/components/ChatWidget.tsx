@@ -43,7 +43,7 @@ export default function ChatWidget() {
   }, [messages]);
 
   const connectWebSocket = () => {
-    const wsUrl = CHAT_API_URL.replace('http', 'ws');
+    const wsUrl = CHAT_API_URL.replace('https://', 'wss://').replace('http://', 'ws://');
     const ws = new WebSocket(wsUrl);
 
     ws.onopen = () => {
