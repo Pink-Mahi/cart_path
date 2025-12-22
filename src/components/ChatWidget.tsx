@@ -20,6 +20,13 @@ export default function ChatWidget() {
   const [visitorName, setVisitorName] = useState('');
   const [visitorEmail, setVisitorEmail] = useState('');
   const [hasProvidedInfo, setHasProvidedInfo] = useState(false);
+
+  // Auto-set hasProvidedInfo when both name and email are filled
+  useEffect(() => {
+    if (visitorName.trim() && visitorEmail.trim() && !hasProvidedInfo) {
+      setHasProvidedInfo(true);
+    }
+  }, [visitorName, visitorEmail, hasProvidedInfo]);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [showScheduling, setShowScheduling] = useState(false);
   const [showCallBack, setShowCallBack] = useState(false);
