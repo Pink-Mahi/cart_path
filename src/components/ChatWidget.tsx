@@ -40,6 +40,21 @@ export default function ChatWidget() {
   
   const wsRef = useRef<WebSocket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const visitorIdRef = useRef<string | null>(null);
+
+  // Get or create persistent visitor ID
+  useEffect(() => {
+    if (!visitorIdRef.current) {
+      const storedId = localStorage.getItem('cart_path_visitor_id');
+      if (storedId) {
+        visitorIdRef.current = storedId;
+      } else {
+        const newId = crypto.randomUUID();
+        localStorage.setItem('cart_path_visitor_id', newId);
+        visitorIdRef.current = newId;
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (isOpen && !isConnected) {
@@ -64,13 +79,23 @@ export default function ChatWidget() {
     ws.onopen = () => {
       setIsConnected(true);
       console.log('Connected to chat server');
+      
+      // Send visitor ID to server on connection
+      if (visitorIdRef.current) {
+        ws.send(JSON.stringify({
+          type: 'init',
+          visitorId: visitorIdRef.current
+        }));
+      }
     };
 
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       
       if (data.type === 'system') {
-        setConversationId(data.visitorId);
+        if (data.visitorId) {
+          setConversationId(data.visitorId);
+        }
         addMessage('system', 'Hi! How can I help you with cart path cleaning today?');
       } else if (data.type === 'bot' || data.type === 'admin') {
         addMessage(data.type, data.content);
