@@ -1,8 +1,12 @@
-import { Phone, Mail, MapPin, Send } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, Calendar } from 'lucide-react';
 import { FormEvent, useState } from 'react';
+import SchedulingForm, { ScheduleData } from './SchedulingForm';
+import CallBackForm, { CallBackData } from './CallBackForm';
 
 export default function Contact() {
   const LEADS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwYyUMXV7FKUYaa5uN-V5Q_H98q4lQnzt2MfeX3hE1wIDZ_xhXUbTkavSnNSbWgHiWY/exec';
+  const CHAT_API_URL = import.meta.env.VITE_CHAT_API_URL || 'ws://localhost:3001';
+  const CHAT_API_HTTP = CHAT_API_URL.replace('ws://', 'http://').replace('wss://', 'https://');
 
   const [formData, setFormData] = useState({
     name: '',
@@ -14,6 +18,87 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const [showScheduling, setShowScheduling] = useState(false);
+  const [showCallBack, setShowCallBack] = useState(false);
+  const [scheduleSubmitted, setScheduleSubmitted] = useState(false);
+  const [callSubmitted, setCallSubmitted] = useState(false);
+  const [scheduleSubmitting, setScheduleSubmitting] = useState(false);
+  const [callSubmitting, setCallSubmitting] = useState(false);
+  const [scheduleError, setScheduleError] = useState<string | null>(null);
+  const [callError, setCallError] = useState<string | null>(null);
+
+  const openSchedule = () => {
+    if (!formData.name || !formData.email) {
+      alert('Please enter your name and email first.');
+      return;
+    }
+    setShowScheduling(true);
+  };
+
+  const openCallBack = () => {
+    if (!formData.name || !formData.email) {
+      alert('Please enter your name and email first.');
+      return;
+    }
+    setShowCallBack(true);
+  };
+
+  const handleScheduleVisit = async (scheduleData: ScheduleData) => {
+    setScheduleSubmitting(true);
+    setScheduleError(null);
+    try {
+      const response = await fetch(`${CHAT_API_HTTP}/api/public/scheduled-visits`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(scheduleData)
+      });
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.error || 'Failed to schedule visit');
+      }
+
+      setShowScheduling(false);
+      setScheduleSubmitted(true);
+      setTimeout(() => setScheduleSubmitted(false), 5000);
+    } catch (e) {
+      setScheduleError(e instanceof Error ? e.message : 'Failed to schedule visit');
+    } finally {
+      setScheduleSubmitting(false);
+    }
+  };
+
+  const handleRequestCall = async (data: CallBackData) => {
+    setCallSubmitting(true);
+    setCallError(null);
+    try {
+      const response = await fetch(`${CHAT_API_HTTP}/api/public/call-requests`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          visitorName: data.visitorName,
+          visitorEmail: formData.email,
+          visitorPhone: data.visitorPhone,
+          bestTime: data.bestTime,
+          notes: data.notes
+        })
+      });
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.error || 'Failed to request a call');
+      }
+
+      setShowCallBack(false);
+      setCallSubmitted(true);
+      setTimeout(() => setCallSubmitted(false), 5000);
+    } catch (e) {
+      setCallError(e instanceof Error ? e.message : 'Failed to request a call');
+    } finally {
+      setCallSubmitting(false);
+    }
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -116,6 +201,53 @@ export default function Contact() {
           </div>
 
           <div className="bg-gray-50 rounded-2xl p-8 shadow-lg">
+            <div className="mb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={openSchedule}
+                  disabled={scheduleSubmitting || callSubmitting}
+                  className="w-full bg-white border border-emerald-200 text-emerald-700 px-4 py-3 rounded-lg font-semibold hover:bg-emerald-50 transition-all shadow-sm disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  <Calendar className="w-5 h-5" />
+                  <span>{scheduleSubmitting ? 'Submitting...' : 'Schedule a Visit'}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={openCallBack}
+                  disabled={scheduleSubmitting || callSubmitting}
+                  className="w-full bg-white border border-blue-200 text-blue-700 px-4 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all shadow-sm disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  <Phone className="w-5 h-5" />
+                  <span>{callSubmitting ? 'Submitting...' : 'Request a Call'}</span>
+                </button>
+              </div>
+
+              {scheduleSubmitted ? (
+                <div className="mt-4 bg-emerald-100 text-emerald-800 px-6 py-4 rounded-lg text-center font-semibold">
+                  Visit request received! We'll confirm shortly.
+                </div>
+              ) : null}
+
+              {callSubmitted ? (
+                <div className="mt-4 bg-emerald-100 text-emerald-800 px-6 py-4 rounded-lg text-center font-semibold">
+                  Call request received! We'll reach out soon.
+                </div>
+              ) : null}
+
+              {scheduleError ? (
+                <div className="mt-4 bg-red-50 text-red-800 px-6 py-4 rounded-lg text-center font-semibold">
+                  {scheduleError}
+                </div>
+              ) : null}
+
+              {callError ? (
+                <div className="mt-4 bg-red-50 text-red-800 px-6 py-4 rounded-lg text-center font-semibold">
+                  {callError}
+                </div>
+              ) : null}
+            </div>
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -215,9 +347,29 @@ export default function Contact() {
                 </div>
               ) : null}
             </form>
+
+            {/* Scheduling Form Modal */}
+            {showScheduling && (
+              <SchedulingForm
+                onSchedule={handleScheduleVisit}
+                onCancel={() => setShowScheduling(false)}
+                visitorName={formData.name}
+                visitorEmail={formData.email}
+              />
+            )}
+
+            {/* Call Back Form Modal */}
+            {showCallBack && (
+              <CallBackForm
+                onSubmit={handleRequestCall}
+                onClose={() => setShowCallBack(false)}
+                visitorName={formData.name}
+              />
+            )}
           </div>
         </div>
       </div>
     </section>
   );
 }
+
