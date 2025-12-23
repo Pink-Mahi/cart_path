@@ -41,6 +41,7 @@ export default function ChatWidget() {
   const wsRef = useRef<WebSocket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const visitorIdRef = useRef<string | null>(null);
+  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Get or create persistent visitor ID
   useEffect(() => {
@@ -140,6 +141,38 @@ export default function ChatWidget() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const sendTypingIndicator = (isTyping: boolean) => {
+    if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN || !conversationId) {
+      return;
+    }
+
+    wsRef.current.send(JSON.stringify({
+      type: 'typing',
+      isTyping,
+      conversationId,
+      visitorName,
+    }));
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+
+    // Send typing indicator
+    if (hasProvidedInfo && conversationId) {
+      sendTypingIndicator(true);
+
+      // Clear existing timeout
+      if (typingTimeoutRef.current) {
+        clearTimeout(typingTimeoutRef.current);
+      }
+
+      // Set timeout to send "stopped typing" after 2 seconds of inactivity
+      typingTimeoutRef.current = setTimeout(() => {
+        sendTypingIndicator(false);
+      }, 2000);
+    }
+  };
+
   const handleSendMessage = () => {
     if (!inputValue.trim() || !wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) {
       return;
@@ -152,6 +185,12 @@ export default function ChatWidget() {
       }
       setHasProvidedInfo(true);
     }
+
+    // Clear typing indicator
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+    sendTypingIndicator(false);
 
     addMessage('visitor', inputValue);
 
@@ -362,7 +401,7 @@ export default function ChatWidget() {
           <input
             type="text"
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={handleInputChange}
             onKeyPress={handleKeyPress}
             placeholder="Type your message..."
             className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
