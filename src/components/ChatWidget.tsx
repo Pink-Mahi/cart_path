@@ -294,20 +294,43 @@ export default function ChatWidget() {
   return (
     <div className="fixed bottom-6 right-6 w-96 h-[600px] bg-white rounded-lg shadow-2xl flex flex-col z-50 border border-gray-200">
       {/* Header */}
-      <div className="bg-emerald-600 text-white p-4 rounded-t-lg flex justify-between items-center">
-        <div>
-          <h3 className="font-semibold text-lg">Cart Path Cleaning</h3>
-          <p className="text-sm text-emerald-100">
-            {isConnected ? 'Online' : 'Connecting...'}
-          </p>
+      <div className="bg-emerald-600 text-white p-4 rounded-t-lg">
+        <div className="flex justify-between items-center mb-3">
+          <div>
+            <h3 className="font-semibold text-lg">Cart Path Cleaning</h3>
+            <p className="text-sm text-emerald-100">
+              {isConnected ? 'Online' : 'Connecting...'}
+            </p>
+          </div>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="hover:bg-emerald-700 p-1 rounded transition-colors"
+            aria-label="Close chat"
+          >
+            <X size={20} />
+          </button>
         </div>
-        <button
-          onClick={() => setIsOpen(false)}
-          className="hover:bg-emerald-700 p-1 rounded transition-colors"
-          aria-label="Close chat"
-        >
-          <X size={20} />
-        </button>
+        
+        {/* User Details in Header */}
+        {!hasProvidedInfo && (
+          <div className="space-y-2 pt-3 border-t border-emerald-500">
+            <p className="text-sm text-emerald-100 font-medium">Your Details:</p>
+            <input
+              type="text"
+              placeholder="Your name"
+              value={visitorName}
+              onChange={(e) => setVisitorName(e.target.value)}
+              className="w-full px-3 py-2 border border-emerald-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-white text-gray-900"
+            />
+            <input
+              type="email"
+              placeholder="Your email"
+              value={visitorEmail}
+              onChange={(e) => setVisitorEmail(e.target.value)}
+              className="w-full px-3 py-2 border border-emerald-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-white text-gray-900"
+            />
+          </div>
+        )}
       </div>
 
       {/* After Hours Message */}
@@ -350,28 +373,6 @@ export default function ChatWidget() {
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50">
-        <div className="bg-white p-4 rounded-lg shadow-sm space-y-3 sticky top-0 z-10">
-          <p className="text-sm text-gray-700 font-medium">
-            {hasProvidedInfo ? 'Your Details:' : 'Welcome! Please provide your details to start chatting:'}
-          </p>
-          <input
-            type="text"
-            placeholder="Your name"
-            value={visitorName}
-            onChange={(e) => setVisitorName(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
-            disabled={hasProvidedInfo}
-          />
-          <input
-            type="email"
-            placeholder="Your email"
-            value={visitorEmail}
-            onChange={(e) => setVisitorEmail(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
-            disabled={hasProvidedInfo}
-          />
-        </div>
-
         {messages.map((message) => (
           <div
             key={message.id}
