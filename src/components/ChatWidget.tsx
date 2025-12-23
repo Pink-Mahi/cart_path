@@ -76,6 +76,51 @@ export default function ChatWidget() {
     };
   }, [isOpen]);
 
+  // Poll for new messages every 3 seconds when chat is open
+  useEffect(() => {
+    if (!isOpen || !conversationId) return;
+
+    const pollMessages = async () => {
+      try {
+        const apiUrl = CHAT_API_URL.replace('ws://', 'http://').replace('wss://', 'https://');
+        const response = await fetch(`${apiUrl}/api/conversations/${conversationId}/messages`);
+        if (response.ok) {
+          const fetchedMessages = await response.json();
+          
+          // Convert fetched messages to our Message format and merge with existing
+          const newMessages: Message[] = fetchedMessages.map((msg: { id: string; sender: string; content: string; created_at: string }) => ({
+            id: msg.id,
+            type: msg.sender === 'visitor' ? 'visitor' : msg.sender === 'bot' ? 'bot' : 'admin',
+            content: msg.content,
+            timestamp: new Date(msg.created_at)
+          }));
+
+          // Only update if we have new messages
+          setMessages(prev => {
+            const existingIds = new Set(prev.map(m => m.id));
+            const uniqueNew = newMessages.filter(m => !existingIds.has(m.id));
+            if (uniqueNew.length > 0) {
+              return [...prev, ...uniqueNew].sort((a, b) => 
+                new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+              );
+            }
+            return prev;
+          });
+        }
+      } catch (error) {
+        console.error('Failed to poll messages:', error);
+      }
+    };
+
+    // Poll immediately on open
+    pollMessages();
+
+    // Then poll every 3 seconds
+    const interval = setInterval(pollMessages, 3000);
+
+    return () => clearInterval(interval);
+  }, [isOpen, conversationId]);
+
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
