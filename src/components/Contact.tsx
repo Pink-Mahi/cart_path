@@ -4,7 +4,6 @@ import SchedulingForm, { ScheduleData } from './SchedulingForm';
 import CallBackForm, { CallBackData } from './CallBackForm';
 
 export default function Contact() {
-  const LEADS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwYyUMXV7FKUYaa5uN-V5Q_H98q4lQnzt2MfeX3hE1wIDZ_xhXUbTkavSnNSbWgHiWY/exec';
   const CHAT_API_URL = import.meta.env.VITE_CHAT_API_URL || 'ws://localhost:3001';
   const CHAT_API_HTTP = CHAT_API_URL.replace('ws://', 'http://').replace('wss://', 'https://');
 
@@ -107,17 +106,22 @@ export default function Contact() {
     setSubmitError(null);
 
     try {
-      const payload = {
-        ...formData,
-        pageUrl: window.location.href,
-        userAgent: navigator.userAgent
-      };
-
-      await fetch(LEADS_ENDPOINT, {
+      const response = await fetch(`${CHAT_API_HTTP}/api/public/contact-submissions`, {
         method: 'POST',
-        mode: 'no-cors',
-        body: JSON.stringify(payload)
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          visitorName: formData.name,
+          visitorEmail: formData.email,
+          visitorPhone: formData.phone,
+          organizationType: formData.organizationType,
+          message: formData.message
+        })
       });
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.error || 'Failed to submit contact form');
+      }
 
       setSubmitted(true);
       setFormData({
