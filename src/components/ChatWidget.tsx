@@ -217,14 +217,15 @@ export default function ChatWidget() {
       return;
     }
 
-    // Update local name if provided in the form
+    // Update local name/email if provided in the form
     if (callBackData.visitorName) setVisitorName(callBackData.visitorName);
+    if (callBackData.visitorEmail) setVisitorEmail(callBackData.visitorEmail);
 
     wsRef.current.send(JSON.stringify({
       type: 'request_callback',
       content: callBackData,
       visitorName: callBackData.visitorName,
-      visitorEmail: visitorEmail || null,
+      visitorEmail: callBackData.visitorEmail,
       conversationId,
     }));
 
@@ -401,6 +402,7 @@ export default function ChatWidget() {
           onSubmit={handleCallBack}
           onClose={() => setShowCallBack(false)}
           visitorName={visitorName}
+          visitorEmail={visitorEmail}
         />
       )}
     </div>

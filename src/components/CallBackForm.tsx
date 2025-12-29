@@ -3,6 +3,7 @@ import { Phone, X, Calendar, Clock } from 'lucide-react';
 
 export interface CallBackData {
   visitorName: string;
+  visitorEmail: string;
   visitorPhone: string;
   bestTime: string;
   notes: string;
@@ -12,11 +13,13 @@ interface CallBackFormProps {
   onSubmit: (data: CallBackData) => void;
   onClose: () => void;
   visitorName?: string;
+  visitorEmail?: string;
 }
 
-export default function CallBackForm({ onSubmit, onClose, visitorName = '' }: CallBackFormProps) {
+export default function CallBackForm({ onSubmit, onClose, visitorName = '', visitorEmail = '' }: CallBackFormProps) {
   const [formData, setFormData] = useState<CallBackData>({
     visitorName: visitorName,
+    visitorEmail: visitorEmail,
     visitorPhone: '',
     bestTime: '',
     notes: ''
@@ -26,7 +29,7 @@ export default function CallBackForm({ onSubmit, onClose, visitorName = '' }: Ca
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.visitorName && formData.visitorPhone) {
+    if (formData.visitorName && formData.visitorEmail && formData.visitorPhone) {
       // Combine day and time into bestTime string
       const bestTimeStr = selectedDay && selectedTime 
         ? `${selectedDay}, ${selectedTime}`
@@ -67,6 +70,20 @@ export default function CallBackForm({ onSubmit, onClose, visitorName = '' }: Ca
               onChange={(e) => setFormData({ ...formData, visitorName: e.target.value })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               placeholder="John Doe"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Your Email *
+            </label>
+            <input
+              type="email"
+              required
+              value={formData.visitorEmail}
+              onChange={(e) => setFormData({ ...formData, visitorEmail: e.target.value })}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+              placeholder="john@example.com"
             />
           </div>
 
