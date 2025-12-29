@@ -19,19 +19,6 @@ export default function ChatWidget() {
   const [isConnected, setIsConnected] = useState(false);
   const [visitorName, setVisitorName] = useState('');
   const [visitorEmail, setVisitorEmail] = useState('');
-  const [hasProvidedInfo, setHasProvidedInfo] = useState(false);
-
-  // Auto-set hasProvidedInfo when both name and valid email are filled (with debounce)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(visitorEmail.trim());
-      if (visitorName.trim() && isValidEmail && !hasProvidedInfo) {
-        setHasProvidedInfo(true);
-      }
-    }, 800); // Wait 800ms after user stops typing
-
-    return () => clearTimeout(timer);
-  }, [visitorName, visitorEmail, hasProvidedInfo]);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [showScheduling, setShowScheduling] = useState(false);
   const [showCallBack, setShowCallBack] = useState(false);
@@ -150,7 +137,7 @@ export default function ChatWidget() {
       type: 'typing',
       isTyping,
       conversationId,
-      visitorName,
+      visitorName: visitorName || 'Visitor',
     }));
   };
 
@@ -158,7 +145,7 @@ export default function ChatWidget() {
     setInputValue(e.target.value);
 
     // Send typing indicator
-    if (hasProvidedInfo && conversationId) {
+    if (conversationId) {
       sendTypingIndicator(true);
 
       // Clear existing timeout
@@ -178,14 +165,6 @@ export default function ChatWidget() {
       return;
     }
 
-    if (!hasProvidedInfo) {
-      if (!visitorName || !visitorEmail) {
-        alert('Please provide your name and email to start chatting');
-        return;
-      }
-      setHasProvidedInfo(true);
-    }
-
     // Clear typing indicator
     if (typingTimeoutRef.current) {
       clearTimeout(typingTimeoutRef.current);
@@ -197,8 +176,8 @@ export default function ChatWidget() {
     wsRef.current.send(JSON.stringify({
       type: 'chat',
       content: inputValue,
-      visitorName,
-      visitorEmail,
+      visitorName: visitorName || null,
+      visitorEmail: visitorEmail || null,
       conversationId,
     }));
 
@@ -217,11 +196,15 @@ export default function ChatWidget() {
       return;
     }
 
+    // Update local name/email if provided in the form
+    if (scheduleData.visitorName) setVisitorName(scheduleData.visitorName);
+    if (scheduleData.visitorEmail) setVisitorEmail(scheduleData.visitorEmail);
+
     wsRef.current.send(JSON.stringify({
       type: 'schedule_visit',
       content: scheduleData,
-      visitorName,
-      visitorEmail,
+      visitorName: scheduleData.visitorName,
+      visitorEmail: scheduleData.visitorEmail,
       conversationId,
     }));
 
@@ -234,11 +217,14 @@ export default function ChatWidget() {
       return;
     }
 
+    // Update local name if provided in the form
+    if (callBackData.visitorName) setVisitorName(callBackData.visitorName);
+
     wsRef.current.send(JSON.stringify({
       type: 'request_callback',
       content: callBackData,
-      visitorName,
-      visitorEmail,
+      visitorName: callBackData.visitorName,
+      visitorEmail: visitorEmail || null,
       conversationId,
     }));
 
@@ -311,26 +297,6 @@ export default function ChatWidget() {
           </button>
         </div>
         
-        {/* User Details in Header */}
-        {!hasProvidedInfo && (
-          <div className="space-y-2 pt-3 border-t border-emerald-500">
-            <p className="text-sm text-emerald-100 font-medium">Your Details:</p>
-            <input
-              type="text"
-              placeholder="Your name"
-              value={visitorName}
-              onChange={(e) => setVisitorName(e.target.value)}
-              className="w-full px-3 py-2 border border-emerald-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-white text-gray-900"
-            />
-            <input
-              type="email"
-              placeholder="Your email"
-              value={visitorEmail}
-              onChange={(e) => setVisitorEmail(e.target.value)}
-              className="w-full px-3 py-2 border border-emerald-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-white text-gray-900"
-            />
-          </div>
-        )}
       </div>
 
       {/* After Hours Message */}
@@ -341,7 +307,7 @@ export default function ChatWidget() {
       )}
 
       {/* Action Buttons */}
-      {hasProvidedInfo && !showScheduling && !showCallBack && (
+      {!showScheduling && !showCallBack && (
         <div className="px-4 py-3 bg-white border-b border-gray-200 flex gap-2">
           <button
             onClick={() => setShowScheduling(true)}
