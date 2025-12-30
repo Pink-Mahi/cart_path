@@ -105,7 +105,7 @@ export default function ChatWidget() {
       if (data.type === 'system') {
         addMessage('system', data.content);
       } else if (data.type === 'bot' || data.type === 'admin') {
-        addMessage(data.type, data.content, data.audioUrl);
+        addMessage(data.type, data.content, data.audioUrl, data.messageId);
       } else if (data.type === 'message_updated') {
         // Update existing message content
         setMessages(prev => prev.map(msg => 
@@ -178,9 +178,9 @@ export default function ChatWidget() {
   };
 
 
-  const addMessage = (type: Message['type'], content: string, audioUrl?: string) => {
+  const addMessage = (type: Message['type'], content: string, audioUrl?: string, messageId?: string) => {
     const newMessage: Message = {
-      id: Date.now().toString(),
+      id: messageId || Date.now().toString(),
       type,
       content,
       timestamp: new Date(),
