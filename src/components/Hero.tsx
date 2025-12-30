@@ -58,23 +58,28 @@ export default function Hero() {
           }
         }
 
-        @keyframes flipOut {
-          0% {
-            transform: rotateY(0deg);
-            opacity: 1;
-          }
-          100% {
-            transform: rotateY(-90deg);
-            opacity: 0;
-          }
-        }
-
         .tile-enter {
           animation: flipIn 0.6s ease-out forwards;
         }
 
         .tile-container {
           perspective: 1000px;
+        }
+
+        .tile-wrapper {
+          min-height: 140px;
+        }
+
+        .tile-0 {
+          animation-delay: 0s;
+        }
+
+        .tile-1 {
+          animation-delay: 0.2s;
+        }
+
+        .tile-2 {
+          animation-delay: 0.4s;
         }
       `}</style>
 
@@ -114,7 +119,7 @@ export default function Hero() {
           {messageSets[currentSet].map((message, index) => (
             <div 
               key={`${currentSet}-${index}`}
-              className="bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto tile-enter"
+              className={`tile-wrapper bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto tile-enter tile-${index}`}
             >
               <div className="text-4xl font-bold text-white mb-2">{message.title}</div>
               <div className="text-white/90">{message.subtitle}</div>
