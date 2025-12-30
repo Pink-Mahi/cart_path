@@ -101,6 +101,8 @@ export default function ChatWidget() {
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       
+      console.log('WebSocket message received:', data.type, 'audioUrl:', data.audioUrl);
+      
       if (data.type === 'system') {
         addMessage('system', data.content);
       } else if (data.type === 'bot' || data.type === 'admin') {
@@ -202,8 +204,11 @@ export default function ChatWidget() {
     };
     setMessages((prev) => [...prev, newMessage]);
     
+    console.log('addMessage called:', type, 'audioEnabled:', audioEnabled, 'audioUrl:', audioUrl);
+    
     // Play audio for bot and admin messages
     if ((type === 'bot' || type === 'admin') && audioEnabled && audioUrl) {
+      console.log('Attempting to play audio for', type);
       playAudio(audioUrl);
     }
   };
