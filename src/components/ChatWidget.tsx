@@ -95,7 +95,7 @@ export default function ChatWidget() {
       const data = JSON.parse(event.data);
       
       if (data.type === 'system') {
-        addMessage('system', 'Hi! How can I help you with cart path cleaning today?');
+        addMessage('system', data.content);
       } else if (data.type === 'bot' || data.type === 'admin') {
         addMessage(data.type, data.content);
       }
