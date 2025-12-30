@@ -29,6 +29,7 @@ export default function ChatWidget() {
     const saved = localStorage.getItem('cart_path_audio_enabled');
     return saved ? JSON.parse(saved) : false;
   });
+  const [pendingAdminAudio, setPendingAdminAudio] = useState<string | null>(null);
   
   const wsRef = useRef<WebSocket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -121,7 +122,7 @@ export default function ChatWidget() {
     wsRef.current = ws;
   };
 
-  const playAudio = (audioUrl: string) => {
+  const playAudio = (audioUrl: string, isAdmin: boolean = false) => {
     if (!audioEnabled || typeof window === 'undefined') return;
     
     try {
@@ -133,18 +134,25 @@ export default function ChatWidget() {
           console.log('Audio playing:', audioUrl);
         }).catch(error => {
           console.error('Audio playback failed:', error);
-          // Show visible error on iOS for debugging
-          if (typeof window !== 'undefined' && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
-            const errorDiv = document.createElement('div');
-            errorDiv.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:red;color:white;padding:20px;z-index:9999;border-radius:8px;max-width:80%;';
-            errorDiv.textContent = `Audio Error: ${error.message || error}`;
-            document.body.appendChild(errorDiv);
-            setTimeout(() => errorDiv.remove(), 5000);
+          // On iOS, if admin audio fails due to autoplay policy, save it for user interaction
+          if (isAdmin && typeof window !== 'undefined' && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
+            setPendingAdminAudio(audioUrl);
           }
         });
       }
     } catch (error) {
       console.error('Audio creation failed:', error);
+    }
+  };
+
+  const playPendingAdminAudio = () => {
+    if (pendingAdminAudio) {
+      const audio = new Audio(pendingAdminAudio);
+      audio.play().then(() => {
+        setPendingAdminAudio(null);
+      }).catch(error => {
+        console.error('Pending audio playback failed:', error);
+      });
     }
   };
 
@@ -173,19 +181,10 @@ export default function ChatWidget() {
     
     console.log('addMessage called:', type, 'audioEnabled:', audioEnabled, 'audioUrl:', audioUrl);
     
-    // Show debug info on iOS for admin messages
-    if (type === 'admin' && typeof window !== 'undefined' && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
-      const debugDiv = document.createElement('div');
-      debugDiv.style.cssText = 'position:fixed;top:10px;left:10px;background:blue;color:white;padding:10px;z-index:9999;font-size:12px;max-width:90%;';
-      debugDiv.textContent = `Admin msg: audioEnabled=${audioEnabled}, audioUrl=${audioUrl ? 'YES' : 'NO'}`;
-      document.body.appendChild(debugDiv);
-      setTimeout(() => debugDiv.remove(), 5000);
-    }
-    
     // Play audio for bot and admin messages
     if ((type === 'bot' || type === 'admin') && audioEnabled && audioUrl) {
       console.log('Attempting to play audio for', type);
-      playAudio(audioUrl);
+      playAudio(audioUrl, type === 'admin');
     }
   };
 
@@ -410,6 +409,19 @@ export default function ChatWidget() {
               WhatsApp
             </a>
           )}
+        </div>
+      )}
+
+      {/* Pending Admin Audio Button for iOS */}
+      {pendingAdminAudio && (
+        <div className="px-4 py-3 bg-orange-50 border-b border-orange-200">
+          <button
+            onClick={playPendingAdminAudio}
+            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors font-medium"
+          >
+            <Volume2 size={20} />
+            Tap to hear admin response
+          </button>
         </div>
       )}
 
