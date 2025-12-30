@@ -12,7 +12,7 @@ export default function Hero() {
     [
       { title: 'More Efficient', subtitle: 'Advanced cleaning system' },
       { title: 'Cost Effective', subtitle: 'Minimal water waste' },
-      { title: 'Environmentally Safe', subtitle: 'Zero-runoff design' }
+      { title: 'Eco-Safe', subtitle: 'Zero-runoff design' }
     ],
     [
       { title: 'Faster Cleaning', subtitle: 'Innovative technology' },
