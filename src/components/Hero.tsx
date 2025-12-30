@@ -22,7 +22,7 @@ export default function Hero() {
     [
       { title: 'Faster Service', subtitle: 'Patent-pending technology' },
       { title: 'Better Value', subtitle: 'Efficient water recovery' },
-      { title: 'Environmentally Responsible', subtitle: 'Closed-loop system' }
+      { title: 'Eco-Responsible', subtitle: 'Closed-loop system' }
     ]
   ];
 
