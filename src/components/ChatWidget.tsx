@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { MessageCircle, X, Send, Calendar, MessageSquare, Phone } from 'lucide-react';
+import { MessageCircle, X, Send, Calendar, MessageSquare, Phone, Volume2, VolumeX } from 'lucide-react';
 import SchedulingForm, { ScheduleData } from './SchedulingForm';
 import CallBackForm, { CallBackData } from './CallBackForm';
 
@@ -24,6 +24,10 @@ export default function ChatWidget() {
   const [showCallBack, setShowCallBack] = useState(false);
   const [whatsappLink, setWhatsappLink] = useState<string | null>(null);
   const [afterHoursMessage, setAfterHoursMessage] = useState<string | null>(null);
+  const [audioEnabled, setAudioEnabled] = useState(() => {
+    const saved = localStorage.getItem('cart_path_audio_enabled');
+    return saved ? JSON.parse(saved) : false;
+  });
   
   const wsRef = useRef<WebSocket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -114,6 +118,31 @@ export default function ChatWidget() {
     wsRef.current = ws;
   };
 
+  const speakMessage = (text: string) => {
+    if (!audioEnabled || !('speechSynthesis' in window)) return;
+    
+    // Cancel any ongoing speech
+    window.speechSynthesis.cancel();
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 1.0;
+    utterance.pitch = 1.0;
+    utterance.volume = 1.0;
+    
+    window.speechSynthesis.speak(utterance);
+  };
+
+  const toggleAudio = () => {
+    const newState = !audioEnabled;
+    setAudioEnabled(newState);
+    localStorage.setItem('cart_path_audio_enabled', JSON.stringify(newState));
+    
+    // Cancel any ongoing speech when muting
+    if (!newState && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+  };
+
   const addMessage = (type: Message['type'], content: string) => {
     const newMessage: Message = {
       id: Date.now().toString(),
@@ -122,6 +151,11 @@ export default function ChatWidget() {
       timestamp: new Date(),
     };
     setMessages((prev) => [...prev, newMessage]);
+    
+    // Speak bot and admin messages
+    if ((type === 'bot' || type === 'admin') && audioEnabled) {
+      speakMessage(content);
+    }
   };
 
   const scrollToBottom = () => {
@@ -289,13 +323,23 @@ export default function ChatWidget() {
               {isConnected ? 'Online' : 'Connecting...'}
             </p>
           </div>
-          <button
-            onClick={() => setIsOpen(false)}
-            className="hover:bg-emerald-700 p-1 rounded transition-colors"
-            aria-label="Close chat"
-          >
-            <X size={20} />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={toggleAudio}
+              className="hover:bg-emerald-700 p-1 rounded transition-colors"
+              aria-label={audioEnabled ? 'Mute audio' : 'Enable audio'}
+              title={audioEnabled ? 'Mute audio responses' : 'Enable audio responses'}
+            >
+              {audioEnabled ? <Volume2 size={20} /> : <VolumeX size={20} />}
+            </button>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="hover:bg-emerald-700 p-1 rounded transition-colors"
+              aria-label="Close chat"
+            >
+              <X size={20} />
+            </button>
+          </div>
         </div>
         
       </div>
