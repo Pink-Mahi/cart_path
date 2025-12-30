@@ -4,6 +4,7 @@ export default function Hero() {
   const [tile0Index, setTile0Index] = useState(0);
   const [tile1Index, setTile1Index] = useState(0);
   const [tile2Index, setTile2Index] = useState(0);
+  const [flipping, setFlipping] = useState(false);
 
   const tileMessages = [
     [
@@ -28,18 +29,28 @@ export default function Hero() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // Update tile 0 immediately
-      setTile0Index(prev => (prev + 1) % 4);
+      // Start flip animation
+      setFlipping(true);
       
-      // Update tile 1 after 350ms
+      // Update tile 0 at halfway point of flip (300ms)
+      setTimeout(() => {
+        setTile0Index(prev => (prev + 1) % 4);
+      }, 300);
+      
+      // Update tile 1 at 650ms (300ms + 350ms delay)
       setTimeout(() => {
         setTile1Index(prev => (prev + 1) % 4);
-      }, 350);
+      }, 650);
       
-      // Update tile 2 after 700ms
+      // Update tile 2 at 1000ms (300ms + 700ms delay)
       setTimeout(() => {
         setTile2Index(prev => (prev + 1) % 4);
-      }, 700);
+      }, 1000);
+      
+      // Reset flipping state after all animations complete
+      setTimeout(() => {
+        setFlipping(false);
+      }, 1700);
     }, 5000);
 
     return () => clearInterval(interval);
@@ -58,19 +69,16 @@ export default function Hero() {
       <div className="absolute inset-0 z-0 bg-gradient-to-r from-emerald-900/55 to-emerald-800/45"></div>
 
       <style>{`
-        @keyframes flipIn {
+        @keyframes flipCard {
           0% {
+            transform: rotateY(0deg);
+          }
+          50% {
             transform: rotateY(90deg);
-            opacity: 0;
           }
           100% {
             transform: rotateY(0deg);
-            opacity: 1;
           }
-        }
-
-        .tile-enter {
-          animation: flipIn 0.6s ease-out forwards;
         }
 
         .tile-container {
@@ -82,17 +90,23 @@ export default function Hero() {
           display: flex;
           flex-direction: column;
           justify-content: center;
+          transform-style: preserve-3d;
+          transition: transform 0.6s ease-in-out;
         }
 
-        .tile-0 {
+        .tile-flip {
+          animation: flipCard 0.6s ease-in-out;
+        }
+
+        .tile-0.tile-flip {
           animation-delay: 0s;
         }
 
-        .tile-1 {
+        .tile-1.tile-flip {
           animation-delay: 0.35s;
         }
 
-        .tile-2 {
+        .tile-2.tile-flip {
           animation-delay: 0.7s;
         }
       `}</style>
@@ -131,24 +145,21 @@ export default function Hero() {
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto tile-container">
           <div 
-            key={`tile-0-${tile0Index}`}
-            className="tile-wrapper bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto tile-enter tile-0"
+            className={`tile-wrapper bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto tile-0 ${flipping ? 'tile-flip' : ''}`}
           >
             <div className="text-4xl font-bold text-white mb-2">{tileMessages[0][tile0Index].title}</div>
             <div className="text-white/90">{tileMessages[0][tile0Index].subtitle}</div>
           </div>
           
           <div 
-            key={`tile-1-${tile1Index}`}
-            className="tile-wrapper bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto tile-enter tile-1"
+            className={`tile-wrapper bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto tile-1 ${flipping ? 'tile-flip' : ''}`}
           >
             <div className="text-4xl font-bold text-white mb-2">{tileMessages[1][tile1Index].title}</div>
             <div className="text-white/90">{tileMessages[1][tile1Index].subtitle}</div>
           </div>
           
           <div 
-            key={`tile-2-${tile2Index}`}
-            className="tile-wrapper bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto tile-enter tile-2"
+            className={`tile-wrapper bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto tile-2 ${flipping ? 'tile-flip' : ''}`}
           >
             <div className="text-4xl font-bold text-white mb-2">{tileMessages[2][tile2Index].title}</div>
             <div className="text-white/90">{tileMessages[2][tile2Index].subtitle}</div>
