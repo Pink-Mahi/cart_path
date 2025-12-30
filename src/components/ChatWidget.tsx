@@ -126,9 +126,23 @@ export default function ChatWidget() {
     
     try {
       const audio = new Audio(audioUrl);
-      audio.play().catch(error => {
-        console.error('Audio playback failed:', error);
-      });
+      const playPromise = audio.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          console.log('Audio playing:', audioUrl);
+        }).catch(error => {
+          console.error('Audio playback failed:', error);
+          // Show visible error on iOS for debugging
+          if (typeof window !== 'undefined' && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
+            const errorDiv = document.createElement('div');
+            errorDiv.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:red;color:white;padding:20px;z-index:9999;border-radius:8px;max-width:80%;';
+            errorDiv.textContent = `Audio Error: ${error.message || error}`;
+            document.body.appendChild(errorDiv);
+            setTimeout(() => errorDiv.remove(), 5000);
+          }
+        });
+      }
     } catch (error) {
       console.error('Audio creation failed:', error);
     }
@@ -158,6 +172,15 @@ export default function ChatWidget() {
     setMessages((prev) => [...prev, newMessage]);
     
     console.log('addMessage called:', type, 'audioEnabled:', audioEnabled, 'audioUrl:', audioUrl);
+    
+    // Show debug info on iOS for admin messages
+    if (type === 'admin' && typeof window !== 'undefined' && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
+      const debugDiv = document.createElement('div');
+      debugDiv.style.cssText = 'position:fixed;top:10px;left:10px;background:blue;color:white;padding:10px;z-index:9999;font-size:12px;max-width:90%;';
+      debugDiv.textContent = `Admin msg: audioEnabled=${audioEnabled}, audioUrl=${audioUrl ? 'YES' : 'NO'}`;
+      document.body.appendChild(debugDiv);
+      setTimeout(() => debugDiv.remove(), 5000);
+    }
     
     // Play audio for bot and admin messages
     if ((type === 'bot' || type === 'admin') && audioEnabled && audioUrl) {
