@@ -7,8 +7,8 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-white">
       <Seo
-        title="Golf Cart Path Cleaning Services | Cart Path Cleaning"
-        description="Closed-loop cart path and sidewalk cleaning for golf facilities, clubs, resorts, and HOA communities. Faster cleaning, less water usage, and minimal disruption."
+        title="Cart Path Pressure Washing & Power Washing Services | Golf Course Cleaning"
+        description="Professional cart path pressure washing and power washing services for golf courses. Our closed-loop system uses 90% less water than traditional pressure washing. Fast, eco-friendly cleaning."
         path="/services"
         breadcrumbs={[
           { name: 'Home', path: '/' },
@@ -34,11 +34,9 @@ export default function ServicesPage() {
       <SiteHeader />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900">Cart Path & Sidewalk Cleaning Services</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900">Cart Path Pressure Washing & Power Washing Services</h1>
         <p className="mt-6 text-lg text-gray-700 max-w-3xl">
-          Cart Path Cleaning provides closed-loop, low-disruption surface cleaning designed for high-traffic golf and community
-          environments. Our patent-pending system recovers and reuses wash water as part of a closed-loop process to help reduce runoff
-          and overall water consumption.
+          Professional cart path pressure washing and power washing for golf courses, country clubs, and communities. Our patent-pending closed-loop system delivers superior cleaning results while using 90% less water than traditional pressure washing methods. Fast, eco-friendly, and compliant with environmental regulations.
         </p>
 
         <section className="mt-12 grid md:grid-cols-3 gap-8">
@@ -65,11 +63,14 @@ export default function ServicesPage() {
         </section>
 
         <section className="mt-14 rounded-2xl bg-emerald-50 border border-emerald-100 p-8">
-          <h2 className="text-2xl font-bold text-gray-900">Why Closed-Loop Cleaning Matters</h2>
-          <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <h2 className="text-2xl font-bold text-gray-900">Advanced Pressure Washing Technology</h2>
+          <p className="mt-3 text-gray-700 max-w-3xl">
+            Our cart path pressure washing and power washing system is engineered specifically for golf courses and large facilities. Unlike traditional pressure washing that wastes water and creates runoff issues, our closed-loop technology recovers and recycles wash water throughout the cleaning process.
+          </p>
+          <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div>
-              <div className="font-semibold text-gray-900">Dramatically less water</div>
-              <div className="text-gray-700 mt-1">Wash water is recovered and reused as part of a closed-loop process, significantly reducing runoff and overall water consumption compared to traditional pressure washing.</div>
+              <div className="font-semibold text-gray-900">90% less water than traditional pressure washing</div>
+              <div className="text-gray-700 mt-1">Our closed-loop pressure washing system recovers and reuses wash water, dramatically reducing water consumption compared to conventional power washing methods.</div>
             </div>
             <div>
               <div className="font-semibold text-gray-900">Fast turnaround</div>
