@@ -94,7 +94,8 @@ export default function ChatWidget() {
       if (visitorIdRef.current) {
         ws.send(JSON.stringify({
           type: 'init',
-          visitorId: visitorIdRef.current
+          visitorId: visitorIdRef.current,
+          language
         }));
       }
     };
@@ -324,7 +325,7 @@ export default function ChatWidget() {
   const fetchBusinessHours = async () => {
     try {
       const apiUrl = CHAT_API_URL.replace('ws://', 'http://').replace('wss://', 'https://');
-      const response = await fetch(`${apiUrl}/api/business-hours`);
+      const response = await fetch(`${apiUrl}/api/business-hours?lang=${encodeURIComponent(language)}`);
       const data = await response.json();
       if (!data.inBusinessHours && data.afterHoursMessage) {
         setAfterHoursMessage(data.afterHoursMessage);
@@ -339,7 +340,19 @@ export default function ChatWidget() {
       fetchWhatsAppLink();
       fetchBusinessHours();
     }
-  }, [isOpen]);
+  }, [isOpen, language]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) return;
+
+    wsRef.current.send(
+      JSON.stringify({
+        type: 'set_language',
+        language,
+      })
+    );
+  }, [isOpen, language]);
 
   if (!isOpen) {
     return (
