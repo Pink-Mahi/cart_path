@@ -30,14 +30,11 @@ export default function ChatWidget() {
     return saved ? JSON.parse(saved) : false;
   });
   const [pendingAdminAudio, setPendingAdminAudio] = useState<string | null>(null);
-  const [showLauncherPulse, setShowLauncherPulse] = useState(false);
   
   const wsRef = useRef<WebSocket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const visitorIdRef = useRef<string | null>(null);
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const pulseStartTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const pulseStopTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Get or create persistent visitor ID
   useEffect(() => {
@@ -70,42 +67,6 @@ export default function ChatWidget() {
       if (wsRef.current) {
         wsRef.current.close();
       }
-    };
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    if (isOpen) return;
-
-    let openedOnce = false;
-    let nudgedOnce = false;
-    let prefersReducedMotion = false;
-    try {
-      openedOnce = localStorage.getItem('cart_path_chat_opened_once') === 'true';
-      nudgedOnce = localStorage.getItem('cart_path_chat_launcher_nudged') === 'true';
-      prefersReducedMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    } catch {
-      return;
-    }
-
-    if (openedOnce || nudgedOnce || prefersReducedMotion) return;
-
-    pulseStartTimeoutRef.current = setTimeout(() => {
-      setShowLauncherPulse(true);
-
-      pulseStopTimeoutRef.current = setTimeout(() => {
-        setShowLauncherPulse(false);
-        try {
-          localStorage.setItem('cart_path_chat_launcher_nudged', 'true');
-        } catch {
-          // ignore
-        }
-      }, 8000);
-    }, 4000);
-
-    return () => {
-      if (pulseStartTimeoutRef.current) clearTimeout(pulseStartTimeoutRef.current);
-      if (pulseStopTimeoutRef.current) clearTimeout(pulseStopTimeoutRef.current);
     };
   }, [isOpen]);
 
@@ -380,29 +341,10 @@ export default function ChatWidget() {
   if (!isOpen) {
     return (
       <button
-        onClick={() => {
-          setIsOpen(true);
-          if (typeof window !== 'undefined') {
-            try {
-              localStorage.setItem('cart_path_chat_opened_once', 'true');
-              localStorage.setItem('cart_path_chat_launcher_nudged', 'true');
-            } catch {
-              // ignore
-            }
-          }
-          setShowLauncherPulse(false);
-          if (pulseStartTimeoutRef.current) clearTimeout(pulseStartTimeoutRef.current);
-          if (pulseStopTimeoutRef.current) clearTimeout(pulseStopTimeoutRef.current);
-        }}
-        className="fixed bottom-6 right-6 bg-emerald-600 text-white p-4 rounded-full shadow-lg hover:bg-emerald-700 transition-all hover:scale-110 z-50 relative flex items-center justify-center"
+        onClick={() => setIsOpen(true)}
+        className="fixed bottom-6 right-6 bg-emerald-600 text-white p-4 rounded-full shadow-lg hover:bg-emerald-700 transition-all hover:scale-110 z-50"
         aria-label="Open chat"
       >
-        {showLauncherPulse && (
-          <>
-            <span className="absolute inset-0 rounded-full border-2 border-emerald-200/70 animate-ping pointer-events-none" />
-            <span className="absolute inset-0 rounded-full border-2 border-emerald-200/25 pointer-events-none" />
-          </>
-        )}
         <MessageCircle size={24} />
       </button>
     );
