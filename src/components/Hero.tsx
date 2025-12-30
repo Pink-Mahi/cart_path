@@ -1,35 +1,57 @@
 import { useState, useEffect } from 'react';
 
 export default function Hero() {
-  const [currentSet, setCurrentSet] = useState(0);
+  const [tileIndices, setTileIndices] = useState([0, 0, 0]);
+  const [flipTrigger, setFlipTrigger] = useState(0);
 
-  const messageSets = [
+  const tileMessages = [
     [
       { title: 'Faster', subtitle: 'Patent-pending technology' },
-      { title: 'Smarter', subtitle: 'Closed-loop water recovery' },
-      { title: 'Compliant', subtitle: 'Designed for regulations' }
-    ],
-    [
       { title: 'More Efficient', subtitle: 'Advanced cleaning system' },
-      { title: 'Cost Effective', subtitle: 'Minimal water waste' },
-      { title: 'Eco-Safe', subtitle: 'Zero-runoff design' }
-    ],
-    [
       { title: 'Faster Cleaning', subtitle: 'Innovative technology' },
-      { title: 'Lower Costs', subtitle: 'Water-recovery system' },
-      { title: 'Eco-Friendly', subtitle: 'Prevents runoff' }
+      { title: 'Faster Service', subtitle: 'Patent-pending technology' }
     ],
     [
-      { title: 'Faster Service', subtitle: 'Patent-pending technology' },
-      { title: 'Better Value', subtitle: 'Efficient water recovery' },
+      { title: 'Smarter', subtitle: 'Closed-loop water recovery' },
+      { title: 'Cost Effective', subtitle: 'Minimal water waste' },
+      { title: 'Lower Costs', subtitle: 'Water-recovery system' },
+      { title: 'Better Value', subtitle: 'Efficient water recovery' }
+    ],
+    [
+      { title: 'Compliant', subtitle: 'Designed for regulations' },
+      { title: 'Eco-Safe', subtitle: 'Zero-runoff design' },
+      { title: 'Eco-Friendly', subtitle: 'Prevents runoff' },
       { title: 'Eco-Responsible', subtitle: 'Closed-loop system' }
     ]
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSet((prev) => (prev + 1) % 4);
-    }, 5000); // Rotate every 5 seconds
+      setTileIndices(prev => {
+        const newIndices = [...prev];
+        // Cycle through each tile's messages independently
+        newIndices[0] = (newIndices[0] + 1) % 4;
+        
+        setTimeout(() => {
+          setTileIndices(p => {
+            const n = [...p];
+            n[1] = (n[1] + 1) % 4;
+            return n;
+          });
+        }, 350);
+        
+        setTimeout(() => {
+          setTileIndices(p => {
+            const n = [...p];
+            n[2] = (n[2] + 1) % 4;
+            return n;
+          });
+        }, 700);
+        
+        return newIndices;
+      });
+      setFlipTrigger(prev => prev + 1);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -119,13 +141,13 @@ export default function Hero() {
         </div>
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto tile-container">
-          {messageSets[currentSet].map((message, index) => (
+          {tileMessages.map((messages, tileIndex) => (
             <div 
-              key={`${currentSet}-${index}`}
-              className={`tile-wrapper bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto tile-enter tile-${index}`}
+              key={`tile-${tileIndex}-${tileIndices[tileIndex]}-${flipTrigger}`}
+              className={`tile-wrapper bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto tile-enter tile-${tileIndex}`}
             >
-              <div className="text-4xl font-bold text-white mb-2">{message.title}</div>
-              <div className="text-white/90">{message.subtitle}</div>
+              <div className="text-4xl font-bold text-white mb-2">{messages[tileIndices[tileIndex]].title}</div>
+              <div className="text-white/90">{messages[tileIndices[tileIndex]].subtitle}</div>
             </div>
           ))}
         </div>
