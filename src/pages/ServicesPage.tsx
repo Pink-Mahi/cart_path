@@ -7,8 +7,8 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-white">
       <Seo
-        title="Cart Path Pressure Washing & Power Washing Services | Golf Course Cleaning"
-        description="Professional cart path pressure washing and power washing services for golf courses. Our closed-loop system uses 90% less water than traditional pressure washing. Fast, eco-friendly cleaning."
+        title="Cart Path & Sidewalk Pressure Washing Services | Power Washing for Golf Courses & HOAs"
+        description="Professional cart path and sidewalk pressure washing services. Our closed-loop power washing system uses 90% less water than traditional pressure washing. Serving golf courses, country clubs, HOAs, and commercial properties."
         path="/services"
         breadcrumbs={[
           { name: 'Home', path: '/' },
@@ -34,9 +34,9 @@ export default function ServicesPage() {
       <SiteHeader />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900">Cart Path Pressure Washing & Power Washing Services</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900">Cart Path & Sidewalk Pressure Washing Services</h1>
         <p className="mt-6 text-lg text-gray-700 max-w-3xl">
-          Professional cart path pressure washing and power washing for golf courses, country clubs, and communities. Our patent-pending closed-loop system delivers superior cleaning results while using 90% less water than traditional pressure washing methods. Fast, eco-friendly, and compliant with environmental regulations.
+          Professional cart path and sidewalk pressure washing for golf courses, country clubs, HOAs, and commercial properties. Our patent-pending closed-loop power washing system delivers superior cleaning results while using 90% less water than traditional pressure washing methods. Fast, eco-friendly, and compliant with environmental regulations.
         </p>
 
         <section className="mt-12 grid md:grid-cols-3 gap-8">
@@ -48,10 +48,9 @@ export default function ServicesPage() {
             </p>
           </div>
           <div className="rounded-2xl border border-gray-100 p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-900">Sidewalk & Walkway Cleaning</h2>
+            <h2 className="text-xl font-bold text-gray-900">Sidewalk Pressure Washing & Power Washing</h2>
             <p className="mt-3 text-gray-700">
-              Remove algae, grime, and staining from sidewalks and pedestrian areas to reduce slip hazards and keep common spaces
-              welcoming.
+              Professional sidewalk pressure washing services for HOAs, commercial properties, and golf facilities. Our power washing system removes algae, grime, and staining while using minimal water and preventing runoff issues.
             </p>
           </div>
           <div className="rounded-2xl border border-gray-100 p-6 shadow-sm">
@@ -63,9 +62,9 @@ export default function ServicesPage() {
         </section>
 
         <section className="mt-14 rounded-2xl bg-emerald-50 border border-emerald-100 p-8">
-          <h2 className="text-2xl font-bold text-gray-900">Advanced Pressure Washing Technology</h2>
+          <h2 className="text-2xl font-bold text-gray-900">Advanced Pressure Washing & Power Washing Technology</h2>
           <p className="mt-3 text-gray-700 max-w-3xl">
-            Our cart path pressure washing and power washing system is engineered specifically for golf courses and large facilities. Unlike traditional pressure washing that wastes water and creates runoff issues, our closed-loop technology recovers and recycles wash water throughout the cleaning process.
+            Our cart path and sidewalk pressure washing system is engineered specifically for golf courses, HOAs, and commercial properties. Unlike traditional pressure washing and power washing that wastes water and creates runoff issues, our closed-loop technology recovers and recycles wash water throughout the cleaning process.
           </p>
           <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div>

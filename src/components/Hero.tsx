@@ -124,8 +124,8 @@ export default function Hero() {
         </h1>
 
         <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
-          Professional cart path pressure washing and power washing for golf courses. Clean faster while using significantly less water.<br />
-          Minimal disruption to play.
+          Professional cart path and sidewalk pressure washing for golf courses and communities. Power washing that uses 90% less water.<br />
+          Minimal disruption to operations.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

@@ -13,8 +13,8 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       <Seo
-        title="Cart Path Pressure Washing & Power Washing - Closed-Loop Cleaning for Golf Courses"
-        description="Professional cart path pressure washing and power washing for golf courses. Our closed-loop system cleans cart paths, sidewalks, and walkways faster using 90% less water than traditional pressure washing methods."
+        title="Cart Path & Sidewalk Pressure Washing | Power Washing for Golf Courses & Communities"
+        description="Professional cart path and sidewalk pressure washing services. Our closed-loop power washing system cleans cart paths, sidewalks, and walkways using 90% less water than traditional pressure washing. Serving golf courses, HOAs, and commercial properties."
         path="/"
         includeWebSiteJsonLd
         jsonLd={{
