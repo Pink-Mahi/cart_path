@@ -36,8 +36,6 @@ export default function ChatWidget() {
   const visitorIdRef = useRef<string | null>(null);
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const recognitionRef = useRef<any>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const audioUnlockedRef = useRef(false);
 
   // Get or create persistent visitor ID
   useEffect(() => {
@@ -123,58 +121,16 @@ export default function ChatWidget() {
     wsRef.current = ws;
   };
 
-  // Initialize audio element on mount
-  useEffect(() => {
-    if (typeof window !== 'undefined' && !audioRef.current) {
-      audioRef.current = new Audio();
-      audioRef.current.preload = 'auto';
-    }
-  }, []);
-
-  // Unlock audio on any user interaction (required for iOS Safari)
-  const unlockAudio = () => {
-    if (audioRef.current && !audioUnlockedRef.current) {
-      audioRef.current.play().then(() => {
-        audioRef.current!.pause();
-        audioRef.current!.currentTime = 0;
-        audioUnlockedRef.current = true;
-      }).catch(() => {
-        // Ignore errors during unlock
-      });
-    }
-  };
-
   const playAudio = (audioUrl: string) => {
-    if (!audioEnabled || typeof window === 'undefined') {
-      console.log('Audio disabled or window undefined');
-      return;
-    }
-    
-    if (!audioRef.current) {
-      console.error('Audio element not initialized');
-      return;
-    }
-    
-    console.log('Playing audio:', audioUrl);
+    if (!audioEnabled || typeof window === 'undefined') return;
     
     try {
-      audioRef.current.src = audioUrl;
-      audioRef.current.load();
-      
-      const playPromise = audioRef.current.play();
-      
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          console.log('Audio playback started successfully');
-        }).catch(error => {
-          console.error('Audio playback failed:', error);
-          console.log('Audio unlocked status:', audioUnlockedRef.current);
-          // Try to unlock audio for next time
-          audioUnlockedRef.current = false;
-        });
-      }
+      const audio = new Audio(audioUrl);
+      audio.play().catch(error => {
+        console.error('Audio playback failed:', error);
+      });
     } catch (error) {
-      console.error('Audio playback error:', error);
+      console.error('Audio creation failed:', error);
     }
   };
 
@@ -185,15 +141,9 @@ export default function ChatWidget() {
       localStorage.setItem('cart_path_audio_enabled', JSON.stringify(newState));
     }
     
-    // Unlock audio on user interaction (iOS Safari requirement)
-    if (newState) {
-      unlockAudio();
-    }
-    
-    // Stop any playing audio when muting
-    if (!newState && audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+    // Cancel any ongoing speech when muting
+    if (!newState && typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
     }
   };
 
@@ -202,9 +152,6 @@ export default function ChatWidget() {
       alert('Voice input is not supported in your browser. Please use Chrome, Edge, or Safari.');
       return;
     }
-
-    // Unlock audio on user interaction (iOS Safari requirement)
-    unlockAudio();
 
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
@@ -301,9 +248,6 @@ export default function ChatWidget() {
     if (!inputValue.trim() || !wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) {
       return;
     }
-
-    // Unlock audio on user interaction (iOS Safari requirement)
-    unlockAudio();
 
     // Clear typing indicator
     if (typingTimeoutRef.current) {
