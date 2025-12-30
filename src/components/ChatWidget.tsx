@@ -145,16 +145,34 @@ export default function ChatWidget() {
   };
 
   const playAudio = (audioUrl: string) => {
-    if (!audioEnabled || typeof window === 'undefined' || !audioRef.current) return;
+    if (!audioEnabled || typeof window === 'undefined') {
+      console.log('Audio disabled or window undefined');
+      return;
+    }
+    
+    if (!audioRef.current) {
+      console.error('Audio element not initialized');
+      return;
+    }
+    
+    console.log('Playing audio:', audioUrl);
     
     try {
       audioRef.current.src = audioUrl;
       audioRef.current.load();
-      audioRef.current.play().catch(error => {
-        console.error('Audio playback failed:', error);
-        // Try to unlock audio for next time
-        audioUnlockedRef.current = false;
-      });
+      
+      const playPromise = audioRef.current.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          console.log('Audio playback started successfully');
+        }).catch(error => {
+          console.error('Audio playback failed:', error);
+          console.log('Audio unlocked status:', audioUnlockedRef.current);
+          // Try to unlock audio for next time
+          audioUnlockedRef.current = false;
+        });
+      }
     } catch (error) {
       console.error('Audio playback error:', error);
     }
@@ -184,6 +202,9 @@ export default function ChatWidget() {
       alert('Voice input is not supported in your browser. Please use Chrome, Edge, or Safari.');
       return;
     }
+
+    // Unlock audio on user interaction (iOS Safari requirement)
+    unlockAudio();
 
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
