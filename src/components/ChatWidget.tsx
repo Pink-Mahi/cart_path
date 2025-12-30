@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { MessageCircle, X, Send, Calendar, MessageSquare, Phone, Volume2, VolumeX } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 import SchedulingForm, { ScheduleData } from './SchedulingForm';
 import CallBackForm, { CallBackData } from './CallBackForm';
 
