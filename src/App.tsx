@@ -14,10 +14,11 @@ import {
   TechnologyPage,
 } from './pages';
 import ChatWidget from './components/ChatWidget';
+import { LanguageProvider } from './contexts/LanguageContext';
 
 function App() {
   return (
-    <>
+    <LanguageProvider>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/services" element={<ServicesPage />} />
@@ -34,7 +35,7 @@ function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <ChatWidget />
-    </>
+    </LanguageProvider>
   );
 }
 

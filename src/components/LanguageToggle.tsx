@@ -4,13 +4,13 @@ export default function LanguageToggle() {
   const { language, setLanguage } = useLanguage();
 
   return (
-    <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 border border-white/20">
+    <div className="flex items-center gap-1 bg-gray-100 rounded-full p-1">
       <button
         onClick={() => setLanguage('en')}
         className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
           language === 'en'
-            ? 'bg-white text-emerald-600'
-            : 'text-white hover:bg-white/10'
+            ? 'bg-emerald-600 text-white shadow-sm'
+            : 'text-gray-600 hover:text-gray-900'
         }`}
         aria-label="Switch to English"
       >
@@ -20,8 +20,8 @@ export default function LanguageToggle() {
         onClick={() => setLanguage('es')}
         className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
           language === 'es'
-            ? 'bg-white text-emerald-600'
-            : 'text-white hover:bg-white/10'
+            ? 'bg-emerald-600 text-white shadow-sm'
+            : 'text-gray-600 hover:text-gray-900'
         }`}
         aria-label="Cambiar a Español"
       >

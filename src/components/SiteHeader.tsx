@@ -1,4 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
+import LanguageToggle from './LanguageToggle';
 
 export default function SiteHeader() {
   const linkClassName = ({ isActive }: { isActive: boolean }) =>
@@ -42,12 +43,15 @@ export default function SiteHeader() {
             </NavLink>
           </nav>
 
-          <Link
-            to="/contact"
-            className="bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-emerald-700 transition-colors"
-          >
-            Get a Quote
-          </Link>
+          <div className="flex items-center gap-4">
+            <LanguageToggle />
+            <Link
+              to="/contact"
+              className="bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-emerald-700 transition-colors"
+            >
+              Get a Quote
+            </Link>
+          </div>
         </div>
       </div>
     </header>
