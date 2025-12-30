@@ -102,7 +102,7 @@ export default function ChatWidget() {
       if (data.type === 'system') {
         addMessage('system', data.content);
       } else if (data.type === 'bot' || data.type === 'admin') {
-        addMessage(data.type, data.content);
+        addMessage(data.type, data.content, data.audioUrl);
       }
     };
 
@@ -119,33 +119,17 @@ export default function ChatWidget() {
     wsRef.current = ws;
   };
 
-  const speakMessage = (text: string) => {
-    if (!audioEnabled || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+  const playAudio = (audioUrl: string) => {
+    if (!audioEnabled || typeof window === 'undefined') return;
     
-    // Cancel any ongoing speech
-    window.speechSynthesis.cancel();
-    
-    // Small delay to ensure cancellation completes
-    setTimeout(() => {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 1.0;
-      utterance.pitch = 1.0;
-      utterance.volume = 1.0;
-      utterance.lang = 'en-US';
-      
-      // Add event listeners for debugging
-      utterance.onstart = () => {
-        console.log('Speech started');
-      };
-      utterance.onerror = (event) => {
-        console.error('Speech error:', event);
-      };
-      utterance.onend = () => {
-        console.log('Speech ended');
-      };
-      
-      window.speechSynthesis.speak(utterance);
-    }, 100);
+    try {
+      const audio = new Audio(audioUrl);
+      audio.play().catch(error => {
+        console.error('Audio playback failed:', error);
+      });
+    } catch (error) {
+      console.error('Audio creation failed:', error);
+    }
   };
 
   const toggleAudio = () => {
@@ -161,7 +145,7 @@ export default function ChatWidget() {
     }
   };
 
-  const addMessage = (type: Message['type'], content: string) => {
+  const addMessage = (type: Message['type'], content: string, audioUrl?: string) => {
     const newMessage: Message = {
       id: Date.now().toString(),
       type,
@@ -170,9 +154,9 @@ export default function ChatWidget() {
     };
     setMessages((prev) => [...prev, newMessage]);
     
-    // Speak bot and admin messages
-    if ((type === 'bot' || type === 'admin') && audioEnabled) {
-      speakMessage(content);
+    // Play audio for bot and admin messages
+    if ((type === 'bot' || type === 'admin') && audioEnabled && audioUrl) {
+      playAudio(audioUrl);
     }
   };
 
