@@ -25,6 +25,7 @@ export default function ChatWidget() {
   const [whatsappLink, setWhatsappLink] = useState<string | null>(null);
   const [afterHoursMessage, setAfterHoursMessage] = useState<string | null>(null);
   const [audioEnabled, setAudioEnabled] = useState(() => {
+    if (typeof window === 'undefined') return false;
     const saved = localStorage.getItem('cart_path_audio_enabled');
     return saved ? JSON.parse(saved) : false;
   });
@@ -135,10 +136,12 @@ export default function ChatWidget() {
   const toggleAudio = () => {
     const newState = !audioEnabled;
     setAudioEnabled(newState);
-    localStorage.setItem('cart_path_audio_enabled', JSON.stringify(newState));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cart_path_audio_enabled', JSON.stringify(newState));
+    }
     
     // Cancel any ongoing speech when muting
-    if (!newState && 'speechSynthesis' in window) {
+    if (!newState && typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }
   };
