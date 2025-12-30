@@ -77,9 +77,16 @@ export default function ChatWidget() {
     if (typeof window === 'undefined') return;
     if (isOpen) return;
 
-    const openedOnce = localStorage.getItem('cart_path_chat_opened_once') === 'true';
-    const nudgedOnce = localStorage.getItem('cart_path_chat_launcher_nudged') === 'true';
-    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let openedOnce = false;
+    let nudgedOnce = false;
+    let prefersReducedMotion = false;
+    try {
+      openedOnce = localStorage.getItem('cart_path_chat_opened_once') === 'true';
+      nudgedOnce = localStorage.getItem('cart_path_chat_launcher_nudged') === 'true';
+      prefersReducedMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    } catch {
+      return;
+    }
 
     if (openedOnce || nudgedOnce || prefersReducedMotion) return;
 
@@ -88,7 +95,11 @@ export default function ChatWidget() {
 
       pulseStopTimeoutRef.current = setTimeout(() => {
         setShowLauncherPulse(false);
-        localStorage.setItem('cart_path_chat_launcher_nudged', 'true');
+        try {
+          localStorage.setItem('cart_path_chat_launcher_nudged', 'true');
+        } catch {
+          // ignore
+        }
       }, 8000);
     }, 4000);
 
@@ -372,20 +383,24 @@ export default function ChatWidget() {
         onClick={() => {
           setIsOpen(true);
           if (typeof window !== 'undefined') {
-            localStorage.setItem('cart_path_chat_opened_once', 'true');
-            localStorage.setItem('cart_path_chat_launcher_nudged', 'true');
+            try {
+              localStorage.setItem('cart_path_chat_opened_once', 'true');
+              localStorage.setItem('cart_path_chat_launcher_nudged', 'true');
+            } catch {
+              // ignore
+            }
           }
           setShowLauncherPulse(false);
           if (pulseStartTimeoutRef.current) clearTimeout(pulseStartTimeoutRef.current);
           if (pulseStopTimeoutRef.current) clearTimeout(pulseStopTimeoutRef.current);
         }}
-        className="fixed bottom-6 right-6 bg-emerald-600 text-white p-4 rounded-full shadow-lg hover:bg-emerald-700 transition-all hover:scale-110 z-50 relative"
+        className="fixed bottom-6 right-6 bg-emerald-600 text-white p-4 rounded-full shadow-lg hover:bg-emerald-700 transition-all hover:scale-110 z-50 relative flex items-center justify-center"
         aria-label="Open chat"
       >
         {showLauncherPulse && (
           <>
-            <span className="absolute inset-0 rounded-full border-2 border-emerald-200/70 animate-ping" />
-            <span className="absolute inset-0 rounded-full border-2 border-emerald-200/25" />
+            <span className="absolute inset-0 rounded-full border-2 border-emerald-200/70 animate-ping pointer-events-none" />
+            <span className="absolute inset-0 rounded-full border-2 border-emerald-200/25 pointer-events-none" />
           </>
         )}
         <MessageCircle size={24} />
