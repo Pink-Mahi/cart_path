@@ -30,11 +30,14 @@ export default function ChatWidget() {
     return saved ? JSON.parse(saved) : false;
   });
   const [pendingAdminAudio, setPendingAdminAudio] = useState<string | null>(null);
+  const [showLauncherPulse, setShowLauncherPulse] = useState(false);
   
   const wsRef = useRef<WebSocket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const visitorIdRef = useRef<string | null>(null);
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const pulseStartTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const pulseStopTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Get or create persistent visitor ID
   useEffect(() => {
@@ -67,6 +70,31 @@ export default function ChatWidget() {
       if (wsRef.current) {
         wsRef.current.close();
       }
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (isOpen) return;
+
+    const openedOnce = localStorage.getItem('cart_path_chat_opened_once') === 'true';
+    const nudgedOnce = localStorage.getItem('cart_path_chat_launcher_nudged') === 'true';
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (openedOnce || nudgedOnce || prefersReducedMotion) return;
+
+    pulseStartTimeoutRef.current = setTimeout(() => {
+      setShowLauncherPulse(true);
+
+      pulseStopTimeoutRef.current = setTimeout(() => {
+        setShowLauncherPulse(false);
+        localStorage.setItem('cart_path_chat_launcher_nudged', 'true');
+      }, 8000);
+    }, 4000);
+
+    return () => {
+      if (pulseStartTimeoutRef.current) clearTimeout(pulseStartTimeoutRef.current);
+      if (pulseStopTimeoutRef.current) clearTimeout(pulseStopTimeoutRef.current);
     };
   }, [isOpen]);
 
@@ -341,10 +369,25 @@ export default function ChatWidget() {
   if (!isOpen) {
     return (
       <button
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 bg-emerald-600 text-white p-4 rounded-full shadow-lg hover:bg-emerald-700 transition-all hover:scale-110 z-50"
+        onClick={() => {
+          setIsOpen(true);
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('cart_path_chat_opened_once', 'true');
+            localStorage.setItem('cart_path_chat_launcher_nudged', 'true');
+          }
+          setShowLauncherPulse(false);
+          if (pulseStartTimeoutRef.current) clearTimeout(pulseStartTimeoutRef.current);
+          if (pulseStopTimeoutRef.current) clearTimeout(pulseStopTimeoutRef.current);
+        }}
+        className="fixed bottom-6 right-6 bg-emerald-600 text-white p-4 rounded-full shadow-lg hover:bg-emerald-700 transition-all hover:scale-110 z-50 relative"
         aria-label="Open chat"
       >
+        {showLauncherPulse && (
+          <>
+            <span className="absolute inset-0 rounded-full border-2 border-emerald-200/70 animate-ping" />
+            <span className="absolute inset-0 rounded-full border-2 border-emerald-200/25" />
+          </>
+        )}
         <MessageCircle size={24} />
       </button>
     );
