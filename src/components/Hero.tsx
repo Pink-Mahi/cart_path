@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 
 export default function Hero() {
-  const [tileIndices, setTileIndices] = useState([0, 0, 0]);
-  const [flipTrigger, setFlipTrigger] = useState(0);
+  const [tile0Index, setTile0Index] = useState(0);
+  const [tile1Index, setTile1Index] = useState(0);
+  const [tile2Index, setTile2Index] = useState(0);
 
   const tileMessages = [
     [
@@ -27,30 +28,18 @@ export default function Hero() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTileIndices(prev => {
-        const newIndices = [...prev];
-        // Cycle through each tile's messages independently
-        newIndices[0] = (newIndices[0] + 1) % 4;
-        
-        setTimeout(() => {
-          setTileIndices(p => {
-            const n = [...p];
-            n[1] = (n[1] + 1) % 4;
-            return n;
-          });
-        }, 350);
-        
-        setTimeout(() => {
-          setTileIndices(p => {
-            const n = [...p];
-            n[2] = (n[2] + 1) % 4;
-            return n;
-          });
-        }, 700);
-        
-        return newIndices;
-      });
-      setFlipTrigger(prev => prev + 1);
+      // Update tile 0 immediately
+      setTile0Index(prev => (prev + 1) % 4);
+      
+      // Update tile 1 after 350ms
+      setTimeout(() => {
+        setTile1Index(prev => (prev + 1) % 4);
+      }, 350);
+      
+      // Update tile 2 after 700ms
+      setTimeout(() => {
+        setTile2Index(prev => (prev + 1) % 4);
+      }, 700);
     }, 5000);
 
     return () => clearInterval(interval);
@@ -141,15 +130,29 @@ export default function Hero() {
         </div>
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto tile-container">
-          {tileMessages.map((messages, tileIndex) => (
-            <div 
-              key={`tile-${tileIndex}-${tileIndices[tileIndex]}-${flipTrigger}`}
-              className={`tile-wrapper bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto tile-enter tile-${tileIndex}`}
-            >
-              <div className="text-4xl font-bold text-white mb-2">{messages[tileIndices[tileIndex]].title}</div>
-              <div className="text-white/90">{messages[tileIndices[tileIndex]].subtitle}</div>
-            </div>
-          ))}
+          <div 
+            key={`tile-0-${tile0Index}`}
+            className="tile-wrapper bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto tile-enter tile-0"
+          >
+            <div className="text-4xl font-bold text-white mb-2">{tileMessages[0][tile0Index].title}</div>
+            <div className="text-white/90">{tileMessages[0][tile0Index].subtitle}</div>
+          </div>
+          
+          <div 
+            key={`tile-1-${tile1Index}`}
+            className="tile-wrapper bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto tile-enter tile-1"
+          >
+            <div className="text-4xl font-bold text-white mb-2">{tileMessages[1][tile1Index].title}</div>
+            <div className="text-white/90">{tileMessages[1][tile1Index].subtitle}</div>
+          </div>
+          
+          <div 
+            key={`tile-2-${tile2Index}`}
+            className="tile-wrapper bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto tile-enter tile-2"
+          >
+            <div className="text-4xl font-bold text-white mb-2">{tileMessages[2][tile2Index].title}</div>
+            <div className="text-white/90">{tileMessages[2][tile2Index].subtitle}</div>
+          </div>
         </div>
 
         <p className="mt-4 text-xs text-white/70 max-w-4xl mx-auto">
