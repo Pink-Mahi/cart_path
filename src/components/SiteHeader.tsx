@@ -1,7 +1,9 @@
 import { Link, NavLink } from 'react-router-dom';
 import LanguageToggle from './LanguageToggle';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function SiteHeader() {
+  const { t } = useLanguage();
   const linkClassName = ({ isActive }: { isActive: boolean }) =>
     `text-sm font-semibold transition-colors ${isActive ? 'text-emerald-700' : 'text-gray-700 hover:text-emerald-700'}`;
 
@@ -15,31 +17,31 @@ export default function SiteHeader() {
 
           <nav className="hidden md:flex items-center gap-6">
             <NavLink to="/services" className={linkClassName}>
-              Services
+              {t('nav.services')}
             </NavLink>
             <NavLink to="/technology" className={linkClassName}>
-              Technology
+              {t('nav.technology')}
             </NavLink>
             <NavLink to="/maintenance" className={linkClassName}>
-              Maintenance
+              {t('nav.maintenance')}
             </NavLink>
             <NavLink to="/markets" className={linkClassName}>
-              Who We Serve
+              {t('nav.whoWeServe')}
             </NavLink>
             <NavLink to="/gallery" className={linkClassName}>
-              Gallery
+              {t('nav.gallery')}
             </NavLink>
             <NavLink to="/case-studies" className={linkClassName}>
-              Case Studies
+              {t('nav.caseStudies')}
             </NavLink>
             <NavLink to="/locations" className={linkClassName}>
-              Locations
+              {t('nav.locations')}
             </NavLink>
             <NavLink to="/faq" className={linkClassName}>
-              FAQ
+              {t('nav.faq')}
             </NavLink>
             <NavLink to="/contact" className={linkClassName}>
-              Contact
+              {t('nav.contact')}
             </NavLink>
           </nav>
 
@@ -49,7 +51,7 @@ export default function SiteHeader() {
               to="/contact"
               className="bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-emerald-700 transition-colors"
             >
-              Get a Quote
+              {t('nav.getQuote')}
             </Link>
           </div>
         </div>

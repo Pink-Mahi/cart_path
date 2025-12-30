@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Hero() {
+  const { t } = useLanguage();
   const [tile0Index, setTile0Index] = useState(0);
   const [tile1Index, setTile1Index] = useState(0);
   const [tile2Index, setTile2Index] = useState(0);
@@ -114,18 +116,18 @@ export default function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="flex justify-center mb-6">
           <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-            <span className="text-white text-sm font-medium">Patent Pending Technology</span>
+            <span className="text-white text-sm font-medium">{t('hero.badge')}</span>
           </div>
         </div>
 
         <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-          Cart Path Cleaning<br />
-          <span className="text-emerald-300">Revolutionized</span>
+          {t('hero.title')}<br />
+          <span className="text-emerald-300">{t('hero.subtitle')}</span>
         </h1>
 
         <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
-          Professional cart path and sidewalk pressure washing for golf courses and communities. Power washing that uses 90% less water.<br />
-          Minimal disruption to operations.
+          {t('hero.description')}<br />
+          {t('hero.subtext')}
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -133,13 +135,13 @@ export default function Hero() {
             href="#contact"
             className="bg-white text-emerald-900 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-emerald-50 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
           >
-            Get a Quote
+            {t('hero.getQuote')}
           </a>
           <a
             href="#solution"
             className="bg-emerald-700/50 backdrop-blur-sm text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-emerald-700/70 transition-all border-2 border-white/30"
           >
-            Learn More
+            {t('hero.learnMore')}
           </a>
         </div>
 
