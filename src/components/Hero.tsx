@@ -67,7 +67,10 @@ export default function Hero() {
         }
 
         .tile-wrapper {
-          min-height: 140px;
+          min-height: 160px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
 
         .tile-0 {
@@ -75,11 +78,11 @@ export default function Hero() {
         }
 
         .tile-1 {
-          animation-delay: 0.2s;
+          animation-delay: 0.35s;
         }
 
         .tile-2 {
-          animation-delay: 0.4s;
+          animation-delay: 0.7s;
         }
       `}</style>
 
