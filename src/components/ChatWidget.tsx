@@ -120,17 +120,32 @@ export default function ChatWidget() {
   };
 
   const speakMessage = (text: string) => {
-    if (!audioEnabled || !('speechSynthesis' in window)) return;
+    if (!audioEnabled || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
     
     // Cancel any ongoing speech
     window.speechSynthesis.cancel();
     
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 1.0;
-    utterance.pitch = 1.0;
-    utterance.volume = 1.0;
-    
-    window.speechSynthesis.speak(utterance);
+    // Small delay to ensure cancellation completes
+    setTimeout(() => {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 1.0;
+      utterance.pitch = 1.0;
+      utterance.volume = 1.0;
+      utterance.lang = 'en-US';
+      
+      // Add event listeners for debugging
+      utterance.onstart = () => {
+        console.log('Speech started');
+      };
+      utterance.onerror = (event) => {
+        console.error('Speech error:', event);
+      };
+      utterance.onend = () => {
+        console.log('Speech ended');
+      };
+      
+      window.speechSynthesis.speak(utterance);
+    }, 100);
   };
 
   const toggleAudio = () => {
