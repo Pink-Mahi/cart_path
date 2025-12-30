@@ -1,4 +1,39 @@
+import { useState, useEffect } from 'react';
+
 export default function Hero() {
+  const [currentSet, setCurrentSet] = useState(0);
+
+  const messageSets = [
+    [
+      { title: 'Faster', subtitle: 'Patent-pending technology' },
+      { title: 'Smarter', subtitle: 'Closed-loop water recovery' },
+      { title: 'Compliant', subtitle: 'Designed for regulations' }
+    ],
+    [
+      { title: 'More Efficient', subtitle: 'Advanced cleaning system' },
+      { title: 'Cost Effective', subtitle: 'Minimal water waste' },
+      { title: 'Environmentally Safe', subtitle: 'Zero-runoff design' }
+    ],
+    [
+      { title: 'Faster Cleaning', subtitle: 'Innovative technology' },
+      { title: 'Lower Costs', subtitle: 'Water-recovery system' },
+      { title: 'Eco-Friendly', subtitle: 'Prevents runoff' }
+    ],
+    [
+      { title: 'Faster Service', subtitle: 'Patent-pending technology' },
+      { title: 'Better Value', subtitle: 'Efficient water recovery' },
+      { title: 'Environmentally Responsible', subtitle: 'Closed-loop system' }
+    ]
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSet((prev) => (prev + 1) % 4);
+    }, 5000); // Rotate every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <picture className="absolute inset-0 z-0">
@@ -10,6 +45,38 @@ export default function Hero() {
         />
       </picture>
       <div className="absolute inset-0 z-0 bg-gradient-to-r from-emerald-900/55 to-emerald-800/45"></div>
+
+      <style>{`
+        @keyframes flipIn {
+          0% {
+            transform: rotateY(90deg);
+            opacity: 0;
+          }
+          100% {
+            transform: rotateY(0deg);
+            opacity: 1;
+          }
+        }
+
+        @keyframes flipOut {
+          0% {
+            transform: rotateY(0deg);
+            opacity: 1;
+          }
+          100% {
+            transform: rotateY(-90deg);
+            opacity: 0;
+          }
+        }
+
+        .tile-enter {
+          animation: flipIn 0.6s ease-out forwards;
+        }
+
+        .tile-container {
+          perspective: 1000px;
+        }
+      `}</style>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="flex justify-center mb-6">
@@ -43,19 +110,16 @@ export default function Hero() {
           </a>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div className="bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto">
-            <div className="text-4xl font-bold text-white mb-2">Faster</div>
-            <div className="text-white/90">Efficient workflow</div>
-          </div>
-          <div className="bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto">
-            <div className="text-4xl font-bold text-white mb-2">Less</div>
-            <div className="text-white/90">Water consumption</div>
-          </div>
-          <div className="bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto">
-            <div className="text-4xl font-bold text-white mb-2">Low</div>
-            <div className="text-white/90">Disruption</div>
-          </div>
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto tile-container">
+          {messageSets[currentSet].map((message, index) => (
+            <div 
+              key={`${currentSet}-${index}`}
+              className="bg-white/10 backdrop-blur-sm md:backdrop-blur-md p-4 md:p-6 rounded-xl border border-white/20 w-60 md:w-full mx-auto tile-enter"
+            >
+              <div className="text-4xl font-bold text-white mb-2">{message.title}</div>
+              <div className="text-white/90">{message.subtitle}</div>
+            </div>
+          ))}
         </div>
 
         <p className="mt-4 text-xs text-white/70 max-w-4xl mx-auto">
