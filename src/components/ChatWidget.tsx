@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { MessageCircle, X, Send, Calendar, MessageSquare, Phone, Volume2, VolumeX } from 'lucide-react';
+import { MessageCircle, X, Send, Calendar, MessageSquare, Phone, Volume2, VolumeX, Mic, MicOff } from 'lucide-react';
 import SchedulingForm, { ScheduleData } from './SchedulingForm';
 import CallBackForm, { CallBackData } from './CallBackForm';
 
@@ -29,11 +29,13 @@ export default function ChatWidget() {
     const saved = localStorage.getItem('cart_path_audio_enabled');
     return saved ? JSON.parse(saved) : false;
   });
+  const [isRecording, setIsRecording] = useState(false);
   
   const wsRef = useRef<WebSocket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const visitorIdRef = useRef<string | null>(null);
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const recognitionRef = useRef<any>(null);
 
   // Get or create persistent visitor ID
   useEffect(() => {
@@ -142,6 +144,52 @@ export default function ChatWidget() {
     // Cancel any ongoing speech when muting
     if (!newState && typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel();
+    }
+  };
+
+  const startVoiceInput = () => {
+    if (typeof window === 'undefined' || !('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+      alert('Voice input is not supported in your browser. Please use Chrome, Edge, or Safari.');
+      return;
+    }
+
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+
+    recognition.onstart = () => {
+      setIsRecording(true);
+    };
+
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript;
+      setInputValue(transcript);
+      setIsRecording(false);
+    };
+
+    recognition.onerror = (event: any) => {
+      console.error('Speech recognition error:', event.error);
+      setIsRecording(false);
+      if (event.error === 'not-allowed') {
+        alert('Microphone access denied. Please allow microphone access to use voice input.');
+      }
+    };
+
+    recognition.onend = () => {
+      setIsRecording(false);
+    };
+
+    recognitionRef.current = recognition;
+    recognition.start();
+  };
+
+  const stopVoiceInput = () => {
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+      setIsRecording(false);
     }
   };
 
@@ -421,6 +469,17 @@ export default function ChatWidget() {
             className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
             disabled={!isConnected}
           />
+          <button
+            onClick={isRecording ? stopVoiceInput : startVoiceInput}
+            disabled={!isConnected}
+            className={`${
+              isRecording ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-600 hover:bg-gray-700'
+            } text-white p-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
+            aria-label={isRecording ? 'Stop recording' : 'Start voice input'}
+            title={isRecording ? 'Stop recording' : 'Voice input'}
+          >
+            {isRecording ? <MicOff size={20} /> : <Mic size={20} />}
+          </button>
           <button
             onClick={handleSendMessage}
             disabled={!isConnected || !inputValue.trim()}
