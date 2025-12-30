@@ -106,6 +106,14 @@ export default function ChatWidget() {
         addMessage('system', data.content);
       } else if (data.type === 'bot' || data.type === 'admin') {
         addMessage(data.type, data.content, data.audioUrl);
+      } else if (data.type === 'message_updated') {
+        // Update existing message content
+        setMessages(prev => prev.map(msg => 
+          msg.id === data.messageId ? { ...msg, content: data.content } : msg
+        ));
+      } else if (data.type === 'message_deleted') {
+        // Remove deleted message
+        setMessages(prev => prev.filter(msg => msg.id !== data.messageId));
       }
     };
 
