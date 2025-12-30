@@ -14,6 +14,7 @@ interface Message {
 }
 
 export default function ChatWidget() {
+  const { language, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
@@ -249,6 +250,7 @@ export default function ChatWidget() {
     wsRef.current.send(JSON.stringify({
       type: 'chat',
       content: inputValue,
+      language: language,
       visitorName: visitorName || null,
       visitorEmail: visitorEmail || null,
       conversationId,
@@ -357,17 +359,17 @@ export default function ChatWidget() {
       <div className="bg-emerald-600 text-white p-4 rounded-t-lg">
         <div className="flex justify-between items-center mb-3">
           <div>
-            <h3 className="font-semibold text-lg">Cart Path Cleaning</h3>
+            <h3 className="font-semibold text-lg">{t('chat.title')}</h3>
             <p className="text-sm text-emerald-100">
-              {isConnected ? 'Online' : 'Connecting...'}
+              {isConnected ? t('chat.online') : t('chat.connecting')}
             </p>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={toggleAudio}
               className="hover:bg-emerald-700 p-1 rounded transition-colors"
-              aria-label={audioEnabled ? 'Mute audio' : 'Enable audio'}
-              title={audioEnabled ? 'Mute audio responses' : 'Enable audio responses'}
+              aria-label={audioEnabled ? t('chat.muteAudio') : t('chat.enableAudio')}
+              title={audioEnabled ? t('chat.muteAudio') : t('chat.enableAudio')}
             >
               {audioEnabled ? <Volume2 size={20} /> : <VolumeX size={20} />}
             </button>
@@ -467,7 +469,7 @@ export default function ChatWidget() {
             value={inputValue}
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
-            placeholder="Type your message..."
+            placeholder={t('chat.typeMessage')}
             className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
             disabled={!isConnected}
           />
@@ -475,7 +477,7 @@ export default function ChatWidget() {
             onClick={handleSendMessage}
             disabled={!isConnected || !inputValue.trim()}
             className="bg-emerald-600 text-white p-2 rounded-lg hover:bg-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            aria-label="Send message"
+            aria-label={t('chat.send')}
           >
             <Send size={20} />
           </button>
