@@ -2,8 +2,10 @@ import { Phone, Mail, MapPin, Send, Calendar } from 'lucide-react';
 import { FormEvent, useState } from 'react';
 import SchedulingForm, { ScheduleData } from './SchedulingForm';
 import CallBackForm, { CallBackData } from './CallBackForm';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Contact() {
+  const { t } = useLanguage();
   const CHAT_API_URL = import.meta.env.VITE_CHAT_API_URL || 'ws://localhost:3001';
   const CHAT_API_HTTP = CHAT_API_URL.replace('ws://', 'http://').replace('wss://', 'https://');
 
@@ -144,10 +146,10 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Get Your Free Quote
+            {t('contact.title') as string}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Ready to experience the future of cart path cleaning? Contact us today for a free consultation and quote.
+            {t('contact.subtitle') as string}
           </p>
         </div>
 
@@ -165,7 +167,7 @@ export default function Contact() {
                   <Phone className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">Phone</h4>
+                  <h4 className="font-semibold text-gray-900 mb-1">{t('contact.info.phone') as string}</h4>
                   <a href="tel:+19412070280" className="text-emerald-600 hover:text-emerald-700">
                     (941) 207-0280
                   </a>
@@ -177,7 +179,7 @@ export default function Contact() {
                   <Mail className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">Email</h4>
+                  <h4 className="font-semibold text-gray-900 mb-1">{t('contact.info.email') as string}</h4>
                   <a href="mailto:info@cartpathcleaning.com" className="text-emerald-600 hover:text-emerald-700">
                     info@cartpathcleaning.com
                   </a>
@@ -189,7 +191,7 @@ export default function Contact() {
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">Service Area</h4>
+                  <h4 className="font-semibold text-gray-900 mb-1">{t('contact.info.location') as string}</h4>
                   <p className="text-gray-600">Serving golf facilities, country clubs, resorts, and HOAs nationwide</p>
                 </div>
               </div>
@@ -214,7 +216,7 @@ export default function Contact() {
                   className="w-full bg-white border border-emerald-200 text-emerald-700 px-4 py-3 rounded-lg font-semibold hover:bg-emerald-50 transition-all shadow-sm disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   <Calendar className="w-5 h-5" />
-                  <span>{scheduleSubmitting ? 'Submitting...' : 'Schedule a Visit'}</span>
+                  <span>{scheduleSubmitting ? (t('contact.form.submitting') as string) : (t('contact.form.scheduleVisit') as string)}</span>
                 </button>
                 <button
                   type="button"
@@ -223,7 +225,7 @@ export default function Contact() {
                   className="w-full bg-white border border-blue-200 text-blue-700 px-4 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all shadow-sm disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   <Phone className="w-5 h-5" />
-                  <span>{callSubmitting ? 'Submitting...' : 'Request a Call'}</span>
+                  <span>{callSubmitting ? (t('contact.form.submitting') as string) : (t('contact.form.requestCall') as string)}</span>
                 </button>
               </div>
 
@@ -255,7 +257,7 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Name *
+                  {t('contact.form.name') as string} *
                 </label>
                 <input
                   type="text"
@@ -270,7 +272,7 @@ export default function Contact() {
 
               <div>
                 <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Email *
+                  {t('contact.form.email') as string} *
                 </label>
                 <input
                   type="email"
@@ -285,7 +287,7 @@ export default function Contact() {
 
               <div>
                 <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Phone
+                  {t('contact.form.phone') as string}
                 </label>
                 <input
                   type="tel"

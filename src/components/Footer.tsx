@@ -1,6 +1,9 @@
 import { Droplets } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -11,16 +14,15 @@ export default function Footer() {
               <span className="text-2xl font-bold">Cart Path Cleaning</span>
             </div>
             <p className="text-gray-400 mb-4 leading-relaxed">
-              Revolutionary closed-loop cleaning technology for golf facilities, clubs, resorts, and HOAs.
-              Clean cart paths, sidewalks, and walkways efficiently and keep operations running smoothly.
+              {t('footer.tagline') as string}
             </p>
             <div className="inline-block bg-emerald-900/50 text-emerald-300 px-3 py-1 rounded-full text-sm">
-              Patent Pending Technology
+              {t('solution.badge') as string}
             </div>
           </div>
 
           <div>
-            <h3 className="font-bold text-lg mb-4">Quick Links</h3>
+            <h3 className="font-bold text-lg mb-4">{t('footer.quickLinks') as string}</h3>
             <ul className="space-y-2">
               <li>
                 <a href="/#solution" className="text-gray-400 hover:text-emerald-400 transition-colors">
