@@ -1,14 +1,9 @@
 import { XCircle } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Problem() {
-  const problems = [
-    "Many facilities lack accessible water sources on cart paths and walkways",
-    "Traditional pressure washing requires extended course closures",
-    "Long hoses and manual cleaning create operational nightmares",
-    "Excessive water usage and environmental concerns",
-    "Algae and moss growth creates slip-and-fall hazards and liability risks",
-    "Slow, labor-intensive cleaning disrupts course operations"
-  ];
+  const { t } = useLanguage();
+  const problems = t('problem.problems') as string[];
 
   return (
     <section className="py-20 bg-gray-50">
@@ -16,13 +11,12 @@ export default function Problem() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Traditional Pressure Washing
-              <span className="block text-red-600 mt-2">Creates Impossible Challenges</span>
+              {t('problem.title') as string}
+              <span className="block text-red-600 mt-2">{t('problem.subtitle') as string}</span>
             </h2>
 
             <p className="text-lg text-gray-700 mb-8">
-              Golf facilities, country clubs, resorts, and HOA communities have struggled for years with dirty cart paths and sidewalks.
-              Traditional pressure washing methods simply don't work for large-scale path cleaning operations.
+              {t('problem.description') as string}
             </p>
 
             <div className="space-y-4">

@@ -4,7 +4,7 @@ import { translations, Language } from '../i18n/translations';
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  t: (key: string) => unknown;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -24,7 +24,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const t = (key: string): string => {
+  const t = (key: string): unknown => {
     const keys = key.split('.');
     let value: Record<string, unknown> = translations[language];
     
@@ -36,7 +36,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       }
     }
     
-    return typeof value === 'string' ? value : key;
+    return value ?? key;
   };
 
   useEffect(() => {
