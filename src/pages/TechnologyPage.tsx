@@ -47,44 +47,33 @@ export default function TechnologyPage() {
           <div className="rounded-2xl bg-emerald-50 border border-emerald-100 p-8">
             <h2 className="text-2xl font-bold text-gray-900">{t('technology.whyChoose') as string}</h2>
             <div className="mt-4 space-y-3 text-gray-700">
-              <div>
-                <div className="font-semibold text-gray-900">Golf-cart-sized equipment</div>
-                <div className="mt-1">Our machine is the width of a golf cart or turf mower—not a full-sized truck. We go where golf carts go.</div>
-              </div>
-              <div>
-                <div className="font-semibold text-gray-900">Fast turnaround</div>
-                <div className="mt-1">Most golf courses are completed in just 1–2 days depending on site conditions.</div>
-              </div>
-              <div>
-                <div className="font-semibold text-gray-900">Minimal disruption</div>
-                <div className="mt-1">No long hoses blocking paths, no water trucks parked everywhere. We move efficiently through the course.</div>
-              </div>
-              <div>
-                <div className="font-semibold text-gray-900">Regrowth prevention</div>
-                <div className="mt-1">Post-treatment helps slow mold and algae regrowth so your paths stay cleaner longer.</div>
-              </div>
+              {(t('technologyExtra.whyChooseItems') as Array<{title: string; description: string}>).map((item, index) => (
+                <div key={index}>
+                  <div className="font-semibold text-gray-900">{item.title}</div>
+                  <div className="mt-1">{item.description}</div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
         <section className="mt-14 rounded-2xl border border-gray-100 p-8 shadow-sm">
-          <h2 className="text-2xl font-bold text-gray-900">Results that matter</h2>
+          <h2 className="text-2xl font-bold text-gray-900">{t('servicesExtra.results.title') as string}</h2>
           <p className="mt-4 text-gray-700 max-w-3xl">
-            Surface condition, staining type, and site layout influence results, but our goal is always the same: deliver a visibly cleaner,
-            safer path network while keeping your facility running.
+            {t('servicesExtra.results.description') as string}
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <Link
               to="/services"
               className="inline-flex justify-center bg-emerald-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-emerald-700 transition-colors"
             >
-              Explore Services
+              {t('servicesExtra.results.buttons.exploreServices') as string}
             </Link>
             <Link
               to="/contact"
               className="inline-flex justify-center bg-white text-emerald-700 px-8 py-4 rounded-lg font-semibold text-lg border border-emerald-200 hover:bg-emerald-50 transition-colors"
             >
-              Get a Free Quote
+              {t('servicesExtra.results.buttons.getFreeQuote') as string}
             </Link>
           </div>
         </section>
