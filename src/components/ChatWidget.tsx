@@ -285,7 +285,7 @@ export default function ChatWidget() {
     }));
 
     setShowScheduling(false);
-    addMessage('visitor', `Requesting on-site visit for ${scheduleData.preferredDate}`);
+    addMessage('visitor', `${t('chat.requestingVisitFor') as string} ${scheduleData.preferredDate}`);
   };
 
   const handleCallBack = (callBackData: CallBackData) => {
@@ -306,7 +306,7 @@ export default function ChatWidget() {
     }));
 
     setShowCallBack(false);
-    addMessage('visitor', `Requesting call back at ${callBackData.visitorPhone}`);
+    addMessage('visitor', `${t('chat.requestingCallBackAt') as string} ${callBackData.visitorPhone}`);
   };
 
   const fetchWhatsAppLink = async () => {
@@ -372,24 +372,24 @@ export default function ChatWidget() {
       <div className="bg-emerald-600 text-white p-4 rounded-t-lg">
         <div className="flex justify-between items-center mb-3">
           <div>
-            <h3 className="font-semibold text-lg">{t('chat.title')}</h3>
+            <h3 className="font-semibold text-lg">{t('chat.title') as string}</h3>
             <p className="text-sm text-emerald-100">
-              {isConnected ? t('chat.online') : t('chat.connecting')}
+              {(isConnected ? t('chat.online') : t('chat.connecting')) as string}
             </p>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={toggleAudio}
               className="hover:bg-emerald-700 p-1 rounded transition-colors"
-              aria-label={audioEnabled ? t('chat.muteAudio') : t('chat.enableAudio')}
-              title={audioEnabled ? t('chat.muteAudio') : t('chat.enableAudio')}
+              aria-label={(audioEnabled ? t('chat.muteAudio') : t('chat.enableAudio')) as string}
+              title={(audioEnabled ? t('chat.muteAudio') : t('chat.enableAudio')) as string}
             >
               {audioEnabled ? <Volume2 size={20} /> : <VolumeX size={20} />}
             </button>
             <button
               onClick={() => setIsOpen(false)}
               className="hover:bg-emerald-700 p-1 rounded transition-colors"
-              aria-label="Close chat"
+              aria-label={t('chat.closeChat') as string}
             >
               <X size={20} />
             </button>
@@ -413,14 +413,14 @@ export default function ChatWidget() {
             className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors text-sm font-medium"
           >
             <Calendar size={16} />
-            Schedule Visit
+            {t('chat.scheduleVisit') as string}
           </button>
           <button
             onClick={() => setShowCallBack(true)}
             className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium"
           >
             <Phone size={16} />
-            Request Call
+            {t('chat.requestCall') as string}
           </button>
           {whatsappLink && (
             <a
@@ -444,7 +444,7 @@ export default function ChatWidget() {
             className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors font-medium"
           >
             <Volume2 size={20} />
-            Tap to hear admin response
+            {t('chat.tapToHearAdminResponse') as string}
           </button>
         </div>
       )}
@@ -482,7 +482,7 @@ export default function ChatWidget() {
             value={inputValue}
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
-            placeholder={t('chat.typeMessage')}
+            placeholder={t('chat.typeMessage') as string}
             className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
             disabled={!isConnected}
           />
@@ -490,7 +490,7 @@ export default function ChatWidget() {
             onClick={handleSendMessage}
             disabled={!isConnected || !inputValue.trim()}
             className="bg-emerald-600 text-white p-2 rounded-lg hover:bg-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            aria-label={t('chat.send')}
+            aria-label={t('chat.send') as string}
           >
             <Send size={20} />
           </button>

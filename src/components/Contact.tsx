@@ -31,7 +31,7 @@ export default function Contact() {
 
   const openSchedule = () => {
     if (!formData.name || !formData.email) {
-      alert('Please enter your name and email first.');
+      alert(t('contact.form.nameRequired') as string);
       return;
     }
     setShowScheduling(true);
@@ -39,7 +39,7 @@ export default function Contact() {
 
   const openCallBack = () => {
     if (!formData.name || !formData.email) {
-      alert('Please enter your name and email first.');
+      alert(t('contact.form.nameRequired') as string);
       return;
     }
     setShowCallBack(true);
@@ -64,7 +64,7 @@ export default function Contact() {
       setScheduleSubmitted(true);
       setTimeout(() => setScheduleSubmitted(false), 5000);
     } catch (e) {
-      setScheduleError(e instanceof Error ? e.message : 'Failed to schedule visit');
+      setScheduleError(e instanceof Error ? e.message : (t('contact.form.error') as string));
     } finally {
       setScheduleSubmitting(false);
     }
@@ -95,7 +95,7 @@ export default function Contact() {
       setCallSubmitted(true);
       setTimeout(() => setCallSubmitted(false), 5000);
     } catch (e) {
-      setCallError(e instanceof Error ? e.message : 'Failed to request a call');
+      setCallError(e instanceof Error ? e.message : (t('contact.form.error') as string));
     } finally {
       setCallSubmitting(false);
     }
@@ -135,7 +135,7 @@ export default function Contact() {
       });
       setTimeout(() => setSubmitted(false), 5000);
     } catch {
-      setSubmitError('Something went wrong. Please try again, or call us directly.');
+      setSubmitError(t('contact.form.error') as string);
     } finally {
       setSubmitting(false);
     }
@@ -155,10 +155,9 @@ export default function Contact() {
 
         <div className="grid md:grid-cols-2 gap-12">
           <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Let's Connect</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('contact.connectTitle') as string}</h3>
             <p className="text-gray-600 mb-8 leading-relaxed">
-              Whether you manage a golf facility, country club, resort, or HOA community, we're here to answer your questions and
-              provide a customized solution for your cart path and sidewalk cleaning needs.
+              {t('contact.connectDescription') as string}
             </p>
 
             <div className="space-y-6 mb-8">
@@ -192,16 +191,15 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-1">{t('contact.info.location') as string}</h4>
-                  <p className="text-gray-600">Serving golf facilities, country clubs, resorts, and HOAs nationwide</p>
+                  <p className="text-gray-600">{t('contact.serviceAreaDescription') as string}</p>
                 </div>
               </div>
             </div>
 
             <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl p-6 border border-emerald-100">
-              <h4 className="font-semibold text-gray-900 mb-2">Patent Pending Technology</h4>
+              <h4 className="font-semibold text-gray-900 mb-2">{t('contact.patentTitle') as string}</h4>
               <p className="text-gray-600 text-sm">
-                Our innovative closed-loop surface cleaning system is patent pending, representing
-                a groundbreaking advancement in mobile pressure washing technology.
+                {t('contact.patentDescription') as string}
               </p>
             </div>
           </div>
@@ -231,13 +229,13 @@ export default function Contact() {
 
               {scheduleSubmitted ? (
                 <div className="mt-4 bg-emerald-100 text-emerald-800 px-6 py-4 rounded-lg text-center font-semibold">
-                  Visit request received! We'll confirm shortly.
+                  {t('contact.form.scheduleReceived') as string}
                 </div>
               ) : null}
 
               {callSubmitted ? (
                 <div className="mt-4 bg-emerald-100 text-emerald-800 px-6 py-4 rounded-lg text-center font-semibold">
-                  Call request received! We'll reach out soon.
+                  {t('contact.form.callReceived') as string}
                 </div>
               ) : null}
 
@@ -266,7 +264,7 @@ export default function Contact() {
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                  placeholder="Your full name"
+                  placeholder={t('contact.form.placeholders.name') as string}
                 />
               </div>
 
@@ -281,7 +279,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                  placeholder="your@email.com"
+                  placeholder={t('contact.form.placeholders.email') as string}
                 />
               </div>
 
@@ -295,13 +293,13 @@ export default function Contact() {
                   value={formData.phone}
                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                  placeholder="(941) 207-0280"
+                  placeholder={t('contact.form.placeholders.phone') as string}
                 />
               </div>
 
               <div>
                 <label htmlFor="organizationType" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Organization Type *
+                  {t('contact.form.organizationType') as string} *
                 </label>
                 <select
                   id="organizationType"
@@ -310,16 +308,16 @@ export default function Contact() {
                   onChange={(e) => setFormData({...formData, organizationType: e.target.value})}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 >
-                  <option value="golf-course">Golf Facility</option>
-                  <option value="country-club-resort">Country Club / Resort</option>
-                  <option value="hoa">HOA / Community Association</option>
-                  <option value="other">Other</option>
+                  <option value="golf-course">{t('contact.orgTypes.golfCourse') as string}</option>
+                  <option value="country-club-resort">{`${t('contact.orgTypes.countryClub') as string} / ${t('contact.orgTypes.resort') as string}`}</option>
+                  <option value="hoa">{t('contact.orgTypes.hoa') as string}</option>
+                  <option value="other">{t('contact.orgTypes.other') as string}</option>
                 </select>
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Message *
+                  {t('contact.form.message') as string} *
                 </label>
                 <textarea
                   id="message"
@@ -328,13 +326,13 @@ export default function Contact() {
                   value={formData.message}
                   onChange={(e) => setFormData({...formData, message: e.target.value})}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                  placeholder="Tell us about your cart path or sidewalk cleaning needs..."
+                  placeholder={t('contact.form.placeholders.message') as string}
                 />
               </div>
 
               {submitted ? (
                 <div className="bg-emerald-100 text-emerald-800 px-6 py-4 rounded-lg text-center font-semibold">
-                  Thank you! We'll be in touch soon.
+                  {t('contact.form.success') as string}
                 </div>
               ) : (
                 <button
@@ -342,7 +340,7 @@ export default function Contact() {
                   disabled={submitting}
                   className="w-full bg-emerald-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-emerald-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  <span>{submitting ? 'Sending...' : 'Send Message'}</span>
+                  <span>{submitting ? (t('contact.form.submitting') as string) : (t('contact.form.submit') as string)}</span>
                   <Send className="w-5 h-5" />
                 </button>
               )}

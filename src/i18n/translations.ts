@@ -44,6 +44,12 @@ export const translations = {
       connecting: 'Connecting...',
       typeMessage: 'Type a message...',
       send: 'Send',
+      closeChat: 'Close chat',
+      scheduleVisit: 'Schedule Visit',
+      requestCall: 'Request Call',
+      tapToHearAdminResponse: 'Tap to hear admin response',
+      requestingVisitFor: 'Requesting on-site visit for',
+      requestingCallBackAt: 'Requesting call back at',
       muteAudio: 'Mute audio responses',
       enableAudio: 'Enable audio responses'
     },
@@ -150,19 +156,100 @@ export const translations = {
     contact: {
       title: 'Get Started Today',
       subtitle: 'Ready to experience the Cart Path Cleaning difference? Contact us for a free consultation and quote.',
+      connectTitle: "Let's Connect",
+      connectDescription: "Whether you manage a golf facility, country club, resort, or HOA community, we're here to answer your questions and provide a customized solution for your cart path and sidewalk cleaning needs.",
+      serviceAreaDescription: 'Serving golf facilities, country clubs, resorts, and HOAs nationwide',
+      patentTitle: 'Patent Pending Technology',
+      patentDescription: 'Our innovative closed-loop surface cleaning system is patent pending, representing a groundbreaking advancement in mobile pressure washing technology.',
+      modals: {
+        scheduling: {
+          title: 'Schedule On-Site Visit',
+          requiredFieldsAlert: 'Please fill in all required fields',
+          nameLabel: 'Your Name',
+          namePlaceholder: 'John Doe',
+          emailLabel: 'Your Email',
+          emailPlaceholder: 'john@example.com',
+          phoneLabel: 'Phone Number',
+          phonePlaceholder: '(555) 123-4567',
+          addressLabel: 'Property Address',
+          addressPlaceholder: '123 Golf Club Drive, City, State ZIP',
+          propertyTypeLabel: 'Property Type',
+          propertyTypes: {
+            golfCourse: 'Golf Course',
+            community: 'Community/HOA',
+            commercial: 'Commercial Property',
+            municipal: 'Municipal',
+            other: 'Other'
+          },
+          preferredDateLabel: 'Preferred Date',
+          preferredTimeLabel: 'Preferred Time',
+          timeOptions: {
+            morning: 'Morning (8am - 12pm)',
+            afternoon: 'Afternoon (12pm - 4pm)',
+            lateAfternoon: 'Late Afternoon (4pm - 6pm)'
+          },
+          notesLabel: 'Additional Notes',
+          notesPlaceholder: 'Any specific requirements or questions...',
+          cancel: 'Cancel',
+          submit: 'Schedule Visit'
+        },
+        callBack: {
+          title: 'Request a Call Back',
+          nameLabel: 'Your Name',
+          namePlaceholder: 'John Doe',
+          emailLabel: 'Your Email',
+          emailPlaceholder: 'john@example.com',
+          phoneLabel: 'Phone Number',
+          phonePlaceholder: '(555) 123-4567',
+          bestDayLabel: 'Best Day to Call',
+          bestDayPlaceholder: 'Select a day...',
+          days: {
+            weekdays: 'Weekdays',
+            weekends: 'Weekends',
+            monday: 'Monday',
+            tuesday: 'Tuesday',
+            wednesday: 'Wednesday',
+            thursday: 'Thursday',
+            friday: 'Friday',
+            saturday: 'Saturday',
+            sunday: 'Sunday',
+            anytime: 'Anytime'
+          },
+          bestTimeLabel: 'Best Time Range',
+          bestTimePlaceholder: 'Select a time...',
+          times: {
+            morning: 'Morning (8am-12pm)',
+            afternoon: 'Afternoon (12pm-4pm)',
+            evening: 'Evening (4pm-8pm)',
+            anytime: 'Anytime'
+          },
+          notesLabel: 'Notes (Optional)',
+          notesPlaceholder: 'Any additional information...',
+          cancel: 'Cancel',
+          submit: 'Request Call Back'
+        }
+      },
       form: {
         name: 'Name',
         email: 'Email',
         phone: 'Phone',
         organizationType: 'Organization Type',
         message: 'Tell us about your project',
+        placeholders: {
+          name: 'Your full name',
+          email: 'your@email.com',
+          phone: '(941) 207-0280',
+          message: 'Tell us about your cart path or sidewalk cleaning needs...'
+        },
         submit: 'Send Message',
         submitting: 'Sending...',
         success: 'Thank you! We\'ll be in touch soon.',
         error: 'Failed to send message. Please try again.',
         nameRequired: 'Please enter your name and email first.',
         scheduleVisit: 'Schedule a Visit',
-        requestCall: 'Request a Call Back'
+        requestCall: 'Request a Call Back',
+        scheduleReceived: "Visit request received! We'll confirm shortly.",
+        callReceived: "Call request received! We'll reach out soon."
       },
       orgTypes: {
         golfCourse: 'Golf Course',
@@ -185,7 +272,23 @@ export const translations = {
       services: 'Services',
       company: 'Company',
       copyright: 'All rights reserved.',
-      builtWith: 'Built with care for the environment'
+      builtWith: 'Built with care for the environment',
+      links: {
+        ourSolution: 'Our Solution',
+        services: 'Services',
+        technology: 'Technology',
+        maintenance: 'Maintenance',
+        whoWeServe: 'Who We Serve',
+        gallery: 'Gallery',
+        caseStudies: 'Case Studies',
+        faq: 'FAQ',
+        contactUs: 'Contact Us'
+      },
+      domainsTitle: 'Domains',
+      division: 'A division of Pink Mahi INC',
+      disclaimer1: '*Performance and water savings vary by surface conditions, equipment setup, and job specifications.',
+      disclaimer2: 'Certain system features, configurations, control methods, and operating parameters are proprietary and protected by pending patents.',
+      servingLine: 'Serving golf facilities, country clubs, resorts, and HOA communities nationwide'
     },
     // FAQ Page
     faq: {
@@ -226,6 +329,171 @@ export const translations = {
           a: 'Pricing depends on total linear footage/square footage, surface condition, access, scheduling constraints, and any special requirements. Contact us for a free quote.'
         }
       ]
+    },
+    marketsPage: {
+      title: 'Who We Serve',
+      subtitle: 'Our closed-loop cleaning system was built for environments where presentation, safety, and operational uptime matter. We work nationwide with teams that understand the expectations of premium facilities and communities.',
+      description: 'Specialized cart path and sidewalk cleaning for golf facilities, country clubs, resorts, and HOA communities. Clean faster with less water and minimal disruption.',
+      cards: [
+        {
+          title: 'Golf Facilities',
+          description: 'Keep cart paths clean without dragging long hoses across the course or forcing extended closures. Ideal for daily play, tournaments, and member events.'
+        },
+        {
+          title: 'Country Clubs & Resorts',
+          description: 'Discreet, efficient cleaning that maintains a premium guest experience. Great for entry areas, walkways, cart paths, and high-visibility zones.'
+        },
+        {
+          title: 'HOA Communities',
+          description: 'Improve curb appeal and reduce slip hazards on sidewalks and common-area paths with minimal disruption to residents.'
+        },
+        {
+          title: 'Other Large-Scale Path Networks',
+          description: 'If you manage a property with extensive walkways and limited water access, our self-contained approach may be a fit. Contact us and we’ll help evaluate your site.'
+        }
+      ],
+      buttons: {
+        getQuote: 'Get a Quote',
+        viewServices: 'View Services'
+      }
+    },
+    galleryPage: {
+      title: 'Before & After Gallery',
+      subtitle: 'Visual proof matters. Below are representative examples of surfaces before and after cleaning. Surface conditions vary, and results depend on staining type, time-in-place, and job specifications.',
+      beforeTitle: 'Before',
+      beforeDescription: 'Typical algae buildup and staining on high-traffic areas.',
+      afterTitle: 'After',
+      afterDescription: 'Cleaner, safer surfaces with improved curb appeal.'
+    },
+    caseStudiesPage: {
+      title: 'Case Studies',
+      subtitle: 'Google rewards proof. Case studies also help prospects understand what success looks like. We’ll keep expanding this library as new projects are completed.',
+      studies: [
+        {
+          title: 'Golf Facility Path Refresh',
+          objective: 'Objective: remove algae buildup and restore appearance across a high-traffic path network while minimizing disruption.',
+          bullets: [
+            { label: 'Approach:', text: 'closed-loop, efficient workflow.' },
+            { label: 'Outcome:', text: 'improved appearance and reduced slick areas.' },
+            { label: 'Operations:', text: 'scheduling aligned with facility needs.' }
+          ]
+        },
+        {
+          title: 'HOA Sidewalk Improvement',
+          objective: 'Objective: clean common-area walkways and entry zones to improve curb appeal and reduce slip risk.',
+          bullets: [
+            { label: 'Approach:', text: 'targeted sections and efficient pass-through workflow.' },
+            { label: 'Outcome:', text: 'visibly cleaner surfaces with less resident disruption.' }
+          ]
+        }
+      ],
+      featured: {
+        title: 'Want your facility featured?',
+        subtitle: 'We can document before/after results and share a short write-up after your project (with your approval). This content supports both credibility and SEO.',
+        button: 'Request a Quote'
+      }
+    },
+    locationsPage: {
+      title: 'Service Locations',
+      subtitle: 'We’re headquartered in Florida and travel for the right projects. Our closed-loop system is a strong fit for large-scale path networks, and we’re building teams to operate across the United States.',
+      floridaTitle: 'Florida',
+      floridaDescription: 'Local-first scheduling, fast mobilization, and recurring maintenance programs.',
+      nationwideTitle: 'Nationwide projects',
+      nationwideDescription: 'If you’re outside these states, we can still help. Tell us where your facility is located and what you need cleaned — we’ll confirm feasibility and provide a quote.',
+      cta: 'Request a Free Quote'
+    },
+    statePages: {
+      common: {
+        requestQuote: 'Request a Quote',
+        getQuote: 'Get a Quote',
+        viewServices: 'View Services',
+        learnTechnology: 'Learn About the Technology',
+        seeAllLocations: 'See all service locations'
+      },
+      texas: {
+        title: 'Texas Cart Path Cleaning',
+        subtitle: 'Texas properties often have long sidewalks, extensive cart paths, and large common areas. Our closed-loop system is built to clean efficiently across large footprints with minimal disruption.',
+        builtForScaleTitle: 'Built for scale',
+        builtForScaleDescription: 'Our workflow is designed for efficient progress across large properties, reducing setup time and operational headaches.',
+        greatFitsTitle: 'Great fits in Texas',
+        fits: [
+          { label: 'Golf facilities', text: 'with high-traffic cart paths' },
+          { label: 'Master-planned communities', text: 'and HOAs' },
+          { label: 'Resorts', text: 'and premium properties' }
+        ],
+        quoteTitle: 'Get a quote',
+        quoteDescription: 'Tell us where in Texas the facility is located and what surfaces need cleaning. We’ll confirm logistics and provide pricing.'
+      },
+      nevada: {
+        title: 'Nevada Cart Path Cleaning',
+        subtitle: 'In Nevada, water efficiency and operational cleanliness matter. Our closed-loop approach helps reduce fresh-water demand while keeping sites cleaner with reduced runoff.',
+        builtForTitle: 'Built for water-scarce markets',
+        builtForDescription: 'Our system is designed to recover and reuse wash water during cleaning. This is a strong fit for desert facilities and long cart path networks.',
+        greatForTitle: 'Great for',
+        greatFor: [
+          { label: 'Golf courses', text: 'with extensive cart paths' },
+          { label: 'Resorts', text: 'with high-visibility walkways' },
+          { label: 'Communities', text: 'with long sidewalks and common areas' }
+        ],
+        quoteTitle: 'Request a quote',
+        quoteDescription: 'Share the site location, approximate footage, and any access restrictions. We’ll confirm scheduling and provide a quote.'
+      },
+      florida: {
+        title: 'Sarasota Golf Cart Path Cleaning (Florida)',
+        intro: 'We’re based in Sarasota, Florida — which means faster mobilization, easier scheduling, and the ability to support recurring maintenance. We regularly serve Sarasota-area golf facilities and can travel statewide for larger projects.',
+        builtForTitle: 'Built for Sarasota & Florida conditions',
+        builtForDescription1: 'Sarasota’s humidity and frequent rain can accelerate algae and organic buildup on shaded cart paths and walkways. Regular cleaning helps maintain curb appeal and reduces slippery areas.',
+        builtForDescription2Prefix: 'We’re a strong fit for:',
+        facilitiesTitle: 'Facilities we serve',
+        facilitiesDescription: 'Sarasota, Bradenton, Lakewood Ranch, Venice, Nokomis, Osprey, Englewood, and surrounding areas — plus statewide Florida projects.',
+        golfFirstTitle: 'Golf-course-first cleaning (cart paths, crossings, and high-traffic areas)',
+        golfFirstDescription: 'Golf facilities can’t afford to shut down holes or create a mess during peak play. Our approach is built for cart path networks where operational uptime matters. We focus on producing a visible improvement while coordinating around tee times, events, and maintenance windows.',
+        golfFirstCards: [
+          { title: 'Tee-time-friendly scheduling', description: 'Plan work to minimize interference with daily play and tournaments.' },
+          { title: 'Golf-cart-sized equipment', description: 'Our machine is the width of a golf cart—not a full-sized truck. We go where carts go, no hoses needed.' },
+          { title: 'Fast turnaround', description: 'Most golf courses are completed in just 1–2 days.' },
+          { title: 'Post-treatment included', description: 'We treat surfaces after cleaning to help prevent mold and algae regrowth.' }
+        ],
+        golfServicesButton: 'Golf Cart Path Cleaning Services',
+        galleryButton: 'View Before & After Gallery',
+        assetTitle: 'Cart paths are a major asset—maintenance protects the investment',
+        assetDescription: 'Concrete and asphalt cart paths are expensive infrastructure. Many 18-hole properties end up with miles of cart paths, and installation projects can be significant. Regular cleaning helps remove algae/grime buildup, improves traction, and supports protective programs (like sealing) by preparing the surface.',
+        assetCards: [
+          { title: 'Long path networks', description: 'Cart path systems can add up quickly on 18 holes—often multiple miles. For example, 7 miles is about 36,960 linear feet.' },
+          { title: 'Replacement is costly', description: 'That’s why many facilities invest in upkeep instead of deferring until replacement. Commonly cited cart path installation ranges (by linear foot) can put a 7-mile system into seven-figure territory depending on scope and current market.' },
+          { title: 'Reduce slip risk', description: 'Florida algae buildup can create slick surfaces in shaded, damp areas.' }
+        ],
+        assetDisclaimer: 'Results vary by surface condition, drainage, shade, and traffic. We’ll recommend frequency based on your site and goals.',
+        maintenanceButton: 'Maintenance Programs',
+        quoteBlockTitle: 'Get a quote',
+        quoteBlockDescription: 'Tell us where you’re located (Sarasota-area or elsewhere in Florida), the approximate length/area of cart paths and sidewalks, any staining or algae issues, and your preferred timeline. We’ll respond with next steps and pricing guidance.',
+        quoteButton: 'Request a Sarasota Quote',
+        maintenanceProgramsButton: 'View Maintenance Programs',
+        faqTitle: 'Sarasota golf cart path cleaning FAQ',
+        faqs: [
+          {
+            q: 'Do you have to close holes or stop play to clean cart paths?',
+            a: 'In many cases, no. We schedule around tee times, events, and maintenance operations to reduce disruption. Final scheduling depends on safety, access, and your facility workflow.'
+          },
+          {
+            q: 'Why do Florida golf cart paths get slippery?',
+            a: 'Humidity, shade, and frequent rain can accelerate algae and organic buildup on cart paths and walkways. Regular cleaning helps restore appearance and reduce slick areas.'
+          },
+          {
+            q: 'Can you handle long cart path networks without dragging hoses everywhere?',
+            a: 'Yes. Our water cart refills from an onsite water source and carries water to the cleaning machine—no hoses stretched across the course. Most golf courses are completed in just 1–2 days.'
+          },
+          {
+            q: 'What about mold and algae coming back after cleaning?',
+            a: 'After cleaning, we apply a post-treatment to the surface that helps prevent mold and algae regrowth. This is especially important in Florida\'s humid climate where regrowth can happen quickly.'
+          },
+          {
+            q: 'Do you offer recurring maintenance for golf facilities?',
+            a: 'Yes. We offer seasonal and recurring maintenance programs so cart paths stay consistently clean through Florida growth cycles and peak season.'
+          }
+        ],
+        seeAllLocations: 'See all service locations'
+      }
     },
     // Services Page
     services: {
@@ -398,6 +666,12 @@ export const translations = {
       connecting: 'Conectando...',
       typeMessage: 'Escribe un mensaje...',
       send: 'Enviar',
+      closeChat: 'Cerrar chat',
+      scheduleVisit: 'Programar Visita',
+      requestCall: 'Solicitar Llamada',
+      tapToHearAdminResponse: 'Toque para escuchar la respuesta del administrador',
+      requestingVisitFor: 'Solicitando visita en el sitio para',
+      requestingCallBackAt: 'Solicitando llamada al',
       muteAudio: 'Silenciar respuestas de audio',
       enableAudio: 'Habilitar respuestas de audio'
     },
@@ -504,19 +778,100 @@ export const translations = {
     contact: {
       title: 'Comience Hoy',
       subtitle: '¿Listo para experimentar la diferencia de Limpieza de Senderos? Contáctenos para una consulta y cotización gratuita.',
+      connectTitle: 'Conectemos',
+      connectDescription: 'Ya sea que administre una instalación de golf, club de campo, resort o comunidad HOA, estamos aquí para responder sus preguntas y proporcionar una solución personalizada para sus necesidades de limpieza de senderos y aceras.',
+      serviceAreaDescription: 'Sirviendo a instalaciones de golf, clubes de campo, resorts y HOAs en todo el país',
+      patentTitle: 'Tecnología Patente Pendiente',
+      patentDescription: 'Nuestro innovador sistema de limpieza de superficies de circuito cerrado está pendiente de patente, representando un avance revolucionario en la tecnología móvil de lavado a presión.',
+      modals: {
+        scheduling: {
+          title: 'Programar Visita en el Sitio',
+          requiredFieldsAlert: 'Por favor complete todos los campos requeridos',
+          nameLabel: 'Su Nombre',
+          namePlaceholder: 'Juan Pérez',
+          emailLabel: 'Su Correo Electrónico',
+          emailPlaceholder: 'juan@ejemplo.com',
+          phoneLabel: 'Número de Teléfono',
+          phonePlaceholder: '(555) 123-4567',
+          addressLabel: 'Dirección de la Propiedad',
+          addressPlaceholder: '123 Golf Club Drive, Ciudad, Estado ZIP',
+          propertyTypeLabel: 'Tipo de Propiedad',
+          propertyTypes: {
+            golfCourse: 'Campo de Golf',
+            community: 'Comunidad/HOA',
+            commercial: 'Propiedad Comercial',
+            municipal: 'Municipal',
+            other: 'Otro'
+          },
+          preferredDateLabel: 'Fecha Preferida',
+          preferredTimeLabel: 'Hora Preferida',
+          timeOptions: {
+            morning: 'Mañana (8am - 12pm)',
+            afternoon: 'Tarde (12pm - 4pm)',
+            lateAfternoon: 'Final de la tarde (4pm - 6pm)'
+          },
+          notesLabel: 'Notas Adicionales',
+          notesPlaceholder: 'Cualquier requisito o pregunta específica...',
+          cancel: 'Cancelar',
+          submit: 'Programar Visita'
+        },
+        callBack: {
+          title: 'Solicitar una Llamada',
+          nameLabel: 'Su Nombre',
+          namePlaceholder: 'Juan Pérez',
+          emailLabel: 'Su Correo Electrónico',
+          emailPlaceholder: 'juan@ejemplo.com',
+          phoneLabel: 'Número de Teléfono',
+          phonePlaceholder: '(555) 123-4567',
+          bestDayLabel: 'Mejor Día para Llamar',
+          bestDayPlaceholder: 'Seleccione un día...',
+          days: {
+            weekdays: 'Días laborables',
+            weekends: 'Fines de semana',
+            monday: 'Lunes',
+            tuesday: 'Martes',
+            wednesday: 'Miércoles',
+            thursday: 'Jueves',
+            friday: 'Viernes',
+            saturday: 'Sábado',
+            sunday: 'Domingo',
+            anytime: 'En cualquier momento'
+          },
+          bestTimeLabel: 'Mejor Rango de Horario',
+          bestTimePlaceholder: 'Seleccione un horario...',
+          times: {
+            morning: 'Mañana (8am-12pm)',
+            afternoon: 'Tarde (12pm-4pm)',
+            evening: 'Noche (4pm-8pm)',
+            anytime: 'En cualquier momento'
+          },
+          notesLabel: 'Notas (Opcional)',
+          notesPlaceholder: 'Cualquier información adicional...',
+          cancel: 'Cancelar',
+          submit: 'Solicitar Llamada'
+        }
+      },
       form: {
         name: 'Nombre',
         email: 'Correo Electrónico',
         phone: 'Teléfono',
         organizationType: 'Tipo de Organización',
         message: 'Cuéntenos sobre su proyecto',
+        placeholders: {
+          name: 'Su nombre completo',
+          email: 'su@correo.com',
+          phone: '(941) 207-0280',
+          message: 'Cuéntenos sobre sus necesidades de limpieza de senderos o aceras...'
+        },
         submit: 'Enviar Mensaje',
         submitting: 'Enviando...',
         success: '¡Gracias! Nos pondremos en contacto pronto.',
         error: 'Error al enviar el mensaje. Por favor, inténtelo de nuevo.',
         nameRequired: 'Por favor ingrese su nombre y correo electrónico primero.',
         scheduleVisit: 'Programar una Visita',
-        requestCall: 'Solicitar una Llamada'
+        requestCall: 'Solicitar una Llamada',
+        scheduleReceived: '¡Solicitud de visita recibida! Confirmaremos en breve.',
+        callReceived: '¡Solicitud de llamada recibida! Nos comunicaremos pronto.'
       },
       orgTypes: {
         golfCourse: 'Campo de Golf',
@@ -539,7 +894,23 @@ export const translations = {
       services: 'Servicios',
       company: 'Compañía',
       copyright: 'Todos los derechos reservados.',
-      builtWith: 'Construido con cuidado por el medio ambiente'
+      builtWith: 'Construido con cuidado por el medio ambiente',
+      links: {
+        ourSolution: 'Nuestra Solución',
+        services: 'Servicios',
+        technology: 'Tecnología',
+        maintenance: 'Mantenimiento',
+        whoWeServe: 'A Quién Servimos',
+        gallery: 'Galería',
+        caseStudies: 'Casos de Estudio',
+        faq: 'Preguntas Frecuentes',
+        contactUs: 'Contacto'
+      },
+      domainsTitle: 'Dominios',
+      division: 'Una división de Pink Mahi INC',
+      disclaimer1: '*El rendimiento y el ahorro de agua varían según las condiciones de la superficie, la configuración del equipo y las especificaciones del trabajo.',
+      disclaimer2: 'Ciertas características del sistema, configuraciones, métodos de control y parámetros operativos son propietarios y están protegidos por patentes pendientes.',
+      servingLine: 'Sirviendo a instalaciones de golf, clubes de campo, resorts y comunidades HOA en todo el país'
     },
     // FAQ Page
     faq: {
@@ -580,6 +951,171 @@ export const translations = {
           a: 'El precio depende del metraje lineal/pies cuadrados totales, la condición de la superficie, el acceso, las restricciones de programación y cualquier requisito especial. Contáctenos para una cotización gratuita.'
         }
       ]
+    },
+    marketsPage: {
+      title: 'A Quién Servimos',
+      subtitle: 'Nuestro sistema de limpieza de circuito cerrado fue construido para entornos donde la presentación, la seguridad y el tiempo de actividad operativa importan. Trabajamos en todo el país con equipos que entienden las expectativas de instalaciones y comunidades premium.',
+      description: 'Limpieza especializada de senderos y aceras para instalaciones de golf, clubes de campo, resorts y comunidades HOA. Limpie más rápido con menos agua y mínima interrupción.',
+      cards: [
+        {
+          title: 'Instalaciones de Golf',
+          description: 'Mantenga los senderos limpios sin arrastrar mangueras largas por el campo ni forzar cierres prolongados. Ideal para juego diario, torneos y eventos de miembros.'
+        },
+        {
+          title: 'Clubes de Campo y Resorts',
+          description: 'Limpieza discreta y eficiente que mantiene una experiencia premium para los huéspedes. Ideal para áreas de entrada, pasillos, senderos y zonas de alta visibilidad.'
+        },
+        {
+          title: 'Comunidades HOA',
+          description: 'Mejore el atractivo exterior y reduzca riesgos de resbalones en aceras y senderos de áreas comunes con mínima interrupción para los residentes.'
+        },
+        {
+          title: 'Otras Redes de Senderos a Gran Escala',
+          description: 'Si administra una propiedad con pasillos extensos y acceso limitado al agua, nuestro enfoque autónomo puede ser una buena opción. Contáctenos y le ayudaremos a evaluar su sitio.'
+        }
+      ],
+      buttons: {
+        getQuote: 'Obtener Cotización',
+        viewServices: 'Ver Servicios'
+      }
+    },
+    galleryPage: {
+      title: 'Galería Antes y Después',
+      subtitle: 'La evidencia visual importa. A continuación hay ejemplos representativos de superficies antes y después de la limpieza. Las condiciones de la superficie varían y los resultados dependen del tipo de mancha, el tiempo en el lugar y las especificaciones del trabajo.',
+      beforeTitle: 'Antes',
+      beforeDescription: 'Acumulación típica de algas y manchas en áreas de alto tráfico.',
+      afterTitle: 'Después',
+      afterDescription: 'Superficies más limpias y seguras con mejor atractivo exterior.'
+    },
+    caseStudiesPage: {
+      title: 'Casos de Estudio',
+      subtitle: 'Google recompensa la evidencia. Los casos de estudio también ayudan a los prospectos a entender cómo se ve el éxito. Seguiremos expandiendo esta biblioteca a medida que se completen nuevos proyectos.',
+      studies: [
+        {
+          title: 'Renovación de Senderos en Instalación de Golf',
+          objective: 'Objetivo: eliminar acumulación de algas y restaurar la apariencia en una red de senderos de alto tráfico mientras se minimiza la interrupción.',
+          bullets: [
+            { label: 'Enfoque:', text: 'circuito cerrado, flujo de trabajo eficiente.' },
+            { label: 'Resultado:', text: 'apariencia mejorada y menos áreas resbaladizas.' },
+            { label: 'Operaciones:', text: 'programación alineada con las necesidades de la instalación.' }
+          ]
+        },
+        {
+          title: 'Mejora de Aceras en HOA',
+          objective: 'Objetivo: limpiar pasillos de áreas comunes y zonas de entrada para mejorar el atractivo exterior y reducir el riesgo de resbalones.',
+          bullets: [
+            { label: 'Enfoque:', text: 'secciones específicas y flujo eficiente.' },
+            { label: 'Resultado:', text: 'superficies visiblemente más limpias con menos interrupción para los residentes.' }
+          ]
+        }
+      ],
+      featured: {
+        title: '¿Quiere que su instalación aparezca?',
+        subtitle: 'Podemos documentar resultados antes/después y compartir un breve resumen después de su proyecto (con su aprobación). Este contenido apoya tanto la credibilidad como el SEO.',
+        button: 'Solicitar una Cotización'
+      }
+    },
+    locationsPage: {
+      title: 'Ubicaciones de Servicio',
+      subtitle: 'Tenemos sede en Florida y viajamos para los proyectos adecuados. Nuestro sistema de circuito cerrado es ideal para redes de senderos a gran escala, y estamos formando equipos para operar en todo Estados Unidos.',
+      floridaTitle: 'Florida',
+      floridaDescription: 'Programación prioritaria local, movilización rápida y programas de mantenimiento recurrente.',
+      nationwideTitle: 'Proyectos a Nivel Nacional',
+      nationwideDescription: 'Si está fuera de estos estados, aún podemos ayudar. Díganos dónde se encuentra su instalación y qué necesita limpiar; confirmaremos viabilidad y proporcionaremos una cotización.',
+      cta: 'Solicitar una Cotización Gratuita'
+    },
+    statePages: {
+      common: {
+        requestQuote: 'Solicitar una Cotización',
+        getQuote: 'Obtener Cotización',
+        viewServices: 'Ver Servicios',
+        learnTechnology: 'Conocer la Tecnología',
+        seeAllLocations: 'Ver todas las ubicaciones de servicio'
+      },
+      texas: {
+        title: 'Limpieza de Senderos en Texas',
+        subtitle: 'Las propiedades en Texas a menudo tienen aceras largas, senderos extensos y grandes áreas comunes. Nuestro sistema de circuito cerrado está diseñado para limpiar eficientemente grandes superficies con mínima interrupción.',
+        builtForScaleTitle: 'Diseñado para gran escala',
+        builtForScaleDescription: 'Nuestro flujo de trabajo está diseñado para avanzar eficientemente en propiedades grandes, reduciendo el tiempo de preparación y los dolores de cabeza operativos.',
+        greatFitsTitle: 'Ideal en Texas',
+        fits: [
+          { label: 'Instalaciones de golf', text: 'con senderos de alto tráfico' },
+          { label: 'Comunidades planificadas', text: 'y HOAs' },
+          { label: 'Resorts', text: 'y propiedades premium' }
+        ],
+        quoteTitle: 'Obtener una cotización',
+        quoteDescription: 'Cuéntenos dónde se encuentra la instalación en Texas y qué superficies necesitan limpieza. Confirmaremos la logística y proporcionaremos precios.'
+      },
+      nevada: {
+        title: 'Limpieza de Senderos en Nevada',
+        subtitle: 'En Nevada, la eficiencia del agua y la limpieza operativa importan. Nuestro enfoque de circuito cerrado ayuda a reducir la demanda de agua potable mientras mantiene los sitios más limpios con menos escorrentía.',
+        builtForTitle: 'Diseñado para mercados con escasez de agua',
+        builtForDescription: 'Nuestro sistema está diseñado para recuperar y reutilizar el agua de lavado durante la limpieza. Es ideal para instalaciones en el desierto y redes largas de senderos.',
+        greatForTitle: 'Ideal para',
+        greatFor: [
+          { label: 'Campos de golf', text: 'con senderos extensos' },
+          { label: 'Resorts', text: 'con pasillos de alta visibilidad' },
+          { label: 'Comunidades', text: 'con aceras largas y áreas comunes' }
+        ],
+        quoteTitle: 'Solicitar una cotización',
+        quoteDescription: 'Comparta la ubicación del sitio, el metraje aproximado y cualquier restricción de acceso. Confirmaremos la programación y proporcionaremos una cotización.'
+      },
+      florida: {
+        title: 'Limpieza de Senderos de Golf en Sarasota (Florida)',
+        intro: 'Tenemos sede en Sarasota, Florida, lo que significa movilización más rápida, programación más fácil y la capacidad de apoyar mantenimiento recurrente. Servimos regularmente instalaciones de golf del área de Sarasota y podemos viajar por todo el estado para proyectos más grandes.',
+        builtForTitle: 'Diseñado para condiciones de Sarasota y Florida',
+        builtForDescription1: 'La humedad y la lluvia frecuente de Sarasota pueden acelerar la acumulación de algas y materia orgánica en senderos y pasillos sombreados. La limpieza regular ayuda a mantener el atractivo exterior y reduce áreas resbaladizas.',
+        builtForDescription2Prefix: 'Somos una excelente opción para:',
+        facilitiesTitle: 'Instalaciones que servimos',
+        facilitiesDescription: 'Sarasota, Bradenton, Lakewood Ranch, Venice, Nokomis, Osprey, Englewood y áreas cercanas, además de proyectos en todo Florida.',
+        golfFirstTitle: 'Limpieza prioritaria para campos de golf (senderos, cruces y áreas de alto tráfico)',
+        golfFirstDescription: 'Las instalaciones de golf no pueden darse el lujo de cerrar hoyos o crear desorden durante las horas de mayor juego. Nuestro enfoque está diseñado para redes de senderos donde el tiempo de actividad operativa importa. Nos enfocamos en lograr una mejora visible mientras coordinamos alrededor de tee times, eventos y ventanas de mantenimiento.',
+        golfFirstCards: [
+          { title: 'Programación compatible con tee times', description: 'Planificamos el trabajo para minimizar interferencias con el juego diario y torneos.' },
+          { title: 'Equipo del tamaño de un carrito de golf', description: 'Nuestra máquina tiene el ancho de un carrito de golf, no un camión de tamaño completo. Vamos donde van los carritos, sin mangueras.' },
+          { title: 'Tiempo de respuesta rápido', description: 'La mayoría de los campos de golf se completan en solo 1–2 días.' },
+          { title: 'Post-tratamiento incluido', description: 'Tratamos las superficies después de la limpieza para ayudar a prevenir el recrecimiento de moho y algas.' }
+        ],
+        golfServicesButton: 'Servicios de Limpieza de Senderos de Golf',
+        galleryButton: 'Ver Galería Antes y Después',
+        assetTitle: 'Los senderos son un activo importante: el mantenimiento protege la inversión',
+        assetDescription: 'Los senderos de concreto y asfalto son infraestructura costosa. Muchas propiedades de 18 hoyos terminan con millas de senderos, y los proyectos de instalación pueden ser significativos. La limpieza regular ayuda a eliminar la acumulación de algas/suciedad, mejora la tracción y apoya programas protectores (como sellado) al preparar la superficie.',
+        assetCards: [
+          { title: 'Redes de senderos largas', description: 'Los sistemas de senderos pueden sumar rápidamente en 18 hoyos—frecuentemente múltiples millas. Por ejemplo, 7 millas son aproximadamente 36,960 pies lineales.' },
+          { title: 'El reemplazo es costoso', description: 'Por eso muchas instalaciones invierten en mantenimiento en lugar de posponer hasta el reemplazo. Rangos comunes de instalación (por pie lineal) pueden colocar un sistema de 7 millas en territorio de siete cifras según el alcance y el mercado actual.' },
+          { title: 'Reducir riesgo de resbalones', description: 'La acumulación de algas en Florida puede crear superficies resbaladizas en áreas sombreadas y húmedas.' }
+        ],
+        assetDisclaimer: 'Los resultados varían según la condición de la superficie, drenaje, sombra y tráfico. Recomendaremos la frecuencia según su sitio y objetivos.',
+        maintenanceButton: 'Programas de Mantenimiento',
+        quoteBlockTitle: 'Obtener una cotización',
+        quoteBlockDescription: 'Cuéntenos dónde se encuentra (área de Sarasota u otra zona de Florida), la longitud/área aproximada de senderos y aceras, problemas de manchas o algas, y su cronograma preferido. Responderemos con los próximos pasos y orientación de precios.',
+        quoteButton: 'Solicitar Cotización de Sarasota',
+        maintenanceProgramsButton: 'Ver Programas de Mantenimiento',
+        faqTitle: 'Preguntas frecuentes sobre limpieza de senderos en Sarasota',
+        faqs: [
+          {
+            q: '¿Tienen que cerrar hoyos o detener el juego para limpiar los senderos?',
+            a: 'En muchos casos, no. Programamos alrededor de tee times, eventos y operaciones de mantenimiento para reducir la interrupción. La programación final depende de la seguridad, el acceso y el flujo de trabajo de su instalación.'
+          },
+          {
+            q: '¿Por qué los senderos en Florida se vuelven resbaladizos?',
+            a: 'La humedad, la sombra y la lluvia frecuente pueden acelerar la acumulación de algas y materia orgánica en senderos y pasillos. La limpieza regular ayuda a restaurar la apariencia y reducir áreas resbaladizas.'
+          },
+          {
+            q: '¿Pueden manejar redes largas de senderos sin arrastrar mangueras por todas partes?',
+            a: 'Sí. Nuestro carrito de agua se rellena desde una fuente de agua en el sitio y lleva agua a la máquina de limpieza—sin mangueras extendidas por el campo. La mayoría de los campos se completan en solo 1–2 días.'
+          },
+          {
+            q: '¿Qué pasa con el moho y las algas que vuelven después de la limpieza?',
+            a: 'Después de la limpieza, aplicamos un post-tratamiento a la superficie que ayuda a prevenir el recrecimiento de moho y algas. Esto es especialmente importante en el clima húmedo de Florida donde el recrecimiento puede ocurrir rápidamente.'
+          },
+          {
+            q: '¿Ofrecen mantenimiento recurrente para instalaciones de golf?',
+            a: 'Sí. Ofrecemos programas estacionales y recurrentes para que los senderos se mantengan consistentemente limpios durante los ciclos de crecimiento en Florida y la temporada alta.'
+          }
+        ],
+        seeAllLocations: 'Ver todas las ubicaciones de servicio'
+      }
     },
     // Services Page
     services: {
@@ -715,11 +1251,15 @@ export type TranslationKey = keyof typeof translations.en;
 
 export function getTranslation(lang: Language, key: string): string {
   const keys = key.split('.');
-  let value: any = translations[lang];
-  
+  let value: unknown = translations[lang] as unknown;
+
   for (const k of keys) {
-    value = value?.[k];
+    if (value && typeof value === 'object') {
+      value = (value as Record<string, unknown>)[k];
+    } else {
+      return key;
+    }
   }
-  
-  return value || key;
+
+  return typeof value === 'string' ? value : key;
 }

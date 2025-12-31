@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Calendar, Clock, MapPin, Home, X } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface SchedulingFormProps {
   visitorName: string;
@@ -20,6 +21,7 @@ export interface ScheduleData {
 }
 
 export default function SchedulingForm({ visitorName, visitorEmail, onSchedule, onCancel }: SchedulingFormProps) {
+  const { t } = useLanguage();
   const [name, setName] = useState(visitorName || '');
   const [email, setEmail] = useState(visitorEmail || '');
   const [phone, setPhone] = useState('');
@@ -33,7 +35,7 @@ export default function SchedulingForm({ visitorName, visitorEmail, onSchedule, 
     e.preventDefault();
     
     if (!name || !email || !phone || !address || !date) {
-      alert('Please fill in all required fields');
+      alert(t('contact.modals.scheduling.requiredFieldsAlert') as string);
       return;
     }
 
@@ -60,7 +62,7 @@ export default function SchedulingForm({ visitorName, visitorEmail, onSchedule, 
         <div className="sticky top-0 bg-emerald-600 text-white p-4 rounded-t-2xl flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Calendar className="w-5 h-5" />
-            <h3 className="font-semibold">Schedule On-Site Visit</h3>
+            <h3 className="font-semibold">{t('contact.modals.scheduling.title') as string}</h3>
           </div>
           <button
             onClick={onCancel}
@@ -74,13 +76,13 @@ export default function SchedulingForm({ visitorName, visitorEmail, onSchedule, 
         {/* Name */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Your Name *
+            {t('contact.modals.scheduling.nameLabel') as string} *
           </label>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="John Doe"
+            placeholder={t('contact.modals.scheduling.namePlaceholder') as string}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
             required
           />
@@ -89,13 +91,13 @@ export default function SchedulingForm({ visitorName, visitorEmail, onSchedule, 
         {/* Email */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Your Email *
+            {t('contact.modals.scheduling.emailLabel') as string} *
           </label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="john@example.com"
+            placeholder={t('contact.modals.scheduling.emailPlaceholder') as string}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
             required
           />
@@ -104,13 +106,13 @@ export default function SchedulingForm({ visitorName, visitorEmail, onSchedule, 
         {/* Phone */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Phone Number *
+            {t('contact.modals.scheduling.phoneLabel') as string} *
           </label>
           <input
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="(555) 123-4567"
+            placeholder={t('contact.modals.scheduling.phonePlaceholder') as string}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
             required
           />
@@ -120,12 +122,12 @@ export default function SchedulingForm({ visitorName, visitorEmail, onSchedule, 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             <MapPin className="inline w-4 h-4 mr-1" />
-            Property Address *
+            {t('contact.modals.scheduling.addressLabel') as string} *
           </label>
           <textarea
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            placeholder="123 Golf Club Drive, City, State ZIP"
+            placeholder={t('contact.modals.scheduling.addressPlaceholder') as string}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
             rows={2}
             required
@@ -136,18 +138,18 @@ export default function SchedulingForm({ visitorName, visitorEmail, onSchedule, 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             <Home className="inline w-4 h-4 mr-1" />
-            Property Type
+            {t('contact.modals.scheduling.propertyTypeLabel') as string}
           </label>
           <select
             value={propertyType}
             onChange={(e) => setPropertyType(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
           >
-            <option value="golf-course">Golf Course</option>
-            <option value="community">Community/HOA</option>
-            <option value="commercial">Commercial Property</option>
-            <option value="municipal">Municipal</option>
-            <option value="other">Other</option>
+            <option value="golf-course">{t('contact.modals.scheduling.propertyTypes.golfCourse') as string}</option>
+            <option value="community">{t('contact.modals.scheduling.propertyTypes.community') as string}</option>
+            <option value="commercial">{t('contact.modals.scheduling.propertyTypes.commercial') as string}</option>
+            <option value="municipal">{t('contact.modals.scheduling.propertyTypes.municipal') as string}</option>
+            <option value="other">{t('contact.modals.scheduling.propertyTypes.other') as string}</option>
           </select>
         </div>
 
@@ -155,7 +157,7 @@ export default function SchedulingForm({ visitorName, visitorEmail, onSchedule, 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             <Calendar className="inline w-4 h-4 mr-1" />
-            Preferred Date *
+            {t('contact.modals.scheduling.preferredDateLabel') as string} *
           </label>
           <input
             type="date"
@@ -171,28 +173,28 @@ export default function SchedulingForm({ visitorName, visitorEmail, onSchedule, 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             <Clock className="inline w-4 h-4 mr-1" />
-            Preferred Time
+            {t('contact.modals.scheduling.preferredTimeLabel') as string}
           </label>
           <select
             value={time}
             onChange={(e) => setTime(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
           >
-            <option value="morning">Morning (8am - 12pm)</option>
-            <option value="afternoon">Afternoon (12pm - 4pm)</option>
-            <option value="late-afternoon">Late Afternoon (4pm - 6pm)</option>
+            <option value="morning">{t('contact.modals.scheduling.timeOptions.morning') as string}</option>
+            <option value="afternoon">{t('contact.modals.scheduling.timeOptions.afternoon') as string}</option>
+            <option value="late-afternoon">{t('contact.modals.scheduling.timeOptions.lateAfternoon') as string}</option>
           </select>
         </div>
 
         {/* Additional Notes */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Additional Notes
+            {t('contact.modals.scheduling.notesLabel') as string}
           </label>
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            placeholder="Any specific requirements or questions..."
+            placeholder={t('contact.modals.scheduling.notesPlaceholder') as string}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
             rows={2}
           />
@@ -205,13 +207,13 @@ export default function SchedulingForm({ visitorName, visitorEmail, onSchedule, 
             onClick={onCancel}
             className="flex-1 px-4 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
           >
-            Cancel
+            {t('contact.modals.scheduling.cancel') as string}
           </button>
           <button
             type="submit"
             className="flex-1 px-4 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-medium"
           >
-            Schedule Visit
+            {t('contact.modals.scheduling.submit') as string}
           </button>
         </div>
       </form>

@@ -26,54 +26,54 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <a href="/#solution" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                  Our Solution
+                  {t('footer.links.ourSolution') as string}
                 </a>
               </li>
               <li>
                 <a href="/services" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                  Services
+                  {t('footer.links.services') as string}
                 </a>
               </li>
               <li>
                 <a href="/technology" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                  Technology
+                  {t('footer.links.technology') as string}
                 </a>
               </li>
               <li>
                 <a href="/maintenance" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                  Maintenance
+                  {t('footer.links.maintenance') as string}
                 </a>
               </li>
               <li>
                 <a href="/markets" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                  Who We Serve
+                  {t('footer.links.whoWeServe') as string}
                 </a>
               </li>
               <li>
                 <a href="/gallery" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                  Gallery
+                  {t('footer.links.gallery') as string}
                 </a>
               </li>
               <li>
                 <a href="/case-studies" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                  Case Studies
+                  {t('footer.links.caseStudies') as string}
                 </a>
               </li>
               <li>
                 <a href="/faq" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                  FAQ
+                  {t('footer.links.faq') as string}
                 </a>
               </li>
               <li>
                 <a href="/contact" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                  Contact Us
+                  {t('footer.links.contactUs') as string}
                 </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-bold text-lg mb-4">Domains</h3>
+            <h3 className="font-bold text-lg mb-4">{t('footer.domainsTitle') as string}</h3>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>cartpathcleaning.com</li>
               <li>cartpathpressurewashing.com</li>
@@ -86,20 +86,20 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-gray-400 text-sm text-center md:text-left">
               <p>
-                &copy; {new Date().getFullYear()} Cart Path Cleaning. All rights reserved.
+                &copy; {new Date().getFullYear()} Cart Path Cleaning. {t('footer.copyright') as string}
               </p>
               <p className="text-gray-500 text-xs mt-1">
-                A division of Pink Mahi INC
+                {t('footer.division') as string}
               </p>
               <p className="text-gray-500 text-xs mt-2 max-w-md">
-                *Performance and water savings vary by surface conditions, equipment setup, and job specifications.
+                {t('footer.disclaimer1') as string}
               </p>
               <p className="text-gray-500 text-xs mt-2 max-w-md">
-                Certain system features, configurations, control methods, and operating parameters are proprietary and protected by pending patents.
+                {t('footer.disclaimer2') as string}
               </p>
             </div>
             <p className="text-gray-400 text-sm">
-              Serving golf facilities, country clubs, resorts, and HOA communities nationwide
+              {t('footer.servingLine') as string}
             </p>
           </div>
         </div>
