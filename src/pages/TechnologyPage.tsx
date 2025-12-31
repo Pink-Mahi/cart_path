@@ -2,8 +2,11 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Seo from '../components/Seo';
 import SiteHeader from '../components/SiteHeader';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function TechnologyPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="min-h-screen bg-white">
       <Seo
@@ -14,15 +17,14 @@ export default function TechnologyPage() {
       <SiteHeader />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900">Closed-Loop Cleaning Technology</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900">{t('technology.title') as string}</h1>
         <p className="mt-6 text-lg text-gray-700 max-w-3xl">
-          Traditional pressure washing on cart paths and walkways is slow, water-intensive, and disruptive. Our patent-pending closed-loop
-          system is ideal for long path networks where uptime matters—using significantly less water than traditional methods.
+          {t('technology.subtitle') as string}
         </p>
 
         <section className="mt-12 grid md:grid-cols-2 gap-10 items-start">
           <div className="rounded-2xl border border-gray-100 p-8 shadow-sm">
-            <h2 className="text-2xl font-bold text-gray-900">How it works</h2>
+            <h2 className="text-2xl font-bold text-gray-900">{t('technology.howItWorks') as string}</h2>
             <ol className="mt-4 space-y-4 text-gray-700">
               <li>
                 <span className="font-semibold text-gray-900">1) Apply</span> pressurized water to lift algae, grime, and staining.
@@ -43,7 +45,7 @@ export default function TechnologyPage() {
           </div>
 
           <div className="rounded-2xl bg-emerald-50 border border-emerald-100 p-8">
-            <h2 className="text-2xl font-bold text-gray-900">Why facilities choose closed-loop</h2>
+            <h2 className="text-2xl font-bold text-gray-900">{t('technology.whyChoose') as string}</h2>
             <div className="mt-4 space-y-3 text-gray-700">
               <div>
                 <div className="font-semibold text-gray-900">Golf-cart-sized equipment</div>

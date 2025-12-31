@@ -226,6 +226,32 @@ export const translations = {
           a: 'Pricing depends on total linear footage/square footage, surface condition, access, scheduling constraints, and any special requirements. Contact us for a free quote.'
         }
       ]
+    },
+    // Services Page
+    services: {
+      title: 'Cart Path & Sidewalk Pressure Washing Services',
+      subtitle: 'Professional cart path and sidewalk pressure washing for golf courses, country clubs, HOAs, and commercial properties. Our patent-pending closed-loop power washing system delivers superior cleaning results while using 90% less water than traditional pressure washing methods. Fast, eco-friendly, and compliant with environmental regulations.',
+      items: [
+        {
+          title: 'Golf Cart Path Cleaning',
+          description: 'Improve curb appeal and safety while keeping play moving. We clean efficiently so you can maintain spotless paths with minimal operational disruption.'
+        },
+        {
+          title: 'Sidewalk Pressure Washing & Power Washing',
+          description: 'Professional sidewalk pressure washing services for HOAs, commercial properties, and golf facilities. Our power washing system removes algae, grime, and staining while using minimal water and preventing runoff issues.'
+        },
+        {
+          title: 'Recurring Maintenance Programs',
+          description: 'Keep surfaces consistently clean with seasonal or scheduled service. Ideal for clubs, resorts, and HOA communities.'
+        }
+      ]
+    },
+    // Technology Page
+    technology: {
+      title: 'Closed-Loop Cleaning Technology',
+      subtitle: 'Traditional pressure washing on cart paths and walkways is slow, water-intensive, and disruptive. Our patent-pending closed-loop system is ideal for long path networks where uptime matters—using significantly less water than traditional methods.',
+      howItWorks: 'How it works',
+      whyChoose: 'Why facilities choose closed-loop'
     }
   },
   es: {
@@ -454,6 +480,32 @@ export const translations = {
           a: 'El precio depende del metraje lineal/pies cuadrados totales, la condición de la superficie, el acceso, las restricciones de programación y cualquier requisito especial. Contáctenos para una cotización gratuita.'
         }
       ]
+    },
+    // Services Page
+    services: {
+      title: 'Servicios de Lavado a Presión de Senderos y Aceras',
+      subtitle: 'Lavado a presión profesional de senderos y aceras para campos de golf, clubes de campo, HOAs y propiedades comerciales. Nuestro sistema de lavado a presión de circuito cerrado patente pendiente ofrece resultados de limpieza superiores mientras usa 90% menos agua que los métodos tradicionales de lavado a presión. Rápido, ecológico y conforme con las regulaciones ambientales.',
+      items: [
+        {
+          title: 'Limpieza de Senderos de Carritos de Golf',
+          description: 'Mejore el atractivo exterior y la seguridad mientras mantiene el juego en movimiento. Limpiamos eficientemente para que pueda mantener senderos impecables con mínima interrupción operacional.'
+        },
+        {
+          title: 'Lavado a Presión de Aceras y Lavado a Potencia',
+          description: 'Servicios profesionales de lavado a presión de aceras para HOAs, propiedades comerciales e instalaciones de golf. Nuestro sistema de lavado a potencia elimina algas, suciedad y manchas mientras usa agua mínima y previene problemas de escorrentía.'
+        },
+        {
+          title: 'Programas de Mantenimiento Recurrente',
+          description: 'Mantenga las superficies consistentemente limpias con servicio estacional o programado. Ideal para clubes, resorts y comunidades HOA.'
+        }
+      ]
+    },
+    // Technology Page
+    technology: {
+      title: 'Tecnología de Limpieza de Circuito Cerrado',
+      subtitle: 'El lavado a presión tradicional en senderos y pasillos es lento, intensivo en agua e interrumpe. Nuestro sistema de circuito cerrado patente pendiente es ideal para redes de senderos largos donde el tiempo de actividad importa, usando significativamente menos agua que los métodos tradicionales.',
+      howItWorks: 'Cómo funciona',
+      whyChoose: 'Por qué las instalaciones eligen circuito cerrado'
     }
   }
 };

@@ -2,8 +2,12 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Seo from '../components/Seo';
 import SiteHeader from '../components/SiteHeader';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function ServicesPage() {
+  const { t } = useLanguage();
+  const services = t('services.items') as Array<{ title: string; description: string }>;
+
   return (
     <div className="min-h-screen bg-white">
       <Seo
@@ -34,31 +38,20 @@ export default function ServicesPage() {
       <SiteHeader />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900">Cart Path & Sidewalk Pressure Washing Services</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900">{t('services.title') as string}</h1>
         <p className="mt-6 text-lg text-gray-700 max-w-3xl">
-          Professional cart path and sidewalk pressure washing for golf courses, country clubs, HOAs, and commercial properties. Our patent-pending closed-loop power washing system delivers superior cleaning results while using 90% less water than traditional pressure washing methods. Fast, eco-friendly, and compliant with environmental regulations.
+          {t('services.subtitle') as string}
         </p>
 
         <section className="mt-12 grid md:grid-cols-3 gap-8">
-          <div className="rounded-2xl border border-gray-100 p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-900">Golf Cart Path Cleaning</h2>
-            <p className="mt-3 text-gray-700">
-              Improve curb appeal and safety while keeping play moving. We clean efficiently so you can maintain spotless paths with
-              minimal operational disruption.
-            </p>
-          </div>
-          <div className="rounded-2xl border border-gray-100 p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-900">Sidewalk Pressure Washing & Power Washing</h2>
-            <p className="mt-3 text-gray-700">
-              Professional sidewalk pressure washing services for HOAs, commercial properties, and golf facilities. Our power washing system removes algae, grime, and staining while using minimal water and preventing runoff issues.
-            </p>
-          </div>
-          <div className="rounded-2xl border border-gray-100 p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-900">Recurring Maintenance Programs</h2>
-            <p className="mt-3 text-gray-700">
-              Keep surfaces consistently clean with seasonal or scheduled service. Ideal for clubs, resorts, and HOA communities.
-            </p>
-          </div>
+          {services.map((service, index) => (
+            <div key={index} className="rounded-2xl border border-gray-100 p-6 shadow-sm">
+              <h2 className="text-xl font-bold text-gray-900">{service.title}</h2>
+              <p className="mt-3 text-gray-700">
+                {service.description}
+              </p>
+            </div>
+          ))}
         </section>
 
         <section className="mt-14 rounded-2xl bg-emerald-50 border border-emerald-100 p-8">
