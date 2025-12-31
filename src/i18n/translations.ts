@@ -186,6 +186,46 @@ export const translations = {
       company: 'Company',
       copyright: 'All rights reserved.',
       builtWith: 'Built with care for the environment'
+    },
+    // FAQ Page
+    faq: {
+      title: 'Frequently Asked Questions',
+      subtitle: 'Here are quick answers to common questions. If you have a specific site or schedule requirement, reach out and we\'ll help.',
+      cta: 'Request a Free Quote',
+      questions: [
+        {
+          q: 'Do you have to close the course or block access to paths?',
+          a: 'In many cases, no. Our self-contained system moves along the path without hoses stretched across the course. Scheduling depends on your facility operations and safety requirements.'
+        },
+        {
+          q: 'How does the closed-loop system reduce water usage?',
+          a: 'Wash water is recovered and reused as part of a closed-loop process, significantly reducing runoff and overall water consumption compared to traditional pressure washing.'
+        },
+        {
+          q: 'How long does it take to clean a golf course?',
+          a: 'Most golf courses are completed in just 1–2 days depending on site conditions.'
+        },
+        {
+          q: 'Do you need water access on the property?',
+          a: 'Yes, limited access to a water source on the property is typically required, though our system uses dramatically less water than traditional pressure washing and does not require long hoses across the site.'
+        },
+        {
+          q: 'Will your equipment fit on our cart paths?',
+          a: 'Yes. Our machine is the width of a typical golf cart or turf mower—not a full-sized truck. We go where golf carts go, navigating the same paths without requiring special access or damaging turf.'
+        },
+        {
+          q: 'What about mold and algae coming back?',
+          a: 'After cleaning, we apply a post-treatment to the surface that helps prevent mold and algae regrowth, keeping your paths cleaner longer.'
+        },
+        {
+          q: 'What surfaces can you clean?',
+          a: 'We commonly clean golf cart paths, sidewalks, walkways, and other hard surfaces. Surface condition, staining type, and site layout affect the recommended approach.'
+        },
+        {
+          q: 'How do you price jobs?',
+          a: 'Pricing depends on total linear footage/square footage, surface condition, access, scheduling constraints, and any special requirements. Contact us for a free quote.'
+        }
+      ]
     }
   },
   es: {
@@ -374,6 +414,46 @@ export const translations = {
       company: 'Compañía',
       copyright: 'Todos los derechos reservados.',
       builtWith: 'Construido con cuidado por el medio ambiente'
+    },
+    // FAQ Page
+    faq: {
+      title: 'Preguntas Frecuentes',
+      subtitle: 'Aquí hay respuestas rápidas a preguntas comunes. Si tiene un requisito específico de sitio o programación, comuníquese y le ayudaremos.',
+      cta: 'Solicitar una Cotización Gratuita',
+      questions: [
+        {
+          q: '¿Tienen que cerrar el campo o bloquear el acceso a los senderos?',
+          a: 'En muchos casos, no. Nuestro sistema autónomo se mueve a lo largo del sendero sin mangueras extendidas por el campo. La programación depende de las operaciones de su instalación y los requisitos de seguridad.'
+        },
+        {
+          q: '¿Cómo reduce el sistema de circuito cerrado el uso de agua?',
+          a: 'El agua de lavado se recupera y reutiliza como parte de un proceso de circuito cerrado, reduciendo significativamente la escorrentía y el consumo general de agua en comparación con el lavado a presión tradicional.'
+        },
+        {
+          q: '¿Cuánto tiempo lleva limpiar un campo de golf?',
+          a: 'La mayoría de los campos de golf se completan en solo 1-2 días dependiendo de las condiciones del sitio.'
+        },
+        {
+          q: '¿Necesitan acceso al agua en la propiedad?',
+          a: 'Sí, generalmente se requiere acceso limitado a una fuente de agua en la propiedad, aunque nuestro sistema usa dramáticamente menos agua que el lavado a presión tradicional y no requiere mangueras largas en todo el sitio.'
+        },
+        {
+          q: '¿Su equipo cabe en nuestros senderos?',
+          a: 'Sí. Nuestra máquina tiene el ancho de un carrito de golf típico o cortadora de césped, no un camión de tamaño completo. Vamos donde van los carritos de golf, navegando los mismos senderos sin requerir acceso especial ni dañar el césped.'
+        },
+        {
+          q: '¿Qué pasa con el moho y las algas que vuelven?',
+          a: 'Después de la limpieza, aplicamos un post-tratamiento a la superficie que ayuda a prevenir el recrecimiento de moho y algas, manteniendo sus senderos más limpios por más tiempo.'
+        },
+        {
+          q: '¿Qué superficies pueden limpiar?',
+          a: 'Comúnmente limpiamos senderos de carritos de golf, aceras, pasillos y otras superficies duras. La condición de la superficie, el tipo de manchas y el diseño del sitio afectan el enfoque recomendado.'
+        },
+        {
+          q: '¿Cómo fijan los precios de los trabajos?',
+          a: 'El precio depende del metraje lineal/pies cuadrados totales, la condición de la superficie, el acceso, las restricciones de programación y cualquier requisito especial. Contáctenos para una cotización gratuita.'
+        }
+      ]
     }
   }
 };
