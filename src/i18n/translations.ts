@@ -252,6 +252,106 @@ export const translations = {
       subtitle: 'Traditional pressure washing on cart paths and walkways is slow, water-intensive, and disruptive. Our patent-pending closed-loop system is ideal for long path networks where uptime matters—using significantly less water than traditional methods.',
       howItWorks: 'How it works',
       whyChoose: 'Why facilities choose closed-loop'
+    },
+    // Process Section
+    process: {
+      title: 'Simple Process, Spectacular Results',
+      subtitle: 'From quote to completion, we make cart path cleaning effortless.',
+      steps: [
+        { title: 'Contact Us', description: 'Reach out for a free consultation and site assessment' },
+        { title: 'Schedule', description: 'Choose a convenient time that works with your operations' },
+        { title: 'We Clean', description: 'Our team arrives and completes the job quickly and professionally' },
+        { title: 'Enjoy', description: 'Pristine, sparkling clean paths with zero disruption' }
+      ]
+    },
+    // CTA Sections
+    cta: {
+      transform: {
+        title: 'Ready to Transform Your Cart Paths and Walkways?',
+        subtitle: 'Join forward-thinking golf facilities, country clubs, resorts, and HOA communities who’ve discovered a better way to clean.',
+        button: 'Request a Free Quote'
+      },
+      getStarted: {
+        title: 'Get Started Today',
+        subtitle: 'Ready to experience the Cart Path Cleaning difference? Contact us for a free consultation and quote.',
+        button: 'Request a Free Quote'
+      }
+    },
+    // Maintenance Programs Page
+    maintenance: {
+      title: 'Recurring Maintenance Programs',
+      subtitle: 'One deep clean helps, but consistent maintenance is what keeps paths looking premium, reduces algae buildup, and lowers slip risk. We offer flexible programs that fit your operations and event calendar.',
+      seasonal: {
+        title: 'Seasonal Cleaning',
+        description: 'Ideal for algae/moss cycles, rainy seasons, and high-growth periods.'
+      },
+      eventBased: {
+        title: 'Event-Based Scheduling',
+        description: 'Prepare for tournaments, member-guest events, or peak season with targeted cleanups.'
+      },
+      recurring: {
+        title: 'Recurring Programs',
+        description: 'Monthly or quarterly options to keep cart paths and sidewalks consistently presentable.'
+      },
+      whatYouGet: {
+        title: 'What you get',
+        items: [
+          { title: 'Predictable upkeep', description: 'that supports a premium experience.' },
+          { title: 'Less disruption', description: 'with consistent scheduling.' },
+          { title: 'Risk reduction', description: 'by addressing algae and slippery buildup.' }
+        ]
+      },
+      buttons: {
+        getPricing: 'Get Program Pricing',
+        seeWhoWeServe: 'See Who We Serve'
+      }
+    },
+    // Additional Services Content
+    servicesExtra: {
+      advancedTech: {
+        title: 'Advanced Pressure Washing & Power Washing Technology',
+        description: 'Our cart path and sidewalk pressure washing system is engineered specifically for golf courses, HOAs, and commercial properties. Unlike traditional pressure washing and power washing that wastes water and creates runoff issues, our closed-loop technology recovers and recycles wash water throughout the cleaning process.',
+        features: [
+          { title: '90% less water than traditional pressure washing', description: 'Our closed-loop pressure washing system recovers and reuses wash water, dramatically reducing water consumption compared to conventional power washing methods.' },
+          { title: 'Fast turnaround', description: 'Most golf courses are completed in just 1–2 days depending on site conditions.' },
+          { title: 'Golf-cart-sized equipment', description: 'Our machine is the width of a golf cart—not a full-sized truck. No hoses, and we go where carts go.' },
+          { title: 'Post-treatment included', description: 'After cleaning, we apply a surface treatment to help prevent mold and algae regrowth.' }
+        ]
+      },
+      protecting: {
+        title: 'Protecting a major golf-course asset',
+        description: 'Cart paths are expensive infrastructure, and industry sources note they have a lifespan. Preventive maintenance is typically most cost-effective when done early—before small issues become expensive repairs or replacement projects.',
+        questions: [
+          { q: 'How long are cart paths on 18 holes?', a: 'Many 18-hole facilities end up with long path networks. Some industry estimates cite more than 10 miles of cart paths.' },
+          { q: 'What does replacement cost?', a: 'Ballpark installation costs are often cited around $20–$30 per linear foot for concrete/asphalt cart paths. For example, a 7-mile path system is about 36,960 linear feet, which puts the rough install cost around $739k–$1.1M at that range. Depending on demolition, base work, drainage, phasing, and market conditions, today’s real-world totals can be higher.' },
+          { q: 'Why clean regularly?', a: 'Regular cleaning helps remove grime and biological buildup, improves traction, and can support protective sealing by helping sealers adhere properly.' }
+        ],
+        disclaimer: 'Actual cart path length, condition, and cost vary widely by course design, layout, and materials. We avoid "one-size-fits-all" claims and provide recommendations based on your specific facility.'
+      },
+      results: {
+        title: 'Results that matter',
+        description: 'Surface condition, staining type, and site layout influence results, but our goal is always the same: deliver a visibly cleaner, safer path network while keeping your facility running.',
+        buttons: {
+          exploreServices: 'Explore Services',
+          getFreeQuote: 'Get a Free Quote'
+        }
+      }
+    },
+    // Additional Technology Content  
+    technologyExtra: {
+      steps: [
+        { number: '1', title: 'Apply', description: 'pressurized water to lift algae, grime, and staining.' },
+        { number: '2', title: 'Recover', description: 'wash water is captured at the point of cleaning, minimizing runoff and water loss.' },
+        { number: '3', title: 'Condition', description: 'recovered water is conditioned for reuse.' },
+        { number: '4', title: 'Reuse', description: 'recovered water is reused to support efficient, low-consumption cleaning operations.' },
+        { number: '5', title: 'Post-treat', description: 'the surface to help prevent mold and algae regrowth.' }
+      ],
+      whyChooseItems: [
+        { title: 'Golf-cart-sized equipment', description: 'Our machine is the width of a golf cart or turf mower—not a full-sized truck. We go where golf carts go.' },
+        { title: 'Fast turnaround', description: 'Most golf courses are completed in just 1–2 days depending on site conditions.' },
+        { title: 'Minimal disruption', description: 'No long hoses blocking paths, no water trucks parked everywhere. We move efficiently through the course.' },
+        { title: 'Regrowth prevention', description: 'Post-treatment helps slow mold and algae regrowth so your paths stay cleaner longer.' }
+      ]
     }
   },
   es: {
@@ -506,6 +606,106 @@ export const translations = {
       subtitle: 'El lavado a presión tradicional en senderos y pasillos es lento, intensivo en agua e interrumpe. Nuestro sistema de circuito cerrado patente pendiente es ideal para redes de senderos largos donde el tiempo de actividad importa, usando significativamente menos agua que los métodos tradicionales.',
       howItWorks: 'Cómo funciona',
       whyChoose: 'Por qué las instalaciones eligen circuito cerrado'
+    },
+    // Process Section
+    process: {
+      title: 'Proceso Simple, Resultados Espectaculares',
+      subtitle: 'Desde la cotización hasta la finalización, hacemos que la limpieza de senderos sea sin esfuerzo.',
+      steps: [
+        { title: 'Contáctenos', description: 'Comuníquese para una consulta gratuita y evaluación del sitio' },
+        { title: 'Programar', description: 'Elija un momento conveniente que funcione con sus operaciones' },
+        { title: 'Limpiamos', description: 'Nuestro equipo llega y completa el trabajo rápida y profesionalmente' },
+        { title: 'Disfrute', description: 'Senderos prístinos y brillantes con cero interrupción' }
+      ]
+    },
+    // CTA Sections
+    cta: {
+      transform: {
+        title: '¿Listo para Transformar Sus Senderos y Pasillos?',
+        subtitle: 'Únase a instalaciones de golf, clubes de campo, resorts y comunidades HOA con visión de futuro que han descubierto una mejor manera de limpiar.',
+        button: 'Solicitar una Cotización Gratuita'
+      },
+      getStarted: {
+        title: 'Comience Hoy',
+        subtitle: '¿Listo para experimentar la diferencia de Limpieza de Senderos? Contáctenos para una consulta y cotización gratuita.',
+        button: 'Solicitar una Cotización Gratuita'
+      }
+    },
+    // Maintenance Programs Page
+    maintenance: {
+      title: 'Programas de Mantenimiento Recurrente',
+      subtitle: 'Una limpieza profunda ayuda, pero el mantenimiento consistente es lo que mantiene los senderos con apariencia premium, reduce la acumulación de algas y disminuye el riesgo de resbalones. Ofrecemos programas flexibles que se ajustan a sus operaciones y calendario de eventos.',
+      seasonal: {
+        title: 'Limpieza Estacional',
+        description: 'Ideal para ciclos de algas/musgo, temporadas de lluvia y períodos de alto crecimiento.'
+      },
+      eventBased: {
+        title: 'Programación Basada en Eventos',
+        description: 'Prepárese para torneos, eventos de miembros e invitados, o temporada alta con limpiezas dirigidas.'
+      },
+      recurring: {
+        title: 'Programas Recurrentes',
+        description: 'Opciones mensuales o trimestrales para mantener senderos y aceras consistentemente presentables.'
+      },
+      whatYouGet: {
+        title: 'Lo que obtiene',
+        items: [
+          { title: 'Mantenimiento predecible', description: 'que apoya una experiencia premium.' },
+          { title: 'Menos interrupción', description: 'con programación consistente.' },
+          { title: 'Reducción de riesgos', description: 'al abordar algas y acumulación resbaladiza.' }
+        ]
+      },
+      buttons: {
+        getPricing: 'Obtener Precios del Programa',
+        seeWhoWeServe: 'Ver A Quién Servimos'
+      }
+    },
+    // Additional Services Content
+    servicesExtra: {
+      advancedTech: {
+        title: 'Tecnología Avanzada de Lavado a Presión y Lavado a Potencia',
+        description: 'Nuestro sistema de lavado a presión de senderos y aceras está diseñado específicamente para campos de golf, HOAs y propiedades comerciales. A diferencia del lavado a presión y lavado a potencia tradicional que desperdicia agua y crea problemas de escorrentía, nuestra tecnología de circuito cerrado recupera y recicla el agua de lavado durante todo el proceso de limpieza.',
+        features: [
+          { title: '90% menos agua que el lavado a presión tradicional', description: 'Nuestro sistema de lavado a presión de circuito cerrado recupera y reutiliza el agua de lavado, reduciendo dramáticamente el consumo de agua en comparación con los métodos convencionales de lavado a potencia.' },
+          { title: 'Tiempo de respuesta rápido', description: 'La mayoría de los campos de golf se completan en solo 1-2 días dependiendo de las condiciones del sitio.' },
+          { title: 'Equipo del tamaño de un carrito de golf', description: 'Nuestra máquina tiene el ancho de un carrito de golf, no un camión de tamaño completo. Sin mangueras, y vamos donde van los carritos.' },
+          { title: 'Post-tratamiento incluido', description: 'Después de la limpieza, aplicamos un tratamiento de superficie para ayudar a prevenir el recrecimiento de moho y algas.' }
+        ]
+      },
+      protecting: {
+        title: 'Protegiendo un activo importante del campo de golf',
+        description: 'Los senderos son infraestructura costosa, y las fuentes de la industria señalan que tienen una vida útil. El mantenimiento preventivo es típicamente más rentable cuando se hace temprano, antes de que los problemas pequeños se conviertan en reparaciones costosas o proyectos de reemplazo.',
+        questions: [
+          { q: '¿Cuánto miden los senderos en 18 hoyos?', a: 'Muchas instalaciones de 18 hoyos terminan con redes de senderos largas. Algunas estimaciones de la industria citan más de 10 millas de senderos.' },
+          { q: '¿Cuánto cuesta el reemplazo?', a: 'Los costos de instalación aproximados a menudo se citan alrededor de $20-$30 por pie lineal para senderos de concreto/asfalto. Por ejemplo, un sistema de senderos de 7 millas es aproximadamente 36,960 pies lineales, lo que pone el costo de instalación aproximado alrededor de $739k-$1.1M en ese rango. Dependiendo de la demolición, trabajo de base, drenaje, fases y condiciones del mercado, los totales del mundo real de hoy pueden ser más altos.' },
+          { q: '¿Por qué limpiar regularmente?', a: 'La limpieza regular ayuda a eliminar la suciedad y la acumulación biológica, mejora la tracción y puede apoyar el sellado protector al ayudar a que los selladores se adhieran correctamente.' }
+        ],
+        disclaimer: 'La longitud, condición y costo real del sendero varían ampliamente según el diseño del campo, el diseño y los materiales. Evitamos afirmaciones de "talla única" y proporcionamos recomendaciones basadas en su instalación específica.'
+      },
+      results: {
+        title: 'Resultados que importan',
+        description: 'La condición de la superficie, el tipo de manchas y el diseño del sitio influyen en los resultados, pero nuestro objetivo es siempre el mismo: entregar una red de senderos visiblemente más limpia y segura mientras mantiene su instalación funcionando.',
+        buttons: {
+          exploreServices: 'Explorar Servicios',
+          getFreeQuote: 'Obtener una Cotización Gratuita'
+        }
+      }
+    },
+    // Additional Technology Content
+    technologyExtra: {
+      steps: [
+        { number: '1', title: 'Aplicar', description: 'agua a presión para levantar algas, suciedad y manchas.' },
+        { number: '2', title: 'Recuperar', description: 'el agua de lavado se captura en el punto de limpieza, minimizando la escorrentía y la pérdida de agua.' },
+        { number: '3', title: 'Acondicionar', description: 'el agua recuperada se acondiciona para su reutilización.' },
+        { number: '4', title: 'Reutilizar', description: 'el agua recuperada se reutiliza para apoyar operaciones de limpieza eficientes y de bajo consumo.' },
+        { number: '5', title: 'Post-tratar', description: 'la superficie para ayudar a prevenir el recrecimiento de moho y algas.' }
+      ],
+      whyChooseItems: [
+        { title: 'Equipo del tamaño de un carrito de golf', description: 'Nuestra máquina tiene el ancho de un carrito de golf o cortadora de césped, no un camión de tamaño completo. Vamos donde van los carritos de golf.' },
+        { title: 'Tiempo de respuesta rápido', description: 'La mayoría de los campos de golf se completan en solo 1-2 días dependiendo de las condiciones del sitio.' },
+        { title: 'Interrupción mínima', description: 'Sin mangueras largas bloqueando senderos, sin camiones de agua estacionados en todas partes. Nos movemos eficientemente por el campo.' },
+        { title: 'Prevención de recrecimiento', description: 'El post-tratamiento ayuda a ralentizar el recrecimiento de moho y algas para que sus senderos se mantengan más limpios por más tiempo.' }
+      ]
     }
   }
 };
