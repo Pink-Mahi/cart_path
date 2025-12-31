@@ -96,7 +96,96 @@ export const translations = {
     solution: {
       badge: 'Patent Pending Innovation',
       title: 'The Cart Path Cleaning Difference',
-      description: 'Our revolutionary closed-loop system changes everything about how cart paths are cleaned.'
+      description: 'Our revolutionary closed-loop system changes everything about how cart paths are cleaned.',
+      systemTitle: 'Self-Contained Mobile System',
+      systemDescription1: 'Our custom-manufactured system features a compact cleaning machine that captures wash water at the point of cleaning, minimizing runoff and water loss. A support water cart travels alongside and refills from an onsite water source—no hoses stretched across the course.',
+      systemDescription2: 'Our equipment is sized like a golf cart or turf mower—not a full-sized truck. We go where golf carts go, navigating the same paths without damaging turf or requiring special access.',
+      systemDescription3: 'Simply drive along the path and watch as our system cleans in a single pass—minimizing runoff and keeping your course clean.',
+      sparklingPaths: 'Clean, sparkling paths in one pass',
+      howItWorks: 'How Our Closed-Loop System Works',
+      steps: [
+        { title: 'Apply', description: 'Pressurized water cleans the surface' },
+        { title: 'Recover', description: 'Wash water captured at point of cleaning' },
+        { title: 'Condition', description: 'Prepared for reuse' },
+        { title: 'Reuse', description: 'Recovered water supports efficient operations' },
+        { title: 'Post-Treat', description: 'Surface treatment helps prevent regrowth' }
+      ]
+    },
+    // Target Markets Section
+    targetMarkets: {
+      title: 'Who We Serve',
+      subtitle: 'Specialized cleaning solutions for golf facilities, country clubs, resorts, and homeowner associations.',
+      golf: {
+        title: 'Golf Facilities',
+        description: 'Keep cart paths and high-traffic areas pristine without closing holes or disrupting play. Our efficient system works alongside your regular maintenance operations.',
+        features: [
+          'No course closure required',
+          'Works with limited water access',
+          'Professional appearance maintained',
+          'Seasonal or recurring service options'
+        ]
+      },
+      clubs: {
+        title: 'Country Clubs & Resorts',
+        description: 'Elevate member and guest experience with spotless paths, walkways, and entry areas. Discreet service options help you maintain premium standards without disrupting operations.',
+        features: [
+          'Member-ready presentation year-round',
+          'Low-disruption cleaning',
+          'Flexible scheduling for events and peak hours',
+          'Safe, clean walkways for guests and staff'
+        ]
+      },
+      hoa: {
+        title: 'HOA Communities',
+        description: 'Maintain beautiful, clean sidewalks and common area pathways that enhance property values. Fast, efficient cleaning means minimal disruption to residents and their daily routines.',
+        features: [
+          'Enhanced curb appeal and property values',
+          'Minimal resident disruption',
+          'Environmentally responsible cleaning',
+          'Cost-effective maintenance solution'
+        ]
+      }
+    },
+    // Contact Section
+    contact: {
+      title: 'Get Started Today',
+      subtitle: 'Ready to experience the Cart Path Cleaning difference? Contact us for a free consultation and quote.',
+      form: {
+        name: 'Name',
+        email: 'Email',
+        phone: 'Phone',
+        organizationType: 'Organization Type',
+        message: 'Tell us about your project',
+        submit: 'Send Message',
+        submitting: 'Sending...',
+        success: 'Thank you! We\'ll be in touch soon.',
+        error: 'Failed to send message. Please try again.',
+        nameRequired: 'Please enter your name and email first.',
+        scheduleVisit: 'Schedule a Visit',
+        requestCall: 'Request a Call Back'
+      },
+      orgTypes: {
+        golfCourse: 'Golf Course',
+        countryClub: 'Country Club',
+        resort: 'Resort',
+        hoa: 'HOA Community',
+        municipality: 'Municipality',
+        other: 'Other'
+      },
+      info: {
+        phone: 'Phone',
+        email: 'Email',
+        location: 'Service Area'
+      }
+    },
+    // Footer Section
+    footer: {
+      tagline: 'Revolutionary cart path and sidewalk cleaning technology',
+      quickLinks: 'Quick Links',
+      services: 'Services',
+      company: 'Company',
+      copyright: 'All rights reserved.',
+      builtWith: 'Built with care for the environment'
     }
   },
   es: {
@@ -195,7 +284,96 @@ export const translations = {
     solution: {
       badge: 'Innovación Patente Pendiente',
       title: 'La Diferencia de Limpieza de Senderos',
-      description: 'Nuestro revolucionario sistema de circuito cerrado cambia todo sobre cómo se limpian los senderos.'
+      description: 'Nuestro revolucionario sistema de circuito cerrado cambia todo sobre cómo se limpian los senderos.',
+      systemTitle: 'Sistema Móvil Autónomo',
+      systemDescription1: 'Nuestro sistema fabricado a medida cuenta con una máquina de limpieza compacta que captura el agua de lavado en el punto de limpieza, minimizando la escorrentía y la pérdida de agua. Un carrito de agua de apoyo viaja al lado y se rellena desde una fuente de agua en el sitio—sin mangueras extendidas por el campo.',
+      systemDescription2: 'Nuestro equipo tiene el tamaño de un carrito de golf o cortadora de césped—no un camión de tamaño completo. Vamos donde van los carritos de golf, navegando los mismos senderos sin dañar el césped ni requerir acceso especial.',
+      systemDescription3: 'Simplemente conduzca por el sendero y observe cómo nuestro sistema limpia en una sola pasada—minimizando la escorrentía y manteniendo su campo limpio.',
+      sparklingPaths: 'Senderos limpios y brillantes en una pasada',
+      howItWorks: 'Cómo Funciona Nuestro Sistema de Circuito Cerrado',
+      steps: [
+        { title: 'Aplicar', description: 'El agua a presión limpia la superficie' },
+        { title: 'Recuperar', description: 'Agua de lavado capturada en el punto de limpieza' },
+        { title: 'Acondicionar', description: 'Preparada para reutilización' },
+        { title: 'Reutilizar', description: 'El agua recuperada apoya operaciones eficientes' },
+        { title: 'Post-Tratar', description: 'El tratamiento de superficie ayuda a prevenir el recrecimiento' }
+      ]
+    },
+    // Target Markets Section
+    targetMarkets: {
+      title: 'A Quién Servimos',
+      subtitle: 'Soluciones de limpieza especializadas para instalaciones de golf, clubes de campo, resorts y asociaciones de propietarios.',
+      golf: {
+        title: 'Instalaciones de Golf',
+        description: 'Mantenga los senderos y áreas de alto tráfico impecables sin cerrar hoyos ni interrumpir el juego. Nuestro sistema eficiente funciona junto con sus operaciones de mantenimiento regulares.',
+        features: [
+          'No se requiere cierre del campo',
+          'Funciona con acceso limitado al agua',
+          'Apariencia profesional mantenida',
+          'Opciones de servicio estacional o recurrente'
+        ]
+      },
+      clubs: {
+        title: 'Clubes de Campo y Resorts',
+        description: 'Eleve la experiencia de miembros e invitados con senderos, pasillos y áreas de entrada impecables. Las opciones de servicio discreto le ayudan a mantener estándares premium sin interrumpir las operaciones.',
+        features: [
+          'Presentación lista para miembros todo el año',
+          'Limpieza de baja interrupción',
+          'Programación flexible para eventos y horas pico',
+          'Pasillos seguros y limpios para invitados y personal'
+        ]
+      },
+      hoa: {
+        title: 'Comunidades HOA',
+        description: 'Mantenga aceras hermosas y limpias y senderos de áreas comunes que mejoren los valores de propiedad. La limpieza rápida y eficiente significa una interrupción mínima para los residentes y sus rutinas diarias.',
+        features: [
+          'Atractivo exterior mejorado y valores de propiedad',
+          'Interrupción mínima para residentes',
+          'Limpieza ambientalmente responsable',
+          'Solución de mantenimiento rentable'
+        ]
+      }
+    },
+    // Contact Section
+    contact: {
+      title: 'Comience Hoy',
+      subtitle: '¿Listo para experimentar la diferencia de Limpieza de Senderos? Contáctenos para una consulta y cotización gratuita.',
+      form: {
+        name: 'Nombre',
+        email: 'Correo Electrónico',
+        phone: 'Teléfono',
+        organizationType: 'Tipo de Organización',
+        message: 'Cuéntenos sobre su proyecto',
+        submit: 'Enviar Mensaje',
+        submitting: 'Enviando...',
+        success: '¡Gracias! Nos pondremos en contacto pronto.',
+        error: 'Error al enviar el mensaje. Por favor, inténtelo de nuevo.',
+        nameRequired: 'Por favor ingrese su nombre y correo electrónico primero.',
+        scheduleVisit: 'Programar una Visita',
+        requestCall: 'Solicitar una Llamada'
+      },
+      orgTypes: {
+        golfCourse: 'Campo de Golf',
+        countryClub: 'Club de Campo',
+        resort: 'Resort',
+        hoa: 'Comunidad HOA',
+        municipality: 'Municipalidad',
+        other: 'Otro'
+      },
+      info: {
+        phone: 'Teléfono',
+        email: 'Correo Electrónico',
+        location: 'Área de Servicio'
+      }
+    },
+    // Footer Section
+    footer: {
+      tagline: 'Tecnología revolucionaria de limpieza de senderos y aceras',
+      quickLinks: 'Enlaces Rápidos',
+      services: 'Servicios',
+      company: 'Compañía',
+      copyright: 'Todos los derechos reservados.',
+      builtWith: 'Construido con cuidado por el medio ambiente'
     }
   }
 };
